@@ -9,7 +9,7 @@ $(document).ready(function() {
         'order': []
     });
 
-    //prueba par git
+    //prueba par gits
     // add product modal btn clicked 
     $("#addProductModalBtn").unbind('click').bind('click', function() {
         // // product form reset
