@@ -42,19 +42,22 @@ $(document).ready(function() {
                 $('#orderDate').closest('.form-group').addClass('has-success');
             } // /else
 
-            if (clientName == "") {
-                $("#clientName").after('<p class="text-danger"> The Client Name field is required </p>');
-                $('#clientName').closest('.form-group').addClass('has-error');
-            } else {
-                $('#clientName').closest('.form-group').addClass('has-success');
-            } // /else
-
+            /*
+                        if (clientName == "") {
+                            $("#clientName").after('<p class="text-danger"> The Client Name field is required </p>');
+                            $('#clientName').closest('.form-group').addClass('has-error');
+                        } else {
+                            $('#clientName').closest('.form-group').addClass('has-success');
+                        } // /else
+            */
+            /*
             if (clientContact == "") {
                 $("#clientContact").after('<p class="text-danger"> The Contact field is required </p>');
                 $('#clientContact').closest('.form-group').addClass('has-error');
             } else {
                 $('#clientContact').closest('.form-group').addClass('has-success');
             } // /else
+            */
 
             if (paid == "") {
                 $("#paid").after('<p class="text-danger"> The Paid field is required </p>');
@@ -70,65 +73,71 @@ $(document).ready(function() {
                 $('#discount').closest('.form-group').addClass('has-success');
             } // /else
 
-            if (paymentType == "") {
-                $("#paymentType").after('<p class="text-danger"> The Payment Type field is required </p>');
-                $('#paymentType').closest('.form-group').addClass('has-error');
-            } else {
-                $('#paymentType').closest('.form-group').addClass('has-success');
-            } // /else
-
+            /*
+                        if (paymentType == "") {
+                            $("#paymentType").after('<p class="text-danger"> The Payment Type field is required </p>');
+                            $('#paymentType').closest('.form-group').addClass('has-error');
+                        } else {
+                            $('#paymentType').closest('.form-group').addClass('has-success');
+                        } // /else
+            */
+            /*
             if (paymentStatus == "") {
                 $("#paymentStatus").after('<p class="text-danger"> The Payment Status field is required </p>');
                 $('#paymentStatus').closest('.form-group').addClass('has-error');
             } else {
                 $('#paymentStatus').closest('.form-group').addClass('has-success');
             } // /else
+*/
+
+            /*
+                        // array validation
+                        var productName = document.getElementsByName('productName[]');
+                        var validateProduct;
+                        for (var x = 0; x < productName.length; x++) {
+                            var productNameId = productName[x].id;
+
+                            if (productName[x].value == '') {
+                                $("#" + productNameId + "").after('<p class="text-danger"> El Nombre del Producto es requerido!! </p>');
+                                $("#" + productNameId + "").closest('.form-group').addClass('has-error');
+                            } else {
+                                $("#" + productNameId + "").closest('.form-group').addClass('has-success');
+                            }
+
+                        } // for
+
+                        for (var x = 0; x < productName.length; x++) {
+                            if (productName[x].value) {
+                                validateProduct = true;
+                            } else {
+                                validateProduct = false;
+                            }
+                        } // for       		   	
+            */
+
+            /*
+                        var quantity = document.getElementsByName('quantity[]');
+                        var validateQuantity;
+                        for (var x = 0; x < quantity.length; x++) {
+                            var quantityId = quantity[x].id;
+                            if (quantity[x].value == '') {
+                                $("#" + quantityId + "").after('<p class="text-danger"> Product Name Field is required!! </p>');
+                                $("#" + quantityId + "").closest('.form-group').addClass('has-error');
+                            } else {
+                                $("#" + quantityId + "").closest('.form-group').addClass('has-success');
+                            }
+                        } // for
 
 
-            // array validation
-            var productName = document.getElementsByName('productName[]');
-            var validateProduct;
-            for (var x = 0; x < productName.length; x++) {
-                var productNameId = productName[x].id;
 
-                if (productName[x].value == '') {
-                    $("#" + productNameId + "").after('<p class="text-danger"> El Nombre del Producto es requerido!! </p>');
-                    $("#" + productNameId + "").closest('.form-group').addClass('has-error');
-                } else {
-                    $("#" + productNameId + "").closest('.form-group').addClass('has-success');
-                }
-
-            } // for
-
-            for (var x = 0; x < productName.length; x++) {
-                if (productName[x].value) {
-                    validateProduct = true;
-                } else {
-                    validateProduct = false;
-                }
-            } // for       		   	
-
-            var quantity = document.getElementsByName('quantity[]');
-            var validateQuantity;
-            for (var x = 0; x < quantity.length; x++) {
-                var quantityId = quantity[x].id;
-                if (quantity[x].value == '') {
-                    $("#" + quantityId + "").after('<p class="text-danger"> Product Name Field is required!! </p>');
-                    $("#" + quantityId + "").closest('.form-group').addClass('has-error');
-                } else {
-                    $("#" + quantityId + "").closest('.form-group').addClass('has-success');
-                }
-            } // for
-
-
-
-            for (var x = 0; x < quantity.length; x++) {
-                if (quantity[x].value) {
-                    validateQuantity = true;
-                } else {
-                    validateQuantity = false;
-                }
-            } // for       	
+                        for (var x = 0; x < quantity.length; x++) {
+                            if (quantity[x].value) {
+                                validateQuantity = true;
+                            } else {
+                                validateQuantity = false;
+                            }
+                        } // for       	
+            */
 
             console.log('primer log');
             if (orderDate && clientName && clientContact && paid && discount && paymentType && paymentStatus) {
