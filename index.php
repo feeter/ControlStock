@@ -4,7 +4,6 @@ require_once 'php_action/db_connect.php';
 session_start();
 
 if(isset($_SESSION['userId'])) {
-	//header('location: http://localhost:9080/stock/dashboard.php');	
 	header('location:dashboard.php');	
 }
 
@@ -17,11 +16,11 @@ if($_POST) {
 
 	if(empty($username) || empty($password)) {
 		if($username == "") {
-			$errors[] = "Username is required";
+			$errors[] = "Usuario es Requerido";
 		} 
 
 		if($password == "") {
-			$errors[] = "Password is required";
+			$errors[] = "Password es Requerido";
 		}
 	} else {
 		$sql = "SELECT * FROM users WHERE username = '$username'";
@@ -37,17 +36,19 @@ if($_POST) {
 				$value = $mainResult->fetch_assoc();
 				$user_id = $value['user_id'];
 
+				$profile = $value['profile'];
+
 				// set session
 				$_SESSION['userId'] = $user_id;
+				$_SESSION['profile'] = $profile;
 
-				//header('location: http://localhost:8080/stock/dashboard.php');	
 				header('location:dashboard.php');	
-			} else{
+			} else {
 				
-				$errors[] = "Incorrect username/password combination";
+				$errors[] = "Combinacion user/password incorrecta.";
 			} // /else
 		} else {		
-			$errors[] = "Username doesnot exists";		
+			$errors[] = "Combinacion user/password incorrecta.";		
 		} // /else
 	} // /else not empty username // password
 	
