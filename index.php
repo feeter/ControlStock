@@ -36,13 +36,19 @@ if($_POST) {
 				$value = $mainResult->fetch_assoc();
 				$user_id = $value['user_id'];
 
-				$profile = $value['profile'];
-
+				$profile = $value['profile_id'];
 				// set session
 				$_SESSION['userId'] = $user_id;
 				$_SESSION['profile'] = $profile;
 
-				header('location:dashboard.php');	
+				if ($_SESSION['profile'] == 2){
+					header('location:orders.php?o=add');
+				}else{
+					header('location:dashboard.php');	
+				}
+				
+
+				
 			} else {
 				
 				$errors[] = "Combinacion user/password incorrecta.";

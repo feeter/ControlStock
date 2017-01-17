@@ -1,4 +1,35 @@
-<?php require_once 'php_action/core.php'; ?>
+<?php require_once 'php_action/core.php'; 
+
+
+
+$urlActual = $_SERVER['REQUEST_URI'];
+$profileId = $_SESSION['profile'];
+
+$tieneAcceso = false;
+
+$sqlProfile = "SELECT b.page_url FROM functions a inner join page b on a.page_id = b.page_id WHERE profile_id = $profileId;";
+$result = $connect->query($sqlProfile);
+
+while($row = $result->fetch_array()) {
+	$url = $row[0];
+
+	//echo "<script>console.log( 'Debug Objects: " .  . "' );</script>";
+	if (strpos($urlActual,$url) !== false) {
+		//echo "<script>console.log( 'Debug Objects: " . "SI" . "' );</script>";
+		$tieneAcceso = true;
+		
+	}
+
+
+}
+  //echo "<script>console.log( 'Debug Objects: " . "NO" . "' );</script>";
+  if (!$tieneAcceso){
+ 	//echo "<script>console.log( 'Debug Objects: " . "SI" . "' );</script>";
+  	header('location: logout.php');
+  }
+
+
+?>
 
 <!DOCTYPE html>
 <html>
@@ -30,6 +61,9 @@
 
   <!-- bootstrap js -->
 	<script src="assests/bootstrap/js/bootstrap.min.js"></script>
+  
+  <script src="custom/js/header.js"></script>
+
 
 </head>
 <body>
@@ -51,7 +85,31 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">      
 
-        <ul class="nav navbar-nav navbar-right">        
+        <ul class="nav navbar-nav navbar-right">     
+
+
+        <?php
+       if ($_SESSION['profile'] == 2){
+        ?>
+          <li class="dropdown" id="navOrder">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-shopping-cart"></i> Ventas <span class="caret"></span></a>
+            <ul class="dropdown-menu">            
+              <li id="topNavAddOrder"><a href="orders.php?o=add"> <i class="glyphicon glyphicon-plus"></i> Vender</a></li>            
+              
+            </ul>
+          </li> 
+
+          <li class="dropdown" id="navSetting">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-user"></i> <span class="caret"></span></a>
+            <ul class="dropdown-menu">            
+              <li id="topNavSetting"><a href="setting.php"> <i class="glyphicon glyphicon-wrench"></i> Configuraciones</a></li>            
+              <li id="topNavLogout"><a href="logout.php"> <i class="glyphicon glyphicon-log-out"></i> Salir</a></li>            
+            </ul>
+          </li>   
+      <?php
+       }else{
+      ?>
+
         
           <li id="navDashboard"><a href="index.php"><i class="glyphicon glyphicon-list-alt"></i>  Informe</a></li>        
           
@@ -78,6 +136,11 @@
               <li id="topNavLogout"><a href="logout.php"> <i class="glyphicon glyphicon-log-out"></i> Salir</a></li>            
             </ul>
           </li>   
+      <?php
+
+       }
+        ?>   
+
                 
         </ul>
       </div><!-- /.navbar-collapse -->
