@@ -7,7 +7,8 @@ $valid['success'] = array('success' => false, 'messages' => array());
 if($_POST) {	
 	$orderId = $_POST['orderId'];
 
-	$orderDate 						= date('Y-m-d', strtotime($_POST['orderDate']));
+
+  $orderDate 					= date('Y-m-d');
   $clientName 					= $_POST['clientName'];
   $clientContact 				= $_POST['clientContact'];
   $subTotalValue 				= $_POST['subTotalValue'];
@@ -78,7 +79,7 @@ if($_POST) {
 	
 
 	$valid['success'] = true;
-	$valid['messages'] = "Successfully Updated";		
+	$valid['messages'] = "Actualizacion Realizada";		
 	
 	$connect->close();
 

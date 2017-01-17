@@ -9,7 +9,7 @@ $valid['success'] = array('success' => false, 'messages' => array(), 'order_id' 
 if($_POST) {	
 
 
-  $orderDate 						= date('Y-m-d', strtotime($_POST['orderDate']));	
+  $orderDate 						= date('Y-m-d');
   $clientName 					= $_POST['clientName'];
   $clientContact 				= $_POST['clientContact'];
   $subTotalValue 				= $_POST['subTotalValue'];
@@ -68,13 +68,10 @@ if($_POST) {
 	} // /for quantity
 
 	$valid['success'] = true;
-	$valid['messages'] = "Successfully Added";		
+	$valid['messages'] = "Venta Realizada.";		
 	
 	$connect->close();
 	
-	
-
-
 	echo json_encode($valid);
  
 } // /if $_POST
