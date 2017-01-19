@@ -364,6 +364,7 @@ function validacionesForm() {
 
 }
 
+
 // print order function
 function printOrder(orderId = null) {
     if (orderId) {
@@ -426,7 +427,7 @@ function addRow() {
                     '<input type="hidden" name="barCodeValue[]" id="barCodeValue' + count + '" autocomplete="off" class="form-control" />' +
                     '</td>' +
 
-                    '<td>' +
+                    '<td style="margin-left:20px;">' +
                     '<input type="text" name="productName[]" disabled="true" id="productName' + count + '" class="form-control" />' +
                     '<input type="hidden" name="productNameValue[]" id="productNameValue' + count + '" autocomplete="off" class="form-control" />' +
                     '</td>' +
@@ -438,7 +439,7 @@ function addRow() {
 
                     '<td style="padding-left:20px;">' +
                     '<div class="form-group">' +
-                    '<input type="number" name="quantity[]" id="quantity' + count + '" onkeyup="getTotal(' + count + ')" autocomplete="off" class="form-control" min="1" />' +
+                    '<input type="number" name="quantity[]" id="quantity' + count + '" onchange="getTotal(' + count + ')" autocomplete="off" class="form-control" min="1" />' +
                     '</div>' +
                     '</td>' +
 
@@ -502,12 +503,19 @@ function getProductDataByBarCode(e, row) {
 
                     $("#quantity" + row).val(1);
 
+                    verifyStock(row);
+
                     var total = Number(response.rate) * 1;
                     total = total.toFixed(0);
 
 
                     $("#total" + row).val(total);
                     $("#totalValue" + row).val(total);
+
+
+                    $("#discount").val(0);
+
+
 
                     subAmount();
                 }, // /success
@@ -604,11 +612,51 @@ function getTotal(row = null) {
         $("#total" + row).val(total);
         $("#totalValue" + row).val(total);
 
+        verifyStock(row);
+
         subAmount();
 
     } else {
         alert('no row !! please refresh the page');
     }
+}
+
+
+function verifyStock(row) {
+    $barCode = $("#barCode" + row).val();
+    $toBuy = $("#quantity" + row).val();
+
+    $.ajax({
+        url: 'php_action/verifyStock.php',
+        type: 'post',
+        data: { barCode: $barCode, toBuy: $toBuy },
+        dataType: 'json',
+        success: function(response) {
+            $('#row' + row + ' > td > div').removeClass('has-error');
+            $('#row' + row + ' > td > div > .text-danger').remove()
+            if (!response) {
+                //alert("No hay Stock Suficiente");
+
+
+                $("#quantity" + row).after('<p class="text-danger"> No hay Stock Suficiente. </p>');
+                $('#quantity' + row).closest('.form-group').addClass('has-error');
+
+
+            } else {
+                // $('.form-group').removeClass('has-error').removeClass('has-success');
+                // $('.text-danger').remove();
+                $('.form-group > #quantity' + row).removeClass('has-error');
+
+            } // /else
+        }, // /success
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert('No existe el producto');
+
+            // alert(xhr.status);
+            // alert(thrownError);
+        }
+    });
+
 }
 
 function subAmount() {
@@ -706,7 +754,7 @@ function paidAmount() {
         $("#dueValue").val(dueAmount);
 
 
-        if (dueAmount <= 0) {
+        if (dueAmount <= 0 && $(".text-danger").length === 0) {
 
             $("#paymentStatus").val("1");
             $("#createOrderBtn").removeAttr("disabled");
