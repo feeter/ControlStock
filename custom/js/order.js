@@ -74,14 +74,14 @@ $(document).ready(function() {
                 $('#discount').closest('.form-group').addClass('has-success');
             } // /else
 
-            /*
-                        if (paymentType == "") {
-                            $("#paymentType").after('<p class="text-danger"> The Payment Type field is required </p>');
-                            $('#paymentType').closest('.form-group').addClass('has-error');
-                        } else {
-                            $('#paymentType').closest('.form-group').addClass('has-success');
-                        } // /else
-            */
+
+            if (paymentType == "") {
+                $("#paymentType").after('<p class="text-danger"> Forma de pago es Obligatorio </p>');
+                $('#paymentType').closest('.form-group').addClass('has-error');
+            } else {
+                $('#paymentType').closest('.form-group').addClass('has-success');
+            } // /else
+
             /*
             if (paymentStatus == "") {
                 $("#paymentStatus").after('<p class="text-danger"> The Payment Status field is required </p>');
