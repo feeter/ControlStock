@@ -9,22 +9,22 @@ $valid['success'] = array('success' => false, 'messages' => array(), 'order_id' 
 if($_POST) {	
 
 
-  $orderDate 						= date('Y-m-d');
+  $orderDate 						= date('Y-m-d H:i:s');
   $clientName 					= $_POST['clientName'];
   $clientContact 				= $_POST['clientContact'];
   $subTotalValue 				= $_POST['subTotalValue'];
-  $vatValue 						=	$_POST['vatValue'];
-  $totalAmountValue     = $_POST['totalAmountValue'];
+  //$vatValue 						=	$_POST['vatValue'];
+  //$totalAmountValue     = $_POST['totalAmountValue'];
   $discount 						= $_POST['discount'];
   $grandTotalValue 			= $_POST['grandTotalValue'];
   $paid 								= $_POST['paid'];
   $dueValue 						= $_POST['dueValue'];
   $paymentType 					= $_POST['paymentType'];
-  $paymentStatus 				= $_POST['paymentStatus'];
+  $paymentStatusValue 				= $_POST['paymentStatusValue'];
 
   
 
-	$sql = "INSERT INTO orders (order_date, client_name, client_contact, sub_total, vat, total_amount, discount, grand_total, paid, due, payment_type, payment_status, order_status) VALUES ('$orderDate', '$clientName', '$clientContact', '$subTotalValue', '$vatValue', '$totalAmountValue', '$discount', '$grandTotalValue', '$paid', '$dueValue', $paymentType, $paymentStatus, 1)";
+	$sql = "INSERT INTO orders (order_date, client_name, client_contact, sub_total, discount, grand_total, paid, due, payment_type, payment_status, order_status) VALUES ('$orderDate', '$clientName', '$clientContact', '$subTotalValue', '$discount', '$grandTotalValue', '$paid', '$dueValue', $paymentType, $paymentStatusValue, 1)";
 	
 	
 	$order_id;

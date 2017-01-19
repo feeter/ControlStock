@@ -15,6 +15,7 @@ $(document).ready(function() {
         // order date picker
         $("#orderDate").datepicker();
 
+
         // create order form function
         $("#createOrderForm").unbind('submit').bind('submit', function() {
             var form = $(this);
@@ -32,7 +33,7 @@ $(document).ready(function() {
             var discount = $("#discount").val();
             var paymentType = $("#paymentType").val();
             var paymentStatus = $("#paymentStatus").val();
-
+            $("#paymentStatusValue").val(paymentStatus);
 
             // form validation 
             if (orderDate == "") {
@@ -140,7 +141,7 @@ $(document).ready(function() {
             */
 
             console.log('primer log');
-            if (orderDate && clientName && clientContact && paid && discount && paymentType && paymentStatus) {
+            if (orderDate && paid && discount && paymentType && paymentStatus) {
                 console.log('segundo log dentro del if');
                 // create order button
                 // $("#createOrderBtn").button('loading');
@@ -426,7 +427,7 @@ function addRow() {
                     '</td>' +
 
                     '<td>' +
-                    '<input type="text" name="productName[]" id="productName' + count + '" class="form-control" />' +
+                    '<input type="text" name="productName[]" disabled="true" id="productName' + count + '" class="form-control" />' +
                     '<input type="hidden" name="productNameValue[]" id="productNameValue' + count + '" autocomplete="off" class="form-control" />' +
                     '</td>' +
 
@@ -599,7 +600,7 @@ function getProductData(row = null) {
 function getTotal(row = null) {
     if (row) {
         var total = Number($("#rate" + row).val()) * Number($("#quantity" + row).val());
-        total = total.toFixed(2);
+        total = total.toFixed();
         $("#total" + row).val(total);
         $("#totalValue" + row).val(total);
 
@@ -621,39 +622,41 @@ function subAmount() {
         totalSubAmount = Number(totalSubAmount) + Number($("#total" + count).val());
     } // /for
 
-    totalSubAmount = totalSubAmount.toFixed(2);
+    totalSubAmount = totalSubAmount.toFixed(0);
 
     // sub total
     $("#subTotal").val(totalSubAmount);
     $("#subTotalValue").val(totalSubAmount);
 
-    // vat
+    /* vat
     var vat = (Number($("#subTotal").val()) / 100) * 13;
     vat = vat.toFixed(2);
     $("#vat").val(vat);
     $("#vatValue").val(vat);
-
-    // total amount
-    var totalAmount = (Number($("#subTotal").val()) + Number($("#vat").val()));
-    totalAmount = totalAmount.toFixed(2);
-    $("#totalAmount").val(totalAmount);
-    $("#totalAmountValue").val(totalAmount);
+*/
+    /*
+         // total amount
+         var totalAmount = (Number($("#subTotal").val()) + Number($("#vat").val()));
+         totalAmount = totalAmount.toFixed(2);
+         $("#totalAmount").val(totalAmount);
+         $("#totalAmountValue").val(totalAmount);
+     */
 
     var discount = $("#discount").val();
     if (discount) {
-        var grandTotal = Number($("#totalAmount").val()) - Number(discount);
-        grandTotal = grandTotal.toFixed(2);
+        var grandTotal = Number($("#subTotal").val()) - Number(discount);
+        grandTotal = grandTotal.toFixed(0);
         $("#grandTotal").val(grandTotal);
         $("#grandTotalValue").val(grandTotal);
     } else {
-        $("#grandTotal").val(totalAmount);
-        $("#grandTotalValue").val(totalAmount);
+        // $("#grandTotal").val(totalAmount);
+        // $("#grandTotalValue").val(totalAmount);
     } // /else discount	
 
     var paidAmount = $("#paid").val();
     if (paidAmount) {
         paidAmount = Number($("#grandTotal").val()) - Number(paidAmount);
-        paidAmount = paidAmount.toFixed(2);
+        paidAmount = paidAmount.toFixed(0);
         $("#due").val(paidAmount);
         $("#dueValue").val(paidAmount);
     } else {
@@ -665,24 +668,24 @@ function subAmount() {
 
 function discountFunc() {
     var discount = $("#discount").val();
-    var totalAmount = Number($("#totalAmount").val());
-    totalAmount = totalAmount.toFixed(2);
+    //var totalAmount = Number($("#totalAmount").val());
+    //totalAmount = totalAmount.toFixed(2);
 
     var grandTotal;
-    if (totalAmount) {
-        grandTotal = Number($("#totalAmount").val()) - Number($("#discount").val());
-        grandTotal = grandTotal.toFixed(2);
+    if (discount) {
+        grandTotal = Number($("#subTotal").val()) - Number($("#discount").val());
+        grandTotal = grandTotal.toFixed(0);
 
         $("#grandTotal").val(grandTotal);
         $("#grandTotalValue").val(grandTotal);
-    } else {}
+    }
 
     var paid = $("#paid").val();
 
     var dueAmount;
     if (paid) {
         dueAmount = Number($("#grandTotal").val()) - Number($("#paid").val());
-        dueAmount = dueAmount.toFixed(2);
+        dueAmount = dueAmount.toFixed(0);
 
         $("#due").val(dueAmount);
         $("#dueValue").val(dueAmount);
@@ -698,9 +701,21 @@ function paidAmount() {
 
     if (grandTotal) {
         var dueAmount = Number($("#grandTotal").val()) - Number($("#paid").val());
-        dueAmount = dueAmount.toFixed(2);
+        dueAmount = dueAmount.toFixed(0);
         $("#due").val(dueAmount);
         $("#dueValue").val(dueAmount);
+
+
+        if (dueAmount <= 0) {
+
+            $("#paymentStatus").val("1");
+            $("#createOrderBtn").removeAttr("disabled");
+        } else {
+            $("#paymentStatus").val("3");
+            $("#createOrderBtn").attr("disabled", true);
+        }
+
+
     } // /if
 } // /paid amoutn function
 

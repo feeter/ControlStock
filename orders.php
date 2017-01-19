@@ -106,7 +106,7 @@ if($_GET['o'] == 'add') {
 			  				</td>	
 
 			  				<td style="margin-left:20px;">
-										<input type="text" name="productName[]" id="productName<?php echo $x; ?>" class="form-control" />			  					
+										<input type="text" name="productName[]" disabled="true" id="productName<?php echo $x; ?>" class="form-control" />			  					
 										<input type="hidden" name="productNameValue[]" id="productNameValue<?php echo $x; ?>" autocomplete="off" class="form-control" />
 			  				</td>
 
@@ -143,20 +143,8 @@ if($_GET['o'] == 'add') {
 				      <input type="hidden" class="form-control" id="subTotalValue" name="subTotalValue" />
 				    </div>
 				  </div> <!--/form-group-->			  
-				  <div class="form-group">
-				    <label for="vat" class="col-sm-3 control-label">VAT 13%</label>
-				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="vat" name="vat" disabled="true" />
-				      <input type="hidden" class="form-control" id="vatValue" name="vatValue" />
-				    </div>
-				  </div> <!--/form-group-->			  
-				  <div class="form-group">
-				    <label for="totalAmount" class="col-sm-3 control-label">Monto Total</label>
-				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="totalAmount" name="totalAmount" disabled="true"/>
-				      <input type="hidden" class="form-control" id="totalAmountValue" name="totalAmountValue" />
-				    </div>
-				  </div> <!--/form-group-->			  
+		  
+	  
 				  <div class="form-group">
 				    <label for="discount" class="col-sm-3 control-label">Descuento</label>
 				    <div class="col-sm-9">
@@ -200,14 +188,15 @@ if($_GET['o'] == 'add') {
 				  <div class="form-group">
 				    <label for="clientContact" class="col-sm-3 control-label">Estado del Pago</label>
 				    <div class="col-sm-9">
-				      <select class="form-control" name="paymentStatus" id="paymentStatus">
+				      <select class="form-control" disabled name="paymentStatus" id="paymentStatus">
 				      	<option value="">~~SELECT~~</option>
 				      	<option value="1">Pago Total</option>
 				      	<option value="2">Pago por Adelantado</option>
 				      	<option value="3">No pagado</option>
 				      </select>
+							<input type="hidden" name="paymentStatusValue" id="paymentStatusValue" />
 				    </div>
-				  </div> <!--/form-group-->							  
+				  </div> <!--/form-group-->	
 			  </div> <!--/col-md-6-->
 
 
@@ -215,7 +204,7 @@ if($_GET['o'] == 'add') {
 			    <div class="col-sm-offset-2 col-sm-10">
 			    <button type="button" class="btn btn-default" onclick="addRow()" id="addRowBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-plus-sign"></i> Agregar Producto </button>
 
-			      <button type="submit" id="createOrderBtn" data-loading-text="Loading..." class="btn btn-success"><i class="glyphicon glyphicon-ok-sign"></i> Finalizar Pago</button>
+			      <button type="submit" id="createOrderBtn" disabled data-loading-text="Loading..." class="btn btn-success"><i class="glyphicon glyphicon-ok-sign"></i> Finalizar Pago</button>
 
 			      <button type="reset" class="btn btn-default" onclick="resetOrderForm()"><i class="glyphicon glyphicon-erase"></i> Limpiar</button>
 			    </div>
@@ -381,13 +370,7 @@ if($_GET['o'] == 'add') {
 				      <input type="text" class="form-control" id="discount" name="discount" onkeyup="discountFunc()" autocomplete="off" value="<?php echo $data[7] ?>" />
 				    </div>
 				  </div> <!--/form-group-->	
-				  <div class="form-group">
-				    <label for="grandTotal" class="col-sm-3 control-label">Monto Final</label>
-				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="grandTotal" name="grandTotal" disabled="true" value="<?php echo $data[8] ?>"  />
-				      <input type="hidden" class="form-control" id="grandTotalValue" name="grandTotalValue" value="<?php echo $data[8] ?>"  />
-				    </div>
-				  </div> <!--/form-group-->			  		  
+				    		  
 			  </div> <!--/col-md-6-->
 
 			  <div class="col-md-6">
@@ -447,7 +430,7 @@ if($_GET['o'] == 'add') {
 
 			    <input type="hidden" name="orderId" id="orderId" value="<?php echo $_GET['i']; ?>" />
 
-			    <button type="submit" id="editOrderBtn" data-loading-text="Loading..." class="btn btn-success"><i class="glyphicon glyphicon-ok-sign"></i> Finalizar Pago</button>
+			    <button type="submit" id="editOrderBtn" data-loading-text="Loading..."  class="btn btn-success"><i class="glyphicon glyphicon-ok-sign"></i> Finalizar Pago</button>
 			      
 			    </div>
 			  </div>
