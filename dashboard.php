@@ -19,6 +19,10 @@ $lowStockSql = "SELECT * FROM product WHERE quantity <= 3 AND status = 1";
 $lowStockQuery = $connect->query($lowStockSql);
 $countLowStock = $lowStockQuery->num_rows;
 
+$soonStockExpireSql = "SELECT * FROM product WHERE expiration_date >= CURDATE() and expiration_date <= date_add(curdate(), interval 14 day) AND status = 1";
+$soonStockExpireQuery = $connect->query($soonStockExpireSql);
+$countStockExpire = $soonStockExpireQuery->num_rows;
+
 $connect->close();
 
 ?>
@@ -74,7 +78,24 @@ $connect->close();
 		</div> <!--/panel-->
 	</div> <!--/col-md-4-->
 
+
+
+
 	<div class="col-md-4">
+
+			
+		<div class="panel panel-warning">
+			<div class="panel-heading">
+				
+				<a href="product.php" style="text-decoration:none;color:black;">
+					Productos pronto a expirar
+					<span class="badge pull pull-right"><?php echo $countStockExpire; ?></span>	
+				</a>
+				
+			</div> <!--/panel-hdeaing-->
+		</div> <!--/panel-->
+	
+
 		<div class="card">
 		  <div class="cardHeader">
 		    <h1><?php echo date('d'); ?></h1>
