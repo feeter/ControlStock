@@ -126,6 +126,8 @@ $(document).ready(function() {
                 var form = $(this);
                 var formData = new FormData(this);
 
+                console.log(formData);
+
                 $.ajax({
                     url: form.attr('action'),
                     type: form.attr('method'),
@@ -168,6 +170,7 @@ $(document).ready(function() {
                             } // /if response.success
 
                         } // /success function
+                        //error: AjaxFailed
                 }); // /ajax function
             } // /if validation is ok 					
 

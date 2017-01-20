@@ -6,6 +6,8 @@ $valid['success'] = array('success' => false, 'messages' => array());
 
 if($_POST) {	
 
+
+
   $barCode = $_POST['barCode'];
 
 	$productName 		= $_POST['productName'];
@@ -16,6 +18,16 @@ if($_POST) {
   $categoryName 	= $_POST['categoryName'];
   $productStatus 	= $_POST['productStatus'];
 
+
+$var = $_POST['expirationDate'];
+$date = str_replace('/', '-', $var);
+$expirationDate = date('Y-m-d', strtotime($date));
+
+
+//print_r($_POST);
+	
+
+
 	$type = explode('.', $_FILES['productImage']['name']);
 	$type = $type[count($type)-1];		
 	$url = '../assests/images/stock/'.uniqid(rand()).'.'.$type;
@@ -23,8 +35,8 @@ if($_POST) {
 		if(is_uploaded_file($_FILES['productImage']['tmp_name'])) {			
 			if(move_uploaded_file($_FILES['productImage']['tmp_name'], $url)) {
 				
-				$sql = "INSERT INTO product (bar_code, product_name, product_image, brand_id, categories_id, quantity, rate, active, status) 
-				VALUES ('$barCode', '$productName', '$url', '$brandName', '$categoryName', '$quantity', '$rate', '$productStatus', 1)";
+				$sql = "INSERT INTO product (bar_code, product_name, product_image, brand_id, categories_id, quantity, rate, active, status, expiration_date) 
+				VALUES ('$barCode', '$productName', '$url', '$brandName', '$categoryName', '$quantity', '$rate', '$productStatus', 1, '$expirationDate')";
 
 				if($connect->query($sql) === TRUE) {
 					$valid['success'] = true;
