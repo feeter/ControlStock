@@ -6,6 +6,7 @@ $(document).ready(function() {
     // manage product data table
     manageProductTable = $('#manageProductTable').DataTable({
         'ajax': 'php_action/fetchProduct.php',
+        'bSort': true,
         'order': []
     });
 
@@ -234,6 +235,10 @@ function editProduct(productId = null) {
                 $(".editProductFooter").append('<input type="hidden" name="productId" id="productId" value="' + response.product_id + '" />');
                 $(".editProductPhotoFooter").append('<input type="hidden" name="productId" id="productId" value="' + response.product_id + '" />');
 
+
+                // product name
+                $("#editBarCode").val(response.bar_code);
+
                 // product name
                 $("#editProductName").val(response.product_name);
                 // quantity
@@ -249,6 +254,12 @@ function editProduct(productId = null) {
 
                 // update the product data function
                 $("#editProductForm").unbind('submit').bind('submit', function() {
+
+
+                    // remove text-error 
+                    $(".text-danger").remove();
+                    // remove from-group error
+                    $(".form-group").removeClass('has-error').removeClass('has-success');
 
                     // form validation
                     var productImage = $("#editProductImage").val();

@@ -197,8 +197,8 @@
 
 				  <!-- Nav tabs -->
 				  <ul class="nav nav-tabs" role="tablist">
-				    <li role="presentation" class="active"><a href="#photo" aria-controls="home" role="tab" data-toggle="tab">Photo</a></li>
-				    <li role="presentation"><a href="#productInfo" aria-controls="profile" role="tab" data-toggle="tab">Product Info</a></li>    
+				    <li role="presentation" class="active"><a href="#photo" aria-controls="home" role="tab" data-toggle="tab">Imagen</a></li>
+				    <li role="presentation"><a href="#productInfo" aria-controls="profile" role="tab" data-toggle="tab">Informacion del Producto</a></li>    
 				  </ul>
 
 				  <!-- Tab panes -->
@@ -212,7 +212,7 @@
 				    	<div id="edit-productPhoto-messages"></div>
 
 				    	<div class="form-group">
-			        	<label for="editProductImage" class="col-sm-3 control-label">Product Image: </label>
+			        	<label for="editProductImage" class="col-sm-3 control-label">Imagen: </label>
 			        	<label class="col-sm-1 control-label">: </label>
 						    <div class="col-sm-8">							    				   
 						      <img src="" id="getProductImage" class="thumbnail" style="width:250px; height:250px;" />
@@ -220,7 +220,7 @@
 			        </div> <!-- /form-group-->	     	           	       
 				    	
 			      	<div class="form-group">
-			        	<label for="editProductImage" class="col-sm-3 control-label">Select Photo: </label>
+			        	<label for="editProductImage" class="col-sm-3 control-label">Seleccionar producto: </label>
 			        	<label class="col-sm-1 control-label">: </label>
 						    <div class="col-sm-8">
 							    <!-- the avatar markup -->
@@ -248,32 +248,40 @@
 
 				    	<div id="edit-product-messages"></div>
 
-				    	<div class="form-group">
-			        	<label for="editProductName" class="col-sm-3 control-label">Product Name: </label>
+							<div class="form-group">
+			        	<label for="editProductBarCode" class="col-sm-3 control-label">Codigo de Barra: </label>
 			        	<label class="col-sm-1 control-label">: </label>
 						    <div class="col-sm-8">
-						      <input type="text" class="form-control" id="editProductName" placeholder="Product Name" name="editProductName" autocomplete="off">
+						      <input type="text" class="form-control" id="editBarCode" placeholder="Codigo de Barra" name="editBarCode" autocomplete="off">
+						    </div>
+			        </div> <!-- /form-group-->
+
+				    	<div class="form-group">
+			        	<label for="editProductName" class="col-sm-3 control-label">Nombre: </label>
+			        	<label class="col-sm-1 control-label">: </label>
+						    <div class="col-sm-8">
+						      <input type="text" class="form-control" id="editProductName" placeholder="Nombre del Producto" name="editProductName" autocomplete="off">
 						    </div>
 			        </div> <!-- /form-group-->	    
 
 			        <div class="form-group">
-			        	<label for="editQuantity" class="col-sm-3 control-label">Quantity: </label>
+			        	<label for="editQuantity" class="col-sm-3 control-label">Cantidad: </label>
 			        	<label class="col-sm-1 control-label">: </label>
 						    <div class="col-sm-8">
-						      <input type="text" class="form-control" id="editQuantity" placeholder="Quantity" name="editQuantity" autocomplete="off">
+						      <input type="text" class="form-control" id="editQuantity" placeholder="Cantidad" name="editQuantity" autocomplete="off">
 						    </div>
 			        </div> <!-- /form-group-->	        	 
 
 			        <div class="form-group">
-			        	<label for="editRate" class="col-sm-3 control-label">Rate: </label>
+			        	<label for="editRate" class="col-sm-3 control-label">Precio: </label>
 			        	<label class="col-sm-1 control-label">: </label>
 						    <div class="col-sm-8">
-						      <input type="text" class="form-control" id="editRate" placeholder="Rate" name="editRate" autocomplete="off">
+						      <input type="text" class="form-control" id="editRate" placeholder="Precio" name="editRate" autocomplete="off">
 						    </div>
 			        </div> <!-- /form-group-->	     	        
 
 			        <div class="form-group">
-			        	<label for="editBrandName" class="col-sm-3 control-label">Brand Name: </label>
+			        	<label for="editBrandName" class="col-sm-3 control-label">Marca: </label>
 			        	<label class="col-sm-1 control-label">: </label>
 						    <div class="col-sm-8">
 						      <select class="form-control" id="editBrandName" name="editBrandName">
@@ -292,7 +300,7 @@
 			        </div> <!-- /form-group-->	
 
 			        <div class="form-group">
-			        	<label for="editCategoryName" class="col-sm-3 control-label">Category Name: </label>
+			        	<label for="editCategoryName" class="col-sm-3 control-label">Categoria: </label>
 			        	<label class="col-sm-1 control-label">: </label>
 						    <div class="col-sm-8">
 						      <select type="text" class="form-control" id="editCategoryName" name="editCategoryName" >
@@ -311,21 +319,21 @@
 			        </div> <!-- /form-group-->					        	         	       
 
 			        <div class="form-group">
-			        	<label for="editProductStatus" class="col-sm-3 control-label">Status: </label>
+			        	<label for="editProductStatus" class="col-sm-3 control-label">Estado: </label>
 			        	<label class="col-sm-1 control-label">: </label>
 						    <div class="col-sm-8">
 						      <select class="form-control" id="editProductStatus" name="editProductStatus">
 						      	<option value="">~~SELECT~~</option>
-						      	<option value="1">Available</option>
-						      	<option value="2">Not Available</option>
+						      	<option value="1">Disponible</option>
+						      	<option value="2">No Disponible</option>
 						      </select>
 						    </div>
 			        </div> <!-- /form-group-->	         	        
 
 			        <div class="modal-footer editProductFooter">
-				        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
+				        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Cerrar</button>
 				        
-				        <button type="submit" class="btn btn-success" id="editProductBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
+				        <button type="submit" class="btn btn-success" id="editProductBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Guardar Cambios</button>
 				      </div> <!-- /modal-footer -->				     
 			        </form> <!-- /.form -->				     	
 				    </div>    
@@ -350,17 +358,17 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title"><i class="glyphicon glyphicon-trash"></i> Remove Product</h4>
+        <h4 class="modal-title"><i class="glyphicon glyphicon-trash"></i> Eliminar Producto</h4>
       </div>
       <div class="modal-body">
 
       	<div class="removeProductMessages"></div>
 
-        <p>Do you really want to remove ?</p>
+        <p>Esta seguro de eliminar el producto ?</p>
       </div>
       <div class="modal-footer removeProductFooter">
-        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
-        <button type="button" class="btn btn-primary" id="removeProductBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save changes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Cerrar</button>
+        <button type="button" class="btn btn-primary" id="removeProductBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Guardar Cambios</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
