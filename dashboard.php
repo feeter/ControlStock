@@ -19,7 +19,7 @@ $lowStockSql = "SELECT * FROM product WHERE quantity <= 3 AND status = 1";
 $lowStockQuery = $connect->query($lowStockSql);
 $countLowStock = $lowStockQuery->num_rows;
 
-$soonStockExpireSql = "SELECT * FROM product WHERE expiration_date >= CURDATE() and expiration_date <= date_add(curdate(), interval 14 day) AND status = 1";
+$soonStockExpireSql = "SELECT * FROM product WHERE expiration_date >= CURDATE() and expiration_date <= date_add(curdate(), interval 31 day) AND status = 1";
 $soonStockExpireQuery = $connect->query($soonStockExpireSql);
 $countStockExpire = $soonStockExpireQuery->num_rows;
 
@@ -136,10 +136,10 @@ $connect->close();
 	
 </div> <!--/row-->
 
-<!-- fullCalendar 2.2.5 -->
-<script src="assests/plugins/moment/moment.min.js"></script>
+<!-- fullCalendar 3.1.0 -->
+<script src="assests/plugins/fullcalendar/lib/moment.min.js"></script>
 <script src="assests/plugins/fullcalendar/fullcalendar.min.js"></script>
-
+<script src='assests/plugins/fullcalendar/locale/es.js'></script>
 
 <script type="text/javascript">
 	$(function () {
@@ -158,9 +158,12 @@ $connect->close();
           center: 'title'
         },
         buttonText: {
-          today: 'today',
+          today: 'Hoy',
           month: 'month'          
-        }        
+        }
+				
+
+				
       });
 
 
