@@ -236,20 +236,28 @@ function editProduct(productId = null) {
                 $(".editProductPhotoFooter").append('<input type="hidden" name="productId" id="productId" value="' + response.product_id + '" />');
 
 
-                // product name
+                // Codigo de Barras
                 $("#editBarCode").val(response.bar_code);
 
-                // product name
+                // Nombre del Producto
                 $("#editProductName").val(response.product_name);
-                // quantity
+
+                // Cantidad
                 $("#editQuantity").val(response.quantity);
-                // rate
+
+                // Precio
                 $("#editRate").val(response.rate);
-                // brand name
+
+                // Fecha de Expiracion
+                $("#editExpirationDate").val($.datepicker.formatDate('dd/mm/yy', new Date(response.expiration_date + " ")));
+
+                // Nombre Marca
                 $("#editBrandName").val(response.brand_id);
-                // category name
+
+                // Nombre Categoria
                 $("#editCategoryName").val(response.categories_id);
-                // status
+
+                // Estado
                 $("#editProductStatus").val(response.active);
 
                 // update the product data function

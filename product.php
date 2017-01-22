@@ -278,6 +278,14 @@
 						    <div class="col-sm-8">
 						      <input type="text" class="form-control" id="editRate" placeholder="Precio" name="editRate" autocomplete="off">
 						    </div>
+			        </div> <!-- /form-group-->	 
+
+							<div class="form-group">
+			        	<label for="editExpirationDate" class="col-sm-3 control-label">Fecha de Expiracion: </label>
+			        	<label class="col-sm-1 control-label">: </label>
+						    <div class="col-sm-8">
+						      <input type="text" class="form-control" id="editExpirationDate" placeholder="dd/mm/aaaa" name="editExpirationDate" autocomplete="off">
+						    </div>
 			        </div> <!-- /form-group-->	     	        
 
 			        <div class="form-group">
