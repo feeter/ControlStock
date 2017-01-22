@@ -40,10 +40,10 @@ $expirationDate = date('Y-m-d', strtotime($date));
 
 				if($connect->query($sql) === TRUE) {
 					$valid['success'] = true;
-					$valid['messages'] = "Successfully Added";	
+					$valid['messages'] = "Producto Agregado";	
 				} else {
 					$valid['success'] = false;
-					$valid['messages'] = "Error while adding the members";
+					$valid['messages'] = "Ocurrio un Error";
 				}
 
 			}	else {

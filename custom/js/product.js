@@ -534,6 +534,7 @@ function removeProduct(productId = null) {
 
                         } // /error
                     } // /success function
+                    //error: AjaxFailed
             }); // /ajax fucntion to remove the product
             return false;
         }); // /remove product btn clicked

@@ -9,7 +9,29 @@ $productId = $_POST['productId'];
 
 if($productId) { 
 
- $sql = "UPDATE product SET active = 2, status = 2 WHERE product_id = {$productId}";
+	$sqlImage = "SELECT product_image FROM product WHERE product_id = $productId";
+
+	$resultImage = $connect->query($sqlImage);
+	
+	$row = $resultImage->fetch_row();
+
+	if (strpos($row[0], 'sin-image'))
+	{
+
+
+	}
+	else
+	{
+		$filename = $row[0];
+		if (file_exists($filename)) {
+			unlink($filename);
+		}
+	}
+
+
+
+
+ $sql = "DELETE FROM product WHERE product_id = {$productId}";
 
  if($connect->query($sql) === TRUE) {
  	$valid['success'] = true;
