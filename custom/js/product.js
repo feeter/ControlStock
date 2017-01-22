@@ -22,6 +22,7 @@ $(document).ready(function() {
         $(".form-group").removeClass('has-error').removeClass('has-success');
 
         $("#productImage").fileinput({
+            language: "es",
             overwriteInitial: true,
             maxFileSize: 2500,
             showClose: false,
@@ -30,7 +31,6 @@ $(document).ready(function() {
             removeLabel: '',
             browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
             removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
-            removeTitle: 'Cancel or reset changes',
             elErrorContainer: '#kv-avatar-errors-1',
             msgErrorClass: 'alert alert-block alert-danger',
             defaultPreviewContent: '<img src="assests/images/photo_default.png" alt="Profile Image" style="width:100%;">',
@@ -212,24 +212,9 @@ function editProduct(productId = null) {
 
                 $("#getProductImage").attr('src', 'stock/' + response.product_image);
 
-                $("#editProductImage").fileinput({});
-
-                // $("#editProductImage").fileinput({
-                //     overwriteInitial: true,
-                //    maxFileSize: 2500,
-                //    showClose: false,
-                //    showCaption: false,
-                //    browseLabel: '',
-                //    removeLabel: '',
-                //    browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
-                //    removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
-                //    removeTitle: 'Cancel or reset changes',
-                //    elErrorContainer: '#kv-avatar-errors-1',
-                //    msgErrorClass: 'alert alert-block alert-danger',
-                //    defaultPreviewContent: '<img src="stock/'+response.product_image+'" alt="Profile Image" style="width:100%;">',
-                //    layoutTemplates: {main2: '{preview} {remove} {browse}'},								    
-                // 		allowedFileExtensions: ["jpg", "png", "gif", "JPG", "PNG", "GIF"]
-                // });  
+                $("#editProductImage").fileinput({
+                    language: "es"
+                });
 
                 // product id 
                 $(".editProductFooter").append('<input type="hidden" name="productId" id="productId" value="' + response.product_id + '" />');

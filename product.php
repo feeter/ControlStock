@@ -233,7 +233,7 @@
 			        </div> <!-- /form-group-->	     	           	       
 
 			        <div class="modal-footer editProductPhotoFooter">
-				        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
+				        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Cerrar</button>
 				        
 				        <!-- <button type="submit" class="btn btn-success" id="editProductImageBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button> -->
 				      </div>
@@ -385,5 +385,6 @@
 
 
 <script src="custom/js/product.js"></script>
+
 
 <?php require_once 'includes/footer.php'; ?>
