@@ -101,7 +101,15 @@
 				    <div class="col-sm-8">
 				      <input type="text" class="form-control" id="rate" placeholder="Precio" name="rate" autocomplete="off">
 				    </div>
-	        </div> <!-- /form-group-->	     	        
+	        </div> <!-- /form-group-->	
+
+					<div class="form-group">
+	        	<label for="expirationDate" class="col-sm-3 control-label">Fecha de Expiracion: </label>
+	        	<label class="col-sm-1 control-label">: </label>
+				    <div class="col-sm-8">
+				      <input type="text" class="form-control" id="expirationDate" placeholder="Fecha dd/mm/aaaa" name="expirationDate" autocomplete="off">
+				    </div>
+	        </div> <!-- /form-group-->     	        
 
 	        <div class="form-group">
 	        	<label for="brandName" class="col-sm-3 control-label">Marca: </label>
@@ -153,13 +161,7 @@
 				    </div>
 	        </div> <!-- /form-group-->	  
 
-					<div class="form-group">
-	        	<label for="expirationDate" class="col-sm-3 control-label">Fecha de Expiracion: </label>
-	        	<label class="col-sm-1 control-label">: </label>
-				    <div class="col-sm-8">
-				      <input type="text" class="form-control" id="expirationDate" placeholder="Fecha" name="expirationDate" autocomplete="off">
-				    </div>
-	        </div> <!-- /form-group-->
+					
 
 	      </div> <!-- /modal-body -->
 
