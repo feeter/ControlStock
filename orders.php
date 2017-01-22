@@ -146,9 +146,9 @@ if($_GET['o'] == 'add') {
 		  
 	  
 				  <div class="form-group">
-				    <label for="discount" class="col-sm-3 control-label">Descuento</label>
+				    <label for="discount" class="col-sm-3 control-label">Descuento %</label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="discount" name="discount" onkeyup="discountFunc()" autocomplete="off" />
+				      <input type="number" min="0" max="100" class="form-control" id="discount" name="discount" onkeyup="discountFunc()" onchange="discountFunc()" autocomplete="off" />
 				    </div>
 				  </div> <!--/form-group-->	
 				  <div class="form-group">

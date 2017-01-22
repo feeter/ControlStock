@@ -619,6 +619,31 @@ function getTotal(row = null) {
     } else {
         alert('no row !! please refresh the page');
     }
+
+
+    validaFinalizarPago();
+
+}
+
+function validaFinalizarPago() {
+    if ($("#dueValue").val() <= 0 && $(".text-danger").length === 0) {
+
+        $("#paymentStatus").val("1");
+        $("#createOrderBtn").removeAttr("disabled");
+    } else {
+        $("#paymentStatus").val("3");
+        $("#createOrderBtn").attr("disabled", true);
+    }
+
+    var isVuelto = Number($("#due").val());
+
+    if (isVuelto < 0) {
+        $("label[for='due']").text("Vuelto");
+
+    } else {
+        $("label[for='due']").text("Faltan");
+    }
+
 }
 
 
@@ -716,12 +741,10 @@ function subAmount() {
 
 function discountFunc() {
     var discount = $("#discount").val();
-    //var totalAmount = Number($("#totalAmount").val());
-    //totalAmount = totalAmount.toFixed(2);
 
     var grandTotal;
     if (discount) {
-        grandTotal = Number($("#subTotal").val()) - Number($("#discount").val());
+        grandTotal = Number($("#subTotal").val()) - (Number($("#subTotal").val()) * (Number($("#discount").val() / 100)));
         grandTotal = grandTotal.toFixed(0);
 
         $("#grandTotal").val(grandTotal);
@@ -742,6 +765,8 @@ function discountFunc() {
         $("#dueValue").val($("#grandTotal").val());
     }
 
+    validaFinalizarPago();
+
 } // /discount function
 
 function paidAmount() {
@@ -754,14 +779,7 @@ function paidAmount() {
         $("#dueValue").val(dueAmount);
 
 
-        if (dueAmount <= 0 && $(".text-danger").length === 0) {
-
-            $("#paymentStatus").val("1");
-            $("#createOrderBtn").removeAttr("disabled");
-        } else {
-            $("#paymentStatus").val("3");
-            $("#createOrderBtn").attr("disabled", true);
-        }
+        validaFinalizarPago();
 
 
     } // /if
