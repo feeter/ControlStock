@@ -196,6 +196,18 @@ $(document).ready(function() {
         $('#topNavManageOrder').addClass('active');
 
         manageOrderTable = $("#manageOrderTable").DataTable({
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ filas por paginas",
+                "zeroRecords": "No se encontraron registros coincidentes",
+                "info": "Mostrando pagina _PAGE_ de _PAGES_",
+                "infoEmpty": "Sin registros disponibles",
+                "infoFiltered": "(Se filtraron _MAX_ registros)",
+                "sSearch": "Buscar:",
+                "paginate": {
+                    "previous": "Anterior",
+                    "next": "Siguiente"
+                }
+            },
             'ajax': 'php_action/fetchOrder.php',
             'order': []
         });

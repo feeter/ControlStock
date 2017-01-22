@@ -13,7 +13,7 @@ $connect->close();
 	<div class="col-md-12">
 		<ol class="breadcrumb">
 		  <li><a href="dashboard.php">Home</a></li>		  
-		  <li class="active">Setting</li>
+		  <li class="active">Configuraciones</li>
 		</ol>
 
 		<div class="panel panel-default">
@@ -27,21 +27,21 @@ $connect->close();
 
 				<form action="php_action/changeUsername.php" method="post" class="form-horizontal" id="changeUsernameForm">
 					<fieldset>
-						<legend>Change Username</legend>
+						<legend>Cambiar Nombre de Usuario</legend>
 
 						<div class="changeUsenrameMessages"></div>			
 
 						<div class="form-group">
-					    <label for="username" class="col-sm-2 control-label">Username</label>
+					    <label for="username" class="col-sm-2 control-label">Nombre de Usuario</label>
 					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="username" name="username" placeholder="Usename" value="<?php echo $result['username']; ?>"/>
+					      <input type="text" class="form-control" id="username" name="username" placeholder="Nombre de Usuario" value="<?php echo $result['username']; ?>"/>
 					    </div>
 					  </div>
 
 					  <div class="form-group">
 					    <div class="col-sm-offset-2 col-sm-10">
 					    	<input type="hidden" name="user_id" id="user_id" value="<?php echo $result['user_id'] ?>" /> 
-					      <button type="submit" class="btn btn-success" data-loading-text="Loading..." id="changeUsernameBtn"> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes </button>
+					      <button type="submit" class="btn btn-success" data-loading-text="Loading..." id="changeUsernameBtn"> <i class="glyphicon glyphicon-ok-sign"></i> Guardar Cambios </button>
 					    </div>
 					  </div>
 					</fieldset>
@@ -49,26 +49,26 @@ $connect->close();
 
 				<form action="php_action/changePassword.php" method="post" class="form-horizontal" id="changePasswordForm">
 					<fieldset>
-						<legend>Change Password</legend>
+						<legend>Cambiar Clave</legend>
 
 						<div class="changePasswordMessages"></div>
 
 						<div class="form-group">
-					    <label for="password" class="col-sm-2 control-label">Current Password</label>
+					    <label for="password" class="col-sm-2 control-label">Clave Actual</label>
 					    <div class="col-sm-10">
 					      <input type="password" class="form-control" id="password" name="password" placeholder="Current Password">
 					    </div>
 					  </div>
 
 					  <div class="form-group">
-					    <label for="npassword" class="col-sm-2 control-label">New password</label>
+					    <label for="npassword" class="col-sm-2 control-label">Nueva Clave</label>
 					    <div class="col-sm-10">
 					      <input type="password" class="form-control" id="npassword" name="npassword" placeholder="New Password">
 					    </div>
 					  </div>
 
 					  <div class="form-group">
-					    <label for="cpassword" class="col-sm-2 control-label">Confirm Password</label>
+					    <label for="cpassword" class="col-sm-2 control-label">Confirmar Clave</label>
 					    <div class="col-sm-10">
 					      <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Confirm Password">
 					    </div>
@@ -77,7 +77,7 @@ $connect->close();
 					  <div class="form-group">
 					    <div class="col-sm-offset-2 col-sm-10">
 					    	<input type="hidden" name="user_id" id="user_id" value="<?php echo $result['user_id'] ?>" /> 
-					      <button type="submit" class="btn btn-primary"> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes </button>
+					      <button type="submit" class="btn btn-primary"> <i class="glyphicon glyphicon-ok-sign"></i> Guardar Cambios </button>
 					      
 					    </div>
 					  </div>

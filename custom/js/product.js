@@ -5,6 +5,18 @@ $(document).ready(function() {
     $('#navProduct').addClass('active');
     // manage product data table
     manageProductTable = $('#manageProductTable').DataTable({
+        "language": {
+            "lengthMenu": "Mostrar _MENU_ filas por paginas",
+            "zeroRecords": "No se encontraron registros coincidentes",
+            "info": "Mostrando pagina _PAGE_ de _PAGES_",
+            "infoEmpty": "Sin registros disponibles",
+            "infoFiltered": "(Se filtraron _MAX_ registros)",
+            "sSearch": "Buscar:",
+            "paginate": {
+                "previous": "Anterior",
+                "next": "Siguiente"
+            }
+        },
         'ajax': 'php_action/fetchProduct.php',
         'bSort': true,
         'order': []
