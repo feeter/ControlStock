@@ -59,10 +59,9 @@ while($row = $result->fetch_array()) {
   <link rel="stylesheet" href="assests/jquery-ui/jquery-ui.min.css">
   <script src="assests/jquery-ui/jquery-ui.min.js"></script>
 
-  <!-- bootstrap js -->
-	<script src="assests/bootstrap/js/bootstrap.min.js"></script>
   
-  <script src="custom/js/header.js"></script>
+  
+  
 
 
 </head>

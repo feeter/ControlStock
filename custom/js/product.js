@@ -398,7 +398,7 @@ function editProduct(productId = null) {
                     var productImage = $("#editProductImage").val();
 
                     if (productImage == "") {
-                        $("#editProductImage").closest('.center-block').after('<p class="text-danger">Product Image field is required</p>');
+                        $("#editProductImage").closest('.center-block').after('<p class="text-danger">El campo Imagen es obligatorio</p>');
                         $('#editProductImage').closest('.form-group').addClass('has-error');
                     } else {
                         // remov error text field
