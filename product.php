@@ -184,7 +184,7 @@
     	    	
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title"><i class="fa fa-edit"></i> Edit Product</h4>
+	        <h4 class="modal-title"><i class="fa fa-edit"></i> Editar Producto</h4>
 	      </div>
 	      <div class="modal-body" style="max-height:450px; overflow:auto;">
 
@@ -220,7 +220,7 @@
 			        </div> <!-- /form-group-->	     	           	       
 				    	
 			      	<div class="form-group">
-			        	<label for="editProductImage" class="col-sm-3 control-label">Seleccionar producto: </label>
+			        	<label for="editProductImage" class="col-sm-3 control-label">Seleccionar imagen: </label>
 			        	<label class="col-sm-1 control-label">: </label>
 						    <div class="col-sm-8">
 							    <!-- the avatar markup -->
