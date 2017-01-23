@@ -37,39 +37,66 @@ if($_POST) {
 	}
 
 		
-	// echo $_POST['productName'];
+	
 	$orderItemStatus = false;
 
 	
 
 	for($x = 0; $x < count($_POST['barCodeValue']); $x++) {	
+		
 
-
+		// echo "<script>console.log( 'Debug Objects: " . "INICIO" . "' );</script>";
+		
 		$updateProductQuantitySql = "SELECT product.quantity FROM product WHERE product.bar_code = ".$_POST['barCodeValue'][$x]."";
+		// echo "<script>console.log( 'Debug Objects: sql:" . "$updateProductQuantitySql" . "' );</script>";
 		$updateProductQuantityData = $connect->query($updateProductQuantitySql);
 		
-		
-		while ($updateProductQuantityResult = $updateProductQuantityData->fetch_row()) {
-			$updateQuantity[$x] = $updateProductQuantityResult[0] - $_POST['quantity'][$x];							
-				// update product table
-				$updateProductTable = "UPDATE product SET quantity = '".$updateQuantity[$x]."' WHERE bar_code = ".$_POST['barCodeValue'][$x]."";
-				$connect->query($updateProductTable);
+		$updateProductQuantityResult = $updateProductQuantityData->fetch_row();	
+		//while ($updateProductQuantityResult = $updateProductQuantityData->fetch_row()) {
+			$updateQuantity = $updateProductQuantityResult[0] - $_POST['quantity'][$x];							
+				
+			// echo "<script>console.log( 'Debug Objects: barCode:" . $_POST['barCodeValue'][$x] . "' );</script>";
+			
+			// echo "<script>console.log( 'Debug Objects: cantidad Actualizada: " . $updateQuantity . "' );</script>";	
+			// update product table
+			// echo "<script>console.log( 'Debug Objects: barCodeValue: " . $_POST['barCodeValue'][$x] . "' );</script>";	
+			$updateProductTable = "UPDATE product SET quantity = '".$updateQuantity."' WHERE bar_code = \'".$_POST['barCodeValue'][$x]."\'";
+			// echo "<script>console.log( 'Debug Objects: SQL: UPDATE product SET quantity = $updateQuantity WHERE bar_code = \'" . $_POST['barCodeValue'][$x] . "\' ' );</script>";
 
-				// add into order_item
-				$orderItemSql = "INSERT INTO order_item (order_id, product_id, quantity, rate, total, order_item_status) 
-				VALUES ('$order_id', '".$_POST['productIdValue'][$x]."', '".$_POST['quantity'][$x]."', '".$_POST['rateValue'][$x]."', '".$_POST['totalValue'][$x]."', 1)"; 
+			$connect->query($updateProductTable);
 
-				$connect->query($orderItemSql);		
+			
 
-				if($x == count($_POST['barCodeValue'])) {
-					$orderItemStatus = true;
-				}		
-		} // while	
+			// add into order_item
+
+			// echo "<script>console.log( 'Debug Objects: orderId: " . $order_id . "' );</script>";	
+			// echo "<script>console.log( 'Debug Objects: productId: " . $_POST['productIdValue'][$x] . "' );</script>";	
+			// echo "<script>console.log( 'Debug Objects: quantity: " . $_POST['quantity'][$x] . "' );</script>";	
+			// echo "<script>console.log( 'Debug Objects: rate: " . $_POST['rateValue'][$x] . "' );</script>";	
+			// echo "<script>console.log( 'Debug Objects: total: " . $_POST['totalValue'][$x] . "' );</script>";	
+
+			$orderItemSql = "INSERT INTO order_item (order_id, product_id, quantity, rate, total, order_item_status) 
+			VALUES ('$order_id', '".$_POST['productIdValue'][$x]."', '".$_POST['quantity'][$x]."', '".$_POST['rateValue'][$x]."', '".$_POST['totalValue'][$x]."', 1)"; 
+
+
+
+			//echo "<script>console.log( 'Debug Objects: " . $orderItemSql . "' );</script>";	
+
+			$connect->query($orderItemSql);		
+
+			// echo "<script>console.log( 'Debug Objects: COUNT BAR CODE: ".count($_POST['barCodeValue']) . "' );</script>";
+
+			if($x == count($_POST['barCodeValue'])) {
+				$orderItemStatus = true;
+			}	
+
+			//echo "<script>console.log( 'Debug Objects: " . "fin del while" . "' );</script>";	
+		//} // while	
 	} // /for quantity
 
 	$valid['success'] = true;
 	$valid['messages'] = "Venta Realizada.";		
-	
+	 //print_r($valid);
 	$connect->close();
 	
 	echo json_encode($valid);

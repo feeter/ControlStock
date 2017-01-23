@@ -153,37 +153,37 @@ $(document).ready(function() {
                     data: form.serialize(),
                     dataType: 'json',
                     success: function(response) {
-                            console.log(response);
+                        console.log(response);
 
-                            // reset button
-                            $("#createOrderBtn").button('reset');
+                        // reset button
+                        $("#createOrderBtn").button('reset');
 
-                            $(".text-danger").remove();
-                            $('.form-group').removeClass('has-error').removeClass('has-success');
+                        $(".text-danger").remove();
+                        $('.form-group').removeClass('has-error').removeClass('has-success');
 
-                            if (response.success == true) {
+                        if (response.success == true) {
 
-                                // create order button
-                                $(".success-messages").html('<div class="alert alert-success">' +
-                                    '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
-                                    '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> ' + response.messages +
-                                    ' <br /> <br /> <a type="button" onclick="printOrder(' + response.order_id + ')" class="btn btn-primary"> <i class="glyphicon glyphicon-print"></i> Print </a>' +
-                                    '<a href="orders.php?o=add" class="btn btn-default" style="margin-left:10px;"> <i class="glyphicon glyphicon-plus-sign"></i> Add New Order </a>' +
+                            // create order button
+                            $(".success-messages").html('<div class="alert alert-success">' +
+                                '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
+                                '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> ' + response.messages +
+                                ' <br /> <br /> <a type="button" onclick="printOrder(' + response.order_id + ')" class="btn btn-primary"> <i class="glyphicon glyphicon-print"></i> Imprimir </a>' +
+                                '<a href="orders.php?o=add" class="btn btn-default" style="margin-left:10px;"> <i class="glyphicon glyphicon-plus-sign"></i> Realizar Nueva Venta </a>' +
 
-                                    '</div>');
+                                '</div>');
 
-                                $("html, body, div.panel, div.pane-body").animate({ scrollTop: '0px' }, 100);
+                            $("html, body, div.panel, div.pane-body").animate({ scrollTop: '0px' }, 100);
 
-                                // disabled te modal footer button
-                                $(".submitButtonFooter").addClass('div-hide');
-                                // remove the product row
-                                $(".removeProductRowBtn").addClass('div-hide');
+                            // disabled te modal footer button
+                            $(".submitButtonFooter").addClass('div-hide');
+                            // remove the product row
+                            $(".removeProductRowBtn").addClass('div-hide');
 
-                            } else {
-                                alert(response.messages);
-                            }
-                        } //response
-                        //error: AjaxFailed
+                        } else {
+                            alert(response.messages);
+                        }
+                    }, //response
+                    error: console.log("errores") //AjaxFailed
                 }); // /ajax
             } // /if field validate is true
 
@@ -437,6 +437,7 @@ function addRow() {
                     '<td style="padding-left:20px;">' +
                     '<input type="text" name="barCode[]" id="barCode' + count + '" onkeypress="getProductDataByBarCode(event, ' + count + ')"  class="form-control" />' +
                     '<input type="hidden" name="barCodeValue[]" id="barCodeValue' + count + '" autocomplete="off" class="form-control" />' +
+                    '<input type="hidden" name="productIdValue[]" id="productIdValue' + count + '" autocomplete="off" class="form-control" />' +
                     '</td>' +
 
                     '<td style="margin-left:20px;">' +
