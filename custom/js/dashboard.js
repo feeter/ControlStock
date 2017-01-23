@@ -45,7 +45,7 @@ function nombreCalendario(mes, y) {
         dataType: 'json',
         success: function(response) {
 
-            $(".fc-center h2").html(mesActual + " Ingreso: " + response);
+            $(".fc-center h2").html(mesActual + " Ingreso: $" + response);
 
         }
 
