@@ -34,6 +34,7 @@ while($row = $result->fetch_array()) {
 <!DOCTYPE html>
 <html>
 <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
 	<title>Sistema de almacenamiento de Stock</title>
 
@@ -49,6 +50,9 @@ while($row = $result->fetch_array()) {
 
 	<!-- DataTables -->
   <link rel="stylesheet" href="assests/plugins/datatables/jquery.dataTables.min.css">
+
+  <!-- DateTimePicker -->
+  <link rel="stylesheet" href="assests/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
 
   <!-- file input -->
   <link rel="stylesheet" href="assests/plugins/fileinput/css/fileinput.min.css">

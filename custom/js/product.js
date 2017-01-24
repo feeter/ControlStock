@@ -1,6 +1,15 @@
 var manageProductTable;
 
 $(document).ready(function() {
+
+    $("#expirationDate").datetimepicker({
+        format: 'dd/mm/yyyy',
+        language: 'es',
+        minView: 2,
+        autoclose: true
+
+    });
+
     // top nav bar 
     $('#navProduct').addClass('active');
     // manage product data table
@@ -200,6 +209,15 @@ $(document).ready(function() {
 function editProduct(productId = null) {
 
     if (productId) {
+
+        $("#editExpirationDate").datetimepicker({
+            format: 'dd/mm/yyyy',
+            language: 'es',
+            minView: 2,
+            autoclose: true
+        });
+
+
         $("#productId").remove();
         // remove text-error 
         $(".text-danger").remove();

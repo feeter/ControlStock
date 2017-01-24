@@ -12,7 +12,9 @@
 	<!-- DataTables -->
 	<script src="assests/plugins/datatables/jquery.dataTables.min.js"></script>
 
-
+	<!-- DateTimePicker -->
+	<script src="assests/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="assests/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.es.js"></script>
 
 </body>
 </html>
