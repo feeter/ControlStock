@@ -4,13 +4,15 @@ $(document).ready(function() {
         format: 'dd/mm/yyyy',
         language: 'es',
         minView: 2,
-        autoclose: true
+        autoclose: true,
+        weekStart: 1
     });
     $("#endDate").datetimepicker({
         format: 'dd/mm/yyyy',
         language: 'es',
         minView: 2,
-        autoclose: true
+        autoclose: true,
+        weekStart: 1
     });
 
     $("#getOrderReportForm").unbind('submit').bind('submit', function() {
