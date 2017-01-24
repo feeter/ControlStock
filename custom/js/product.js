@@ -565,31 +565,37 @@ function removeProduct(productId = null) {
 } // /remove product function
 
 function clearForm(oForm) {
-    // var frm_elements = oForm.elements;									
-    // console.log(frm_elements);
-    // 	for(i=0;i<frm_elements.length;i++) {
-    // 		field_type = frm_elements[i].type.toLowerCase();									
-    // 		switch (field_type) {
-    // 	    case "text":
-    // 	    case "password":
-    // 	    case "textarea":
-    // 	    case "hidden":
-    // 	    case "select-one":	    
-    // 	      frm_elements[i].value = "";
-    // 	      break;
-    // 	    case "radio":
-    // 	    case "checkbox":	    
-    // 	      if (frm_elements[i].checked)
-    // 	      {
-    // 	          frm_elements[i].checked = false;
-    // 	      }
-    // 	      break;
-    // 	    case "file": 
-    // 	    	if(frm_elements[i].options) {
-    // 	    		frm_elements[i].options= false;
-    // 	    	}
-    // 	    default:
-    // 	        break;
-    //     } // /switch
-    // 	} // for
+
+}
+
+$("input[type='text']").on("keypress", function(e) {
+    IsAlphaNumeric(e)
+});
+
+
+function IsAlphaNumeric(e) {
+
+    // remove text-error 
+    $(".text-danger").remove();
+    // remove from-group error
+    $(".form-group").removeClass('has-error').removeClass('has-success');
+
+    var specialKeys = new Array();
+    specialKeys.push(8); //Backspace
+    specialKeys.push(9); //Tab
+    specialKeys.push(46); //Delete
+    specialKeys.push(36); //Home
+    specialKeys.push(35); //End
+    specialKeys.push(37); //Left
+    specialKeys.push(39); //Right
+
+    var keyCode = e.keyCode == 0 ? e.charCode : e.keyCode;
+    var ret = ((keyCode >= 48 && keyCode <= 57) || (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122) || (keyCode >= 241 && keyCode <= 241) || (specialKeys.indexOf(e.keyCode) != -1 && e.charCode != e.keyCode));
+    if (!ret) {
+        $("#submitProductForm, #editProductForm").after('<p class="text-danger">Los caracteres especiales no son permitidos</p>');
+
+        e.preventDefault();
+    }
+
+
 }
