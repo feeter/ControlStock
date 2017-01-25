@@ -568,7 +568,8 @@ function clearForm(oForm) {
 
 }
 
-$("input[type='text']").on("keypress", function(e) {
+//$("input[id$='productName']").on("keypress", function(e) {
+$("#productName, #editProductName").on("keypress", function(e) {
     IsAlphaNumeric(e)
 });
 
@@ -580,22 +581,14 @@ function IsAlphaNumeric(e) {
     // remove from-group error
     $(".form-group").removeClass('has-error').removeClass('has-success');
 
-    var specialKeys = new Array();
-    specialKeys.push(8); //Backspace
-    specialKeys.push(9); //Tab
-    specialKeys.push(46); //Delete
-    specialKeys.push(36); //Home
-    specialKeys.push(35); //End
-    specialKeys.push(37); //Left
-    specialKeys.push(39); //Right
 
-    var keyCode = e.keyCode == 0 ? e.charCode : e.keyCode;
-    var ret = ((keyCode >= 48 && keyCode <= 57) || (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122) || (keyCode >= 241 && keyCode <= 241) || (specialKeys.indexOf(e.keyCode) != -1 && e.charCode != e.keyCode));
-    if (!ret) {
-        $("#submitProductForm, #editProductForm").after('<p class="text-danger">Los caracteres especiales no son permitidos</p>');
-
-        e.preventDefault();
+    var regex = new RegExp("^[a-zA-Z0-9\\-\\s]+$");
+    var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+    if (regex.test(str)) {
+        return true;
     }
-
+    $("#submitProductForm, #editProductForm").after('<p class="text-danger">Los caracteres especiales no son permitidos</p>');
+    e.preventDefault();
+    return false;
 
 }
