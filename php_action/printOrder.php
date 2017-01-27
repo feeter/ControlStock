@@ -4,7 +4,9 @@ require_once 'core.php';
 
 $orderId = $_POST['orderId'];
 
-$sql = "SELECT order_date, client_name, client_contact, sub_total, vat, total_amount, discount, grand_total, paid, due FROM orders WHERE order_id = $orderId";
+$sql = "SELECT order_date, client_name, client_contact, sub_total, discount, grand_total, paid, due FROM orders WHERE order_id = $orderId";
+//vat, total_amount,
+
 
 $orderResult = $connect->query($sql);
 $orderData = $orderResult->fetch_array();
@@ -13,12 +15,12 @@ $orderDate = $orderData[0];
 $clientName = $orderData[1];
 $clientContact = $orderData[2]; 
 $subTotal = $orderData[3];
-$vat = $orderData[4];
-$totalAmount = $orderData[5]; 
-$discount = $orderData[6];
-$grandTotal = $orderData[7];
-$paid = $orderData[8];
-$due = $orderData[9];
+// $vat = $orderData[4];
+// $totalAmount = $orderData[5]; 
+$discount = $orderData[4];
+$grandTotal = $orderData[5];
+$paid = $orderData[6];
+$due = $orderData[7];
 
 
 $orderItemSql = "SELECT order_item.product_id, order_item.rate, order_item.quantity, order_item.total,
@@ -34,9 +36,9 @@ $orderItemResult = $connect->query($orderItemSql);
 			<th colspan="5">
 
 			<center>
-				Order Date : '.$orderDate.'
-				<center>Client Name : '.$clientName.'</center>
-				Contact : '.$clientContact.'
+				Fecha de Venta : '.$orderDate.'
+				<center>Nombre del Cliente : '.$clientName.'</center>
+				Contacto : '.$clientContact.'
 			</center>		
 			</th>
 				
@@ -47,10 +49,10 @@ $orderItemResult = $connect->query($orderItemSql);
 
 	<tbody>
 		<tr>
-			<th>S.no</th>
-			<th>Product</th>
-			<th>Rate</th>
-			<th>Quantity</th>
+			<th>Nro</th>
+			<th>Producto</th>
+			<th>Precio</th>
+			<th>Cantidad</th>
 			<th>Total</th>
 		</tr>';
 
@@ -77,37 +79,27 @@ $orderItemResult = $connect->query($orderItemSql);
 		</tr>
 
 		<tr>
-			<th>Sub Amount</th>
+			<th>Sub Total</th>
 			<th>'.$subTotal.'</th>			
 		</tr>
 
 		<tr>
-			<th>VAT (13%)</th>
-			<th>'.$vat.'</th>			
-		</tr>
-
-		<tr>
-			<th>Total Amount</th>
-			<th>'.$totalAmount.'</th>			
-		</tr>	
-
-		<tr>
-			<th>Discount</th>
+			<th>Descuento</th>
 			<th>'.$discount.'</th>			
 		</tr>
 
 		<tr>
-			<th>Grand Total</th>
+			<th>Monto Total</th>
 			<th>'.$grandTotal.'</th>			
 		</tr>
 
 		<tr>
-			<th>Paid Amount</th>
+			<th>Monto Pagado</th>
 			<th>'.$paid.'</th>			
 		</tr>
 
 		<tr>
-			<th>Due Amount</th>
+			<th>Vuelto</th>
 			<th>'.$due.'</th>			
 		</tr>
 	</tbody>
