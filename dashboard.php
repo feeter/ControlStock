@@ -6,14 +6,13 @@ $sql = "SELECT * FROM product WHERE status = 1";
 $query = $connect->query($sql);
 $countProduct = $query->num_rows;
 
-$orderSql = "SELECT * FROM orders WHERE order_status = 1";
-$orderQuery = $connect->query($orderSql);
-$countOrder = $orderQuery->num_rows;
+$OrderSql = "SELECT SUM(grand_total) SumaTotal, COUNT(order_id) CantidadTotal FROM orders WHERE order_status = 1";
+$orderQuery = $connect->query($OrderSql);
+$orderResult = $orderQuery->fetch_assoc();
 
-$totalRevenue = "";
-while ($orderResult = $orderQuery->fetch_assoc()) {
-	$totalRevenue += $orderResult['grand_total'];
-}
+$totalRevenue = $orderResult['SumaTotal'];
+$countOrder = $orderResult['CantidadTotal'];
+
 
 $lowStockSql = "SELECT * FROM product WHERE quantity < 3 AND status = 1";
 $lowStockQuery = $connect->query($lowStockSql);

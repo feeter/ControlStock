@@ -8,21 +8,15 @@ $year = $_POST['year'];
 
 
 
-$orderSql = "SELECT grand_total FROM orders WHERE YEAR(order_date) = $year AND MONTH(order_date) = $mes";
+$orderSql = "SELECT SUM(grand_total) sumaTotal FROM orders WHERE YEAR(order_date) = $year AND MONTH(order_date) = $mes AND order_status = 1";
 
 $orderQuery = $connect->query($orderSql);
 
 
-
-$output = array('data' => array());
-
-$totalRevenue = "";
-while ($orderResult = $orderQuery->fetch_assoc()) {
-	$totalRevenue += $orderResult['grand_total'];
-}
+$orderResult = $orderQuery->fetch_assoc();
 
 
 
 $connect->close();
 
-echo json_encode($totalRevenue);
+echo json_encode($orderResult);
