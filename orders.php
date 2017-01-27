@@ -242,7 +242,7 @@ if($_GET['o'] == 'add') {
 
   			<?php $orderId = $_GET['i'];
 
-  			$sql = "SELECT orders.order_id, orders.order_date, orders.client_name, orders.client_contact, orders.sub_total, orders.vat, orders.total_amount, orders.discount, orders.grand_total, orders.paid, orders.due, orders.payment_type, orders.payment_status FROM orders 	
+  			$sql = "SELECT orders.order_id, orders.order_date, orders.client_name, orders.client_contact, orders.sub_total, orders.discount, orders.grand_total, orders.paid, orders.due, orders.payment_type, orders.payment_status FROM orders 	
 					WHERE orders.order_id = {$orderId}";
 
 				$result = $connect->query($sql);
@@ -258,19 +258,19 @@ if($_GET['o'] == 'add') {
 			  <div class="form-group">
 			    <label for="clientName" class="col-sm-2 control-label">Nombre Cliente</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="clientName" name="clientName" placeholder="Client Name" autocomplete="off" value="<?php echo $data[2] ?>" />
+			      <input type="text" class="form-control" id="clientName" name="clientName" placeholder="Mombre del Cliente" autocomplete="off" value="<?php echo $data[2] ?>" />
 			    </div>
 			  </div> <!--/form-group-->
 			  <div class="form-group">
 			    <label for="clientContact" class="col-sm-2 control-label">Numero de Contacto</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="clientContact" name="clientContact" placeholder="Contact Number" autocomplete="off" value="<?php echo $data[3] ?>" />
+			      <input type="text" class="form-control" id="clientContact" name="clientContact" placeholder="Numero de Contacto" autocomplete="off" value="<?php echo $data[3] ?>" />
 			    </div>
 			  </div> <!--/form-group-->			  
 
 			  <table class="table" id="productTable">
 			  	<thead>
-			  		<tr>			  			
+			  		<tr>
 			  			<th style="width:40%;">Producto</th>
 			  			<th style="width:20%;">Precio</th>
 			  			<th style="width:15%;">Cantidad</th>			  			
@@ -350,13 +350,12 @@ if($_GET['o'] == 'add') {
 				      <input type="hidden" class="form-control" id="subTotalValue" name="subTotalValue" value="<?php echo $data[4] ?>" />
 				    </div>
 				  </div> <!--/form-group-->			  
-				  <div class="form-group">
-				    <label for="vat" class="col-sm-3 control-label">VAT 13%</label>
+		  		<div class="form-group">
+				    <label for="discount" class="col-sm-3 control-label">Descuento %</label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="vat" name="vat" disabled="true" value="<?php echo $data[5] ?>"  />
-				      <input type="hidden" class="form-control" id="vatValue" name="vatValue" value="<?php echo $data[5] ?>"  />
+				      <input type="text" class="form-control" id="discount" name="discount" onkeyup="discountFunc()" autocomplete="off" value="<?php echo $data[5] ?>" />
 				    </div>
-				  </div> <!--/form-group-->			  
+				  </div> <!--/form-group-->	
 				  <div class="form-group">
 				    <label for="totalAmount" class="col-sm-3 control-label">Monto Total</label>
 				    <div class="col-sm-9">
@@ -364,12 +363,7 @@ if($_GET['o'] == 'add') {
 				      <input type="hidden" class="form-control" id="totalAmountValue" name="totalAmountValue" value="<?php echo $data[6] ?>"  />
 				    </div>
 				  </div> <!--/form-group-->			  
-				  <div class="form-group">
-				    <label for="discount" class="col-sm-3 control-label">Descuento</label>
-				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="discount" name="discount" onkeyup="discountFunc()" autocomplete="off" value="<?php echo $data[7] ?>" />
-				    </div>
-				  </div> <!--/form-group-->	
+
 				    		  
 			  </div> <!--/col-md-6-->
 
@@ -377,14 +371,14 @@ if($_GET['o'] == 'add') {
 			  	<div class="form-group">
 				    <label for="paid" class="col-sm-3 control-label">Monto Pagado</label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="paid" name="paid" autocomplete="off" onkeyup="paidAmount()" value="<?php echo $data[9] ?>"  />
+				      <input type="text" class="form-control" id="paid" name="paid" autocomplete="off" onkeyup="paidAmount()" value="<?php echo $data[7] ?>"  />
 				    </div>
 				  </div> <!--/form-group-->			  
 				  <div class="form-group">
 				    <label for="due" class="col-sm-3 control-label">Vuelto</label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="due" name="due" disabled="true" value="<?php echo $data[10] ?>"  />
-				      <input type="hidden" class="form-control" id="dueValue" name="dueValue" value="<?php echo $data[10] ?>"  />
+				      <input type="text" class="form-control" id="due" name="due" disabled="true" value="<?php echo $data[8] ?>"  />
+				      <input type="hidden" class="form-control" id="dueValue" name="dueValue" value="<?php echo $data[8] ?>"  />
 				    </div>
 				  </div> <!--/form-group-->		
 				  <div class="form-group">
@@ -392,15 +386,15 @@ if($_GET['o'] == 'add') {
 				    <div class="col-sm-9">
 				      <select class="form-control" name="paymentType" id="paymentType" >
 				      	<option value="">~~SELECT~~</option>
-				      	<option value="1" <?php if($data[11] == 1) {
+				      	<option value="1" <?php if($data[9] == 1) {
 				      		echo "selected";
 				      	} ?> >Cheque</option>
-				      	<option value="2" <?php if($data[11] == 2) {
+				      	<option value="2" <?php if($data[9] == 2) {
 				      		echo "selected";
-				      	} ?>  >Cash</option>
-				      	<option value="3" <?php if($data[11] == 3) {
+				      	} ?>  >Efectivo</option>
+				      	<option value="3" <?php if($data[9] == 3) {
 				      		echo "selected";
-				      	} ?> >Credit Card</option>
+				      	} ?> >Tarjeta de Credito</option>
 				      </select>
 				    </div>
 				  </div> <!--/form-group-->							  
@@ -409,10 +403,10 @@ if($_GET['o'] == 'add') {
 				    <div class="col-sm-9">
 				      <select class="form-control" name="paymentStatus" id="paymentStatus">
 				      	<option value="">~~SELECT~~</option>
-				      	<option value="1" <?php if($data[12] == 1) {
+				      	<option value="1" <?php if($data[10] == 1) {
 				      		echo "selected";
 				      	} ?>  >Pago Completo</option>
-				      	<option value="2" <?php if($data[12] == 2) {
+				      	<option value="2" <?php if($data[10] == 2) {
 				      		echo "selected";
 				      	} ?> >Pago Adelantado</option>
 				      	<option value="3" <?php if($data[10] == 3) {
