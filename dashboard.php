@@ -2,9 +2,11 @@
 
 <?php 
 
-$sql = "SELECT * FROM product WHERE status = 1";
-$query = $connect->query($sql);
-$countProduct = $query->num_rows;
+$sql = "SELECT COUNT(product_id) cantProductos FROM product WHERE status = 1";
+$sqlQuery = $connect->query($sql);
+$sqlResult = $sqlQuery->fetch_assoc();
+$countProduct = $sqlResult['cantProductos'];
+
 
 $OrderSql = "SELECT SUM(grand_total) SumaTotal, COUNT(order_id) CantidadTotal FROM orders WHERE order_status = 1";
 $orderQuery = $connect->query($OrderSql);
@@ -14,13 +16,15 @@ $totalRevenue = $orderResult['SumaTotal'];
 $countOrder = $orderResult['CantidadTotal'];
 
 
-$lowStockSql = "SELECT * FROM product WHERE quantity < 3 AND status = 1";
+$lowStockSql = "SELECT COUNT(product_id) CantidadProducto FROM product WHERE quantity < 3 AND status = 1";
 $lowStockQuery = $connect->query($lowStockSql);
-$countLowStock = $lowStockQuery->num_rows;
+$lowStockResult = $lowStockQuery->fetch_assoc();
+$countLowStock = $lowStockResult['CantidadProducto'];
 
-$soonStockExpireSql = "SELECT * FROM product WHERE expiration_date >= CURDATE() and expiration_date <= date_add(curdate(), interval 31 day) AND status = 1";
+$soonStockExpireSql = "SELECT COUNT(product_id) CantProdToExpire FROM product WHERE expiration_date >= CURDATE() and expiration_date <= date_add(curdate(), interval 31 day) AND status = 1";
 $soonStockExpireQuery = $connect->query($soonStockExpireSql);
-$countStockExpire = $soonStockExpireQuery->num_rows;
+$soonStockExpireResult = $soonStockExpireQuery->fetch_assoc();
+$countStockExpire = $soonStockExpireResult['CantProdToExpire'];
 
 $connect->close();
 
