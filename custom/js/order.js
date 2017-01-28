@@ -209,7 +209,7 @@ $(document).ready(function() {
                 }
             },
             'ajax': 'php_action/fetchOrder.php',
-            'order': []
+            'order': [1, "desc"]
         });
 
     } else if (divRequest == 'editOrd') {
