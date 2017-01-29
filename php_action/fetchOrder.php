@@ -49,7 +49,8 @@ if($result->num_rows > 0) {
 
  	$output['data'][] = array( 		
  		// image
- 		$x,
+ 		//$x,
+		 $orderId,
  		// order date
  		$row[1],
  		// client name
