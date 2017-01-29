@@ -1,4 +1,9 @@
-<?php require_once 'includes/header.php'; ?>
+<?php 
+require_once 'includes/header.php'; 
+date_default_timezone_set('America/Santiago'); //puedes cambiar Guayaquil por tu Ciudad
+setlocale(LC_TIME, 'spanish');
+$fecha=strftime("%A, %d de %B de %Y");
+?>
 
 <?php 
 
@@ -105,7 +110,7 @@ $connect->close();
 		  </div>
 
 		  <div class="cardContainer">
-		    <p><?php echo date('l') .' '.date('d').', '.date('Y'); ?></p>
+		    <p><?php echo $fecha; ?></p>
 		  </div>
 		</div> 
 		<br/>
