@@ -47,12 +47,16 @@ if($result->num_rows > 0) {
 	  </ul>
 	</div>';		
 
+
+	$var = $row[1];
+	$date = str_replace('-', '/', $var);
+	$orderDate = date('d/m/Y G:i:s', strtotime($date));
+
  	$output['data'][] = array( 		
- 		// image
- 		//$x,
+ 		// order id
 		 $orderId,
  		// order date
- 		$row[1],
+		$orderDate,
  		// client name
  		$row[2], 
  		// client contact
