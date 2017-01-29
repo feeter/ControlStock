@@ -45,7 +45,10 @@ function nombreCalendario(mes, y) {
         dataType: 'json',
         success: function(response) {
 
-            $(".fc-center h2").html(mesActual + " Ingreso: $" + response.sumaTotal);
+            if (response.sumaTotal !== null) {
+                $(".fc-center h2").html(mesActual + " <h4>Ingreso: $" + response.sumaTotal + "</h4>");
+            }
+
 
         }
 
