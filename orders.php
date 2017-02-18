@@ -89,8 +89,8 @@ if($_GET['o'] == 'add') {
 			  	<thead>
 			  		<tr>
 						  <th style="width:30%;">Codigo de Barra</th>
-			  			<th style="width:20%;">Producto</th>
-			  			<th style="width:10%;">Precio</th>
+			  			<th style="width:20%;">Nombre Producto</th>
+			  			<th style="width:10%;">Precio Unitario</th>
 			  			<th style="width:15%;">Cantidad</th>			  			
 			  			<th style="width:15%;">Total</th>			  			
 			  			<th style="width:10%;"></th>
@@ -130,7 +130,7 @@ if($_GET['o'] == 'add') {
 
 			  <div class="col-md-6">
 			  	<div class="form-group">
-				    <label for="paid" class="col-sm-3 control-label">Monto Pagado</label>
+				    <label for="paid" class="col-sm-3 control-label">Monto a Pagar</label>
 				    <div class="col-sm-9">
 				      <input type="text" class="form-control" id="paid" name="paid" autocomplete="off" onkeyup="paidAmount()" />
 				    </div>
@@ -142,20 +142,6 @@ if($_GET['o'] == 'add') {
 				      <input type="hidden" class="form-control" id="dueValue" name="dueValue" />
 				    </div>
 				  </div> <!--/form-group-->		
-					
-					<!--
-				  <div class="form-group">
-				    <label for="clientContact" class="col-sm-3 control-label">Forma de Pago</label>
-				    <div class="col-sm-9">
-				      <select class="form-control" name="paymentType" id="paymentType">
-				      	<option value="">~~SELECT~~</option>
-				      	<option value="1">Cheque</option>
-				      	<option value="2">Efectivo</option>
-				      	<option value="3">Tarjeta de Credito</option>
-				      </select>
-				    </div>
-				  </div> --> <!--/form-group-->
-
 				  <div class="form-group">
 				    <label for="clientContact" class="col-sm-3 control-label">Estado del Pago</label>
 				    <div class="col-sm-9">
@@ -340,7 +326,7 @@ if($_GET['o'] == 'add') {
 
 			  <div class="col-md-6">
 			  	<div class="form-group">
-				    <label for="paid" class="col-sm-3 control-label">Monto Pagado</label>
+				    <label for="paid" class="col-sm-3 control-label">Monto a Pagar</label>
 				    <div class="col-sm-9">
 				      <input type="text" class="form-control" id="paid" name="paid" autocomplete="off" onkeyup="paidAmount()" value="<?php echo $data[7] ?>"  />
 				    </div>

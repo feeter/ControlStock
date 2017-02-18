@@ -12,6 +12,7 @@ $(document).ready(function() {
 
         loadAutoComplete();
 
+        $("#barCode").focus();
 
         // top nav child bar 
         $('#topNavAddOrder').addClass('active');
@@ -470,22 +471,35 @@ function addProduct() {
 
 
             } else {
-                var trData = '<tr>' +
+                var tableRow = $("#productTable tbody tr:last").attr('id');
+                var numFila = 1;
+
+                if (typeof tableRow != 'undefined') {
+                    numFila = tableRow.substring(3);
+                    numFila = Number(numFila) + 1;
+                }
+
+                var trData = '<tr id="row' + numFila + '">' +
                     '<td>' + response.bar_code + '</td>' +
                     '<td>' + response.product_name + '</td>' +
                     '<td>' + response.rate + '</td>' +
                     '<td>' + 1 + '</td>' +
-                    '<td>' + response.rate + '</td>' +
-                    '<td><button class="btn btn-default removeProductRowBtn" type="button" id="removeProductRowBtn" onclick="removeProductRow(<?php echo $x; ?>)"><i class="glyphicon glyphicon-trash"></i></button></td>' +
+                    '<td id="total' + numFila + '">' + response.rate + '</td>' +
+                    '<td><button class="btn btn-default removeProductRowBtn" type="button" id="removeProductRowBtn" onclick="removeProductRow(' + numFila + ')"><i class="glyphicon glyphicon-trash"></i></button></td>' +
                     '</tr>';
 
                 $("#productTable tbody").append(trData);
-            }
 
+
+
+
+            }
 
             $('#barCode, #productName').val('');
 
 
+
+            CalculoFinal();
 
 
         }, // /success
@@ -578,14 +592,13 @@ function addRow() {
 
 } // /add row
 
+//Elimina una fila de la tabla donde "row" es el numero de fila mayor a 0 
 function removeProductRow(row = null) {
     if (row) {
         $("#row" + row).remove();
-
-
-        subAmount();
+        CalculoFinal();
     } else {
-        alert('error! Refresh the page again');
+        alert('Error, favor refresque la pagina!');
     }
 }
 
@@ -633,7 +646,7 @@ function getProductDataByBarCode(e, row) {
 
 
 
-                    subAmount();
+                    CalculoFinal();
                 }, // /success
                 error: function(xhr, ajaxOptions, thrownError) {
                     alert('No existe el producto');
@@ -659,21 +672,6 @@ function getProductData(row = null) {
 
             $("#quantity" + row).val("");
             $("#total" + row).val("");
-
-            // remove check if product name is selected
-            // var tableProductLength = $("#productTable tbody tr").length;			
-            // for(x = 0; x < tableProductLength; x++) {
-            // 	var tr = $("#productTable tbody tr")[x];
-            // 	var count = $(tr).attr('id');
-            // 	count = count.substring(3);
-
-            // 	var productValue = $("#productName"+row).val()
-
-            // 	if($("#productName"+count).val() == "") {					
-            // 		$("#productName"+count).find("#changeProduct"+productId).removeClass('div-hide');	
-            // 		console.log("#changeProduct"+count);
-            // 	}											
-            // } // /for
 
         } else {
             $.ajax({
@@ -710,7 +708,7 @@ function getProductData(row = null) {
                         // 	}											
                         // } // /for
 
-                        subAmount();
+                        CalculoFinal();
                     } // /success
             }); // /ajax function to fetch the product data	
         }
@@ -730,7 +728,7 @@ function getTotal(row = null) {
 
         verifyStock(row);
 
-        subAmount();
+        CalculoFinal();
 
     } else {
         alert('no row !! please refresh the page');
@@ -800,7 +798,9 @@ function verifyStock(row) {
 
 }
 
-function subAmount() {
+
+//Obtiene el valor total de todos los productos agregados a la tabla calculando el "Monto" total y agregarlo al textbox 
+function CalculoFinal() {
     var tableProductLength = $("#productTable tbody tr").length;
     var totalSubAmount = 0;
     for (x = 0; x < tableProductLength; x++) {
@@ -808,7 +808,7 @@ function subAmount() {
         var count = $(tr).attr('id');
         count = count.substring(3);
 
-        totalSubAmount = Number(totalSubAmount) + Number($("#total" + count).val());
+        totalSubAmount = Number(totalSubAmount) + Number($("#total" + count)[0].innerHTML);
     } // /for
 
     totalSubAmount = totalSubAmount.toFixed(0);
@@ -816,20 +816,6 @@ function subAmount() {
     // sub total
     $("#subTotal").val(totalSubAmount);
     $("#subTotalValue").val(totalSubAmount);
-
-    /* vat
-    var vat = (Number($("#subTotal").val()) / 100) * 13;
-    vat = vat.toFixed(2);
-    $("#vat").val(vat);
-    $("#vatValue").val(vat);
-*/
-    /*
-         // total amount
-         var totalAmount = (Number($("#subTotal").val()) + Number($("#vat").val()));
-         totalAmount = totalAmount.toFixed(2);
-         $("#totalAmount").val(totalAmount);
-         $("#totalAmountValue").val(totalAmount);
-     */
 
     var discount = $("#discount").val();
     if (discount) {
