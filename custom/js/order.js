@@ -9,6 +9,10 @@ $(document).ready(function() {
 
     if (divRequest == 'add') {
         // add order	
+
+        loadAutoComplete();
+
+
         // top nav child bar 
         $('#topNavAddOrder').addClass('active');
 
@@ -405,6 +409,105 @@ function printOrder(orderId = null) {
     } // /if orderId
 } // /print order function
 
+
+//Cargar los nombres de los productos para el autocompletado del campo #productName
+//18/02/2017 - Jose Campos
+function loadAutoComplete() {
+
+    $.ajax({
+        url: 'php_action/fetchProductData.php',
+        type: 'post',
+        dataType: 'json',
+        success: function(response) {
+                var available = [];
+
+                $.each(response, function(i) {
+
+                    available[i] = response[i][1];
+
+                });
+
+                $("#productName").autocomplete({
+                    source: available
+                });
+
+            } // /success
+    }); // get the product data
+
+}
+
+$('#barCode, #productName').keyup(function(e) {
+    if (e.keyCode == 13) {
+        addProduct()
+    }
+});
+
+//Metodo que agrega producto en forma de labels al momento de obtener los datos del producto en los textbox principales (#barCode y #productName) 
+//18-02-2017 Jose Campos
+function addProduct() {
+    var barCode = $("#barCode").val();
+    var productName = $("#productName").val();
+
+
+    $.ajax({
+        url: 'php_action/fetchSelectedProduct.php',
+        type: 'post',
+        data: { barCode: barCode, productName: productName },
+        dataType: 'json',
+        success: function(response) {
+
+            var existeEnTabla = $("td").filter(function() {
+                return $(this).text() == response.product_name;
+            }).closest("tr");
+
+
+            if (existeEnTabla.length > 0) {
+                var cantidad = ++existeEnTabla[0].childNodes[3].innerText;
+                var total = cantidad * response.rate;
+
+                existeEnTabla[0].childNodes[3].innerText = cantidad;
+                existeEnTabla[0].childNodes[4].innerText = total;;
+
+
+            } else {
+                var trData = '<tr>' +
+                    '<td>' + response.bar_code + '</td>' +
+                    '<td>' + response.product_name + '</td>' +
+                    '<td>' + response.rate + '</td>' +
+                    '<td>' + 1 + '</td>' +
+                    '<td>' + response.rate + '</td>' +
+                    '<td><button class="btn btn-default removeProductRowBtn" type="button" id="removeProductRowBtn" onclick="removeProductRow(<?php echo $x; ?>)"><i class="glyphicon glyphicon-trash"></i></button></td>' +
+                    '</tr>';
+
+                $("#productTable tbody").append(trData);
+            }
+
+
+            $('#barCode, #productName').val('');
+
+
+
+
+        }, // /success
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert('No existe el producto');
+
+            // alert(xhr.status);
+            // alert(thrownError);
+        }
+    }); // /ajax function to fetch the product data	
+
+    $("#barCode").focus();
+
+
+
+
+
+    //  $("#productTable tbody").append(trData);
+
+} //addProduct()
+
+//Metodo queda inabilitado ya que se cambiara la forma de agregar productos al metodo addProduct() - 20170218 jcp
 function addRow() {
     $("#addRowBtn").button("loading");
 

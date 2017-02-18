@@ -3,15 +3,14 @@
 require_once 'core.php';
 
 
-$productId = $_POST['productId'];
+$productName = $_POST['productName'];
 $barCode = $_POST['barCode'];
   
 
-if ($productId != ""){
-   $sql = "SELECT product_id, product_name, product_image, brand_id, categories_id, quantity, rate, active, status, bar_code, expiration_date FROM product WHERE product_id = $productId";
-} else {
-   $sql = "SELECT product_id, product_name, product_image, brand_id, categories_id, quantity, rate, active, status, bar_code, expiration_date FROM product WHERE bar_code = $barCode";
-}
+$sql = "SELECT bar_code, product_name, product_image, brand_id, categories_id, quantity, rate, active, status, bar_code, expiration_date 
+FROM product 
+WHERE (bar_code = '$barCode' ) 
+OR (product_name = '$productName')";
 
 
 

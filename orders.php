@@ -82,6 +82,9 @@ if($_GET['o'] == 'add') {
 			    </div>
 			  </div> <!--/form-group-->			  
 
+				<input type="text" id="barCode"	/>
+				<input type="text" id="productName" />
+
 			  <table class="table" id="productTable">
 			  	<thead>
 			  		<tr>
@@ -93,45 +96,10 @@ if($_GET['o'] == 'add') {
 			  			<th style="width:10%;"></th>
 			  		</tr>
 			  	</thead>
+
 			  	<tbody>
-			  		<?php
-			  		$arrayNumber = 0;
-			  		for($x = 1; $x < 2; $x++) { ?>
-			  			<tr id="row<?php echo $x; ?>" class="<?php echo $arrayNumber; ?>">
-								
-								<td style="padding-left:20px;">			  					
-			  					<input type="text" name="barCode[]" id="barCode<?php echo $x; ?>" onkeypress="getProductDataByBarCode(event, <?php echo $x; ?>)"  class="form-control" />			  					
-			  					<input type="hidden" name="barCodeValue[]" id="barCodeValue<?php echo $x; ?>" autocomplete="off" class="form-control" />
-									<input type="hidden" name="productIdValue[]" id="productIdValue<?php echo $x; ?>" autocomplete="off" class="form-control" />
-			  				</td>	
+			  		
 
-			  				<td style="margin-left:20px;">
-										<input type="text" name="productName[]" disabled="true" id="productName<?php echo $x; ?>" class="form-control" />			  					
-										<input type="hidden" name="productNameValue[]" id="productNameValue<?php echo $x; ?>" autocomplete="off" class="form-control" />
-			  				</td>
-
-			  				<td style="padding-left:20px;">			  					
-			  					<input type="text" name="rate[]" id="rate<?php echo $x; ?>" autocomplete="off" disabled="true" class="form-control" />			  					
-			  					<input type="hidden" name="rateValue[]" id="rateValue<?php echo $x; ?>" autocomplete="off" class="form-control" />			  					
-			  				</td>
-			  				<td style="padding-left:20px;">
-			  					<div class="form-group">
-			  					<input type="number" name="quantity[]" id="quantity<?php echo $x; ?>" onchange="getTotal(<?php echo $x ?>)" autocomplete="off" class="form-control" min="1" />
-			  					</div>
-			  				</td>
-			  				<td style="padding-left:20px;">			  					
-			  					<input type="text" name="total[]" id="total<?php echo $x; ?>" autocomplete="off" class="form-control" disabled="true" />			  					
-			  					<input type="hidden" name="totalValue[]" id="totalValue<?php echo $x; ?>" autocomplete="off" class="form-control" />			  					
-			  				</td>
-			  				<td>
-
-			  					<button class="btn btn-default removeProductRowBtn" type="button" id="removeProductRowBtn" onclick="removeProductRow(<?php echo $x; ?>)"><i class="glyphicon glyphicon-trash"></i></button>
-			  				</td>
-			  			</tr>
-		  			<?php
-		  			$arrayNumber++;
-			  		} // /for
-			  		?>
 			  	</tbody>			  	
 			  </table>
 
@@ -174,6 +142,8 @@ if($_GET['o'] == 'add') {
 				      <input type="hidden" class="form-control" id="dueValue" name="dueValue" />
 				    </div>
 				  </div> <!--/form-group-->		
+					
+					<!--
 				  <div class="form-group">
 				    <label for="clientContact" class="col-sm-3 control-label">Forma de Pago</label>
 				    <div class="col-sm-9">
@@ -184,7 +154,8 @@ if($_GET['o'] == 'add') {
 				      	<option value="3">Tarjeta de Credito</option>
 				      </select>
 				    </div>
-				  </div> <!--/form-group-->							  
+				  </div> --> <!--/form-group-->
+
 				  <div class="form-group">
 				    <label for="clientContact" class="col-sm-3 control-label">Estado del Pago</label>
 				    <div class="col-sm-9">
@@ -202,7 +173,7 @@ if($_GET['o'] == 'add') {
 
 			  <div class="form-group submitButtonFooter">
 			    <div class="col-sm-offset-2 col-sm-10">
-			    <button type="button" class="btn btn-default" onclick="addRow()" id="addRowBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-plus-sign"></i> Agregar Producto </button>
+			    <!--<button type="button" class="btn btn-default" onclick="addRow()" id="addRowBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-plus-sign"></i> Agregar Producto </button>-->
 
 			      <button type="submit" id="createOrderBtn" disabled data-loading-text="Loading..." class="btn btn-success"><i class="glyphicon glyphicon-ok-sign"></i> Finalizar Pago</button>
 
@@ -420,7 +391,7 @@ if($_GET['o'] == 'add') {
 
 			  <div class="form-group editButtonFooter">
 			    <div class="col-sm-offset-2 col-sm-10">
-			    <button type="button" class="btn btn-default" onclick="addRow()" id="addRowBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-plus-sign"></i> Agregar Producto </button>
+			    <!--<button type="button" class="btn btn-default" onclick="addRow()" id="addRowBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-plus-sign"></i> Agregar Producto </button>-->
 
 			    <input type="hidden" name="orderId" id="orderId" value="<?php echo $_GET['i']; ?>" />
 
