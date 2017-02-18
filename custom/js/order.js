@@ -36,7 +36,7 @@ $(document).ready(function() {
             var clientContact = $("#clientContact").val();
             var paid = $("#paid").val();
             var discount = $("#discount").val();
-            var paymentType = $("#paymentType").val();
+            //var paymentType = $("#paymentType").val();
             var paymentStatus = $("#paymentStatus").val();
             $("#paymentStatusValue").val(paymentStatus);
 
@@ -79,14 +79,14 @@ $(document).ready(function() {
                 $('#discount').closest('.form-group').addClass('has-success');
             } // /else
 
-
-            if (paymentType == "") {
-                $("#paymentType").after('<p class="text-danger"> Forma de pago es Obligatorio </p>');
-                $('#paymentType').closest('.form-group').addClass('has-error');
-            } else {
-                $('#paymentType').closest('.form-group').addClass('has-success');
-            } // /else
-
+            /*
+                        if (paymentType == "") {
+                            $("#paymentType").after('<p class="text-danger"> Forma de pago es Obligatorio </p>');
+                            $('#paymentType').closest('.form-group').addClass('has-error');
+                        } else {
+                            $('#paymentType').closest('.form-group').addClass('has-success');
+                        } // /else
+            */
             /*
             if (paymentStatus == "") {
                 $("#paymentStatus").after('<p class="text-danger"> The Payment Status field is required </p>');
@@ -146,7 +146,7 @@ $(document).ready(function() {
             */
 
             console.log('primer log');
-            if (orderDate && paid && discount && paymentType && paymentStatus) {
+            if (orderDate && paid && discount && paymentStatus) {
                 console.log('segundo log dentro del if');
                 // create order button
                 // $("#createOrderBtn").button('loading');
@@ -460,14 +460,14 @@ function addProduct() {
             var existeEnTabla = $("td").filter(function() {
                 return $(this).text() == response.product_name;
             }).closest("tr");
-
+            var cantidad = 1;
 
             if (existeEnTabla.length > 0) {
-                var cantidad = ++existeEnTabla[0].childNodes[3].innerText;
+                cantidad = ++existeEnTabla[0].childNodes[3].innerText;
                 var total = cantidad * response.rate;
 
                 existeEnTabla[0].childNodes[3].innerText = cantidad;
-                existeEnTabla[0].childNodes[4].innerText = total;;
+                existeEnTabla[0].childNodes[4].innerText = total;
 
 
             } else {
@@ -480,10 +480,10 @@ function addProduct() {
                 }
 
                 var trData = '<tr id="row' + numFila + '">' +
-                    '<td>' + response.bar_code + '</td>' +
+                    '<td>' + response.bar_code + '<input type="hidden" name="barCodeValue" value="' + response.bar_code + '" /></td>' +
                     '<td>' + response.product_name + '</td>' +
                     '<td>' + response.rate + '</td>' +
-                    '<td>' + 1 + '</td>' +
+                    '<td>' + cantidad + '<input type="hidden" name="quantity" value="' + cantidad + '" /></td>' +
                     '<td id="total' + numFila + '">' + response.rate + '</td>' +
                     '<td><button class="btn btn-default removeProductRowBtn" type="button" id="removeProductRowBtn" onclick="removeProductRow(' + numFila + ')"><i class="glyphicon glyphicon-trash"></i></button></td>' +
                     '</tr>';
