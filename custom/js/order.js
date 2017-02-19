@@ -448,7 +448,7 @@ $('#barCode, #productName').keyup(function(e) {
 function addProduct() {
     var barCode = $("#barCode").val();
     var productName = $("#productName").val();
-    var cantidad = 0;
+
 
     $.ajax({
         url: 'php_action/fetchSelectedProduct.php',
@@ -457,61 +457,11 @@ function addProduct() {
         dataType: 'json',
         success: function(response) {
 
-            var existeEnTabla = $("td").filter(function() {
-                return $(this).text() == response.product_name;
-            }).closest("tr");
-
-            if (existeEnTabla.length > 0) {
-                cantidad = existeEnTabla[0].childNodes[3].innerText;
-            }
-
-            cantidad++;
-            //Validacion del stock disponible actualmente al ingresar un producto
-            //mejorable con metodo verifyStock() para mostrarlo de mejor forma al usuario 19/02/2017 Jose Campos
-            if (response.quantity > 0 && cantidad <= response.quantity) {
-
-                if (existeEnTabla.length > 0) {
-
-                    var total = cantidad * response.rate;
-
-                    existeEnTabla[0].childNodes[3].innerHTML = cantidad + '<input type="hidden" name="quantity[]" value="' + cantidad + '" />';
-                    existeEnTabla[0].childNodes[4].innerText = total;
-
-
-
-                } else {
-                    var tableRow = $("#productTable tbody tr:last").attr('id');
-                    var numFila = 1;
-
-                    if (typeof tableRow != 'undefined') {
-                        numFila = tableRow.substring(3);
-                        numFila = Number(numFila) + 1;
-                    }
-
-                    var trData = '<tr id="row' + numFila + '">' +
-                        '<td>' + response.bar_code + '<input type="hidden" name="barCodeValue[]" value="' + response.bar_code + '" /></td>' +
-                        '<td>' + response.product_name + '</td>' +
-                        '<td>' + response.rate + '</td>' +
-                        '<td>' + cantidad + '<input type="hidden" name="quantity[]" value="' + cantidad + '" /></td>' +
-                        '<td id="total' + numFila + '">' + response.rate + '</td>' +
-                        '<td><button class="btn btn-default removeProductRowBtn" type="button" id="removeProductRowBtn" onclick="removeProductRow(' + numFila + ')"><i class="glyphicon glyphicon-trash"></i></button></td>' +
-                        '</tr>';
-
-                    $("#productTable tbody").append(trData);
-
-                }
-
-
-
+            if (response != null) {
+                addProductSuccess(response);
             } else {
-                alert("Stock insuficiente...");
+                alert('No existe el producto');
             }
-
-
-            $('#barCode, #productName').val('');
-
-            CalculoFinal();
-
 
         }, // /success
         error: function(xhr, ajaxOptions, thrownError) {
@@ -524,13 +474,68 @@ function addProduct() {
 
     $("#barCode").focus();
 
-
-
-
-
     //  $("#productTable tbody").append(trData);
 
 } //addProduct()
+
+function addProductSuccess(response) {
+    var cantidad = 0;
+
+    var existeEnTabla = $("td").filter(function() {
+        return $(this).text() == response.product_name;
+    }).closest("tr");
+
+    if (existeEnTabla.length > 0) {
+        cantidad = existeEnTabla[0].childNodes[3].innerText;
+    }
+
+    cantidad++;
+    //Validacion del stock disponible actualmente al ingresar un producto
+    //mejorable con metodo verifyStock() para mostrarlo de mejor forma al usuario 19/02/2017 Jose Campos
+    if (response.quantity > 0 && cantidad <= response.quantity) {
+
+        if (existeEnTabla.length > 0) {
+
+            var total = cantidad * response.rate;
+
+            existeEnTabla[0].childNodes[3].innerHTML = cantidad + '<input type="hidden" name="quantity[]" value="' + cantidad + '" />';
+            existeEnTabla[0].childNodes[4].innerText = total;
+
+
+
+        } else {
+            var tableRow = $("#productTable tbody tr:last").attr('id');
+            var numFila = 1;
+
+            if (typeof tableRow != 'undefined') {
+                numFila = tableRow.substring(3);
+                numFila = Number(numFila) + 1;
+            }
+
+            var trData = '<tr id="row' + numFila + '">' +
+                '<td>' + response.bar_code + '<input type="hidden" name="barCodeValue[]" value="' + response.bar_code + '" /></td>' +
+                '<td>' + response.product_name + '</td>' +
+                '<td>' + response.rate + '</td>' +
+                '<td>' + cantidad + '<input type="hidden" name="quantity[]" value="' + cantidad + '" /></td>' +
+                '<td id="total' + numFila + '">' + response.rate + '</td>' +
+                '<td><button class="btn btn-default removeProductRowBtn" type="button" id="removeProductRowBtn" onclick="removeProductRow(' + numFila + ')"><i class="glyphicon glyphicon-trash"></i></button></td>' +
+                '</tr>';
+
+            $("#productTable tbody").append(trData);
+
+        }
+
+
+
+    } else {
+        alert("Stock insuficiente...");
+    }
+
+
+    $('#barCode, #productName').val('');
+
+    CalculoFinal();
+} //addProductSuccess
 
 //Metodo queda inabilitado ya que se cambiara la forma de agregar productos al metodo addProduct() - 20170218 jcp
 function addRow() {
