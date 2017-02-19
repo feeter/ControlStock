@@ -39,23 +39,23 @@ if($_POST) {
 	$orderItemStatus = false;
 
 	
-
+	//echo "<script>console.log( 'Debug Objects: " . "Cantida de productos a ingresar: " . count($_POST['barCodeValue']) . "' );</script>";
 	for($x = 0; $x < count($_POST['barCodeValue']); $x++) {	
 		
 
 		 //echo "<script>console.log( 'Debug Objects: " . "INICIO" . "' );</script>";
 		
-		$updateProductQuantitySql = "SELECT product.quantity FROM product WHERE product.bar_code = ".$_POST['barCodeValue'][$x]."";
-		// echo "<script>console.log( 'Debug Objects: sql:" . "$updateProductQuantitySql" . "' );</script>";
+		$updateProductQuantitySql = "SELECT product.quantity, product.product_id, product.rate FROM product WHERE product.bar_code = ".$_POST['barCodeValue'][$x]."";
+		 //echo "<script>console.log( 'Debug Objects: sql:" . "$updateProductQuantitySql" . "' );</script>";
 		$updateProductQuantityData = $connect->query($updateProductQuantitySql);
 		
 		$updateProductQuantityResult = $updateProductQuantityData->fetch_row();	
 		//while ($updateProductQuantityResult = $updateProductQuantityData->fetch_row()) {
 			$updateQuantity = $updateProductQuantityResult[0] - $_POST['quantity'][$x];							
 				
-			// echo "<script>console.log( 'Debug Objects: barCode:" . $_POST['barCodeValue'][$x] . "' );</script>";
+			 //echo "<script>console.log( 'Debug Objects: barCode:" . $_POST['barCodeValue'][$x] . "' );</script>";
 
-			 //echo "<script>console.log( 'Debug Objects: cantidad Actualizada: " . $updateQuantity . "' );</script>";	
+			 //echo "<script>console.log( 'Debug Objects: PRODUCTO: Cantidad Original: " . $updateProductQuantityResult[0] . " Cantidad a descontar: " . $_POST['quantity'][$x] . " Cantidad Final: " . $updateQuantity . "' );</script>";	
 			// update product table
 			 //echo "<script>console.log( 'Debug Objects: barCodeValue: " . $_POST['barCodeValue'][$x] . "' );</script>";	
 			$updateProductTable = "UPDATE product SET quantity = ".$updateQuantity." WHERE bar_code = '".$_POST['barCodeValue'][$x]."'";
@@ -69,14 +69,16 @@ if($_POST) {
 
 			// add into order_item
 
-			// echo "<script>console.log( 'Debug Objects: orderId: " . $order_id . "' );</script>";	
-			// echo "<script>console.log( 'Debug Objects: productId: " . $_POST['productIdValue'][$x] . "' );</script>";	
-			// echo "<script>console.log( 'Debug Objects: quantity: " . $_POST['quantity'][$x] . "' );</script>";	
-			// echo "<script>console.log( 'Debug Objects: rate: " . $_POST['rateValue'][$x] . "' );</script>";	
-			// echo "<script>console.log( 'Debug Objects: total: " . $_POST['totalValue'][$x] . "' );</script>";	
+			$totalValue = $_POST['quantity'][$x] * $updateProductQuantityResult[2];
+
+			 //echo "<script>console.log( 'Debug Objects: orderId: " . $order_id . "' );</script>";	
+			 //echo "<script>console.log( 'Debug Objects: productId: " . $updateProductQuantityResult[1] . "' );</script>";	
+			 //echo "<script>console.log( 'Debug Objects: cantidad: " . $_POST['quantity'][$x] . "' );</script>";	
+			 //echo "<script>console.log( 'Debug Objects: precio: " . $updateProductQuantityResult[2] . "' );</script>";	
+			 //echo "<script>console.log( 'Debug Objects: total: " . $totalValue . "' );</script>";	
 
 			$orderItemSql = "INSERT INTO order_item (order_id, product_id, quantity, rate, total, order_item_status) 
-			VALUES ('$order_id', '".$_POST['productIdValue'][$x]."', '".$_POST['quantity'][$x]."', '".$_POST['rateValue'][$x]."', '".$_POST['totalValue'][$x]."', 1)"; 
+			VALUES ('$order_id', '". $updateProductQuantityResult[1] ."', '".$_POST['quantity'][$x]."', '".$updateProductQuantityResult[1]."', '".$totalValue."', 1)"; 
 
 
 
@@ -84,13 +86,13 @@ if($_POST) {
 
 			$connect->query($orderItemSql);		
 
-			// echo "<script>console.log( 'Debug Objects: COUNT BAR CODE: ".count($_POST['barCodeValue']) . "' );</script>";
+//			 echo "<script>console.log( 'Debug Objects: COUNT BAR CODE: ".count($_POST['barCodeValue']) . "' );</script>";
 
 			if($x == count($_POST['barCodeValue'])) {
 				$orderItemStatus = true;
 			}	
 
-			//echo "<script>console.log( 'Debug Objects: " . "fin del while" . "' );</script>";	
+			//echo "<script>console.log( 'Debug Objects: " . "FIN DEL WHILE" . "' );</script>";	
 		//} // while	
 	} // /for quantity
 

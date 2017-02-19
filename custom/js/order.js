@@ -188,7 +188,7 @@ $(document).ready(function() {
                             alert(response.messages);
                         }
                     }, //response
-                    error: console.log("errores") //AjaxFailed
+                    error: console.log("Error") //AjaxFailed
                 }); // /ajax
             } // /if field validate is true
 
@@ -466,8 +466,9 @@ function addProduct() {
                 cantidad = ++existeEnTabla[0].childNodes[3].innerText;
                 var total = cantidad * response.rate;
 
-                existeEnTabla[0].childNodes[3].innerText = cantidad;
+                existeEnTabla[0].childNodes[3].innerHTML = cantidad + '<input type="hidden" name="quantity[]" value="' + cantidad + '" />';
                 existeEnTabla[0].childNodes[4].innerText = total;
+
 
 
             } else {
@@ -480,10 +481,10 @@ function addProduct() {
                 }
 
                 var trData = '<tr id="row' + numFila + '">' +
-                    '<td>' + response.bar_code + '<input type="hidden" name="barCodeValue" value="' + response.bar_code + '" /></td>' +
+                    '<td>' + response.bar_code + '<input type="hidden" name="barCodeValue[]" value="' + response.bar_code + '" /></td>' +
                     '<td>' + response.product_name + '</td>' +
                     '<td>' + response.rate + '</td>' +
-                    '<td>' + cantidad + '<input type="hidden" name="quantity" value="' + cantidad + '" /></td>' +
+                    '<td>' + cantidad + '<input type="hidden" name="quantity[]" value="' + cantidad + '" /></td>' +
                     '<td id="total' + numFila + '">' + response.rate + '</td>' +
                     '<td><button class="btn btn-default removeProductRowBtn" type="button" id="removeProductRowBtn" onclick="removeProductRow(' + numFila + ')"><i class="glyphicon glyphicon-trash"></i></button></td>' +
                     '</tr>';
