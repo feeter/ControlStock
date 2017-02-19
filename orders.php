@@ -88,7 +88,7 @@ if($_GET['o'] == 'add') {
 <div class="page-header">
   <h1><small>Ingreso de Productos</small></h1>
 
-				 <div class="form-group">
+				 <div class="">
 					<label class="col-sm-2 control-label">Codigo de Barras</label>
 					<div class="col-xs-3">
 						<input type="text" class="form-control" id="barCode" placeholder="Ingresar Codigo">
