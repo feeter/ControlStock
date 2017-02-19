@@ -82,8 +82,24 @@ if($_GET['o'] == 'add') {
 			    </div>
 			  </div> <!--/form-group-->			  
 
-				<input type="text" id="barCode"	/>
-				<input type="text" id="productName" />
+
+<hr style="color: #0056b2;" />
+
+<div class="page-header">
+  <h1><small>Ingreso de Productos</small></h1>
+
+				 <div class="form-group">
+					<label class="col-sm-2 control-label">Codigo de Barras</label>
+					<div class="col-xs-3">
+						<input type="text" class="form-control" id="barCode" placeholder="Ingresar Codigo">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Nombre del Producto</label>
+					<div class="col-xs-3">
+						<input type="text" class="form-control" id="productName" placeholder="Ingresar Nombre">
+					</div>
+				</div>
 
 			  <table class="table" id="productTable">
 			  	<thead>
@@ -102,6 +118,8 @@ if($_GET['o'] == 'add') {
 
 			  	</tbody>			  	
 			  </table>
+
+				</div>
 
 			  <div class="col-md-6">
 			  	<div class="form-group">
