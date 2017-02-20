@@ -61,12 +61,12 @@ if($_GET['o'] == 'add') {
 
 			<div class="success-messages"></div> <!--/success-messages-->
 
-  		<form class="form-horizontal" method="POST" action="php_action/createOrder.php" id="createOrderForm">
+  		<form class="form-horizontal" method="POST" action="php_action/createOrder.php" id="createOrderForm" >
 
 			  <div class="form-group">
 			    <label for="orderDate" class="col-sm-2 control-label">Fecha</label>
-			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="orderDate" value="<?php echo date('d-m-Y'); ?>" disabled="disabled" name="orderDate" autocomplete="off" />
+			    <div class="col-sm-2">
+			      <input type="text" class="form-control" id="orderDate" value="<?php echo date('d/m/Y'); ?>" disabled="disabled" name="orderDate" autocomplete="off" />
 			    </div>
 			  </div> <!--/form-group-->
 			  <div class="form-group">
@@ -83,23 +83,25 @@ if($_GET['o'] == 'add') {
 			  </div> <!--/form-group-->			  
 
 
-<hr style="color: #0056b2;" />
+<hr style="color: #0056b2;" /> <!--Separador-->
 
 <div class="page-header">
   <h1><small>Ingreso de Productos</small></h1>
 
-				 <div class="">
+
+				<div class="form-group">
 					<label class="col-sm-2 control-label">Codigo de Barras</label>
 					<div class="col-xs-3">
 						<input type="text" class="form-control" id="barCode" placeholder="Ingresar Codigo">
 					</div>
-				</div>
-				<div class="form-group">
+
 					<label class="col-sm-2 control-label">Nombre del Producto</label>
 					<div class="col-xs-3">
-						<input type="text" class="form-control" id="productName" placeholder="Ingresar Nombre">
+						<input type="text" class="form-control" id="productName" placeholder="Buscar por Nombre">
 					</div>
+
 				</div>
+
 
 			  <table class="table" id="productTable">
 			  	<thead>
@@ -132,10 +134,11 @@ if($_GET['o'] == 'add') {
 		  
 	  
 				  <div class="form-group">
-				    <label for="discount" class="col-sm-3 control-label">Descuento %</label>
-				    <div class="col-sm-9">
-				      <input type="number" min="0" max="100" class="form-control" id="discount" name="discount" onkeyup="discountFunc()" onchange="discountFunc()" autocomplete="off" />
-				    </div>
+				    <label for="discount" class="col-sm-3 control-label">Descuento</label>
+				    <div class="col-sm-2">
+				      <input type="text" maxlength="3" value="0" class="form-control" id="discount" name="discount" onkeyup="discountFunc()" onchange="discountFunc()" autocomplete="off" />
+				    </div> 
+						<label class="col-sm-0 control-label">%</label>
 				  </div> <!--/form-group-->	
 				  <div class="form-group">
 				    <label for="grandTotal" class="col-sm-3 control-label">Monto Final</label>
@@ -150,7 +153,7 @@ if($_GET['o'] == 'add') {
 			  	<div class="form-group">
 				    <label for="paid" class="col-sm-3 control-label">Monto a Pagar</label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="paid" name="paid" autocomplete="off" onkeyup="paidAmount()" />
+				      <input type="text" class="form-control" id="paid" name="paid" autocomplete="off" onkeyup="paidAmount()" value="0" />
 				    </div>
 				  </div> <!--/form-group-->			  
 				  <div class="form-group">
