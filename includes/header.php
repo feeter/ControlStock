@@ -34,7 +34,8 @@ while($row = $result->fetch_array()) {
 <!DOCTYPE html>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
 
 	<title>Sistema de almacenamiento de Stock</title>
 
