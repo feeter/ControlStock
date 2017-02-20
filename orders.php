@@ -199,8 +199,7 @@ if($_GET['o'] == 'add') {
 					<tr>
 						<th>#</th>
 						<th>Fecha de Venta</th>
-						<th>Nombre del Cliente</th>
-						<th>Contacto</th>
+						<th>Monto</th>
 						<th>Cantidad Vendida</th>
 						<th>Estado del Pago</th>
 						<th>Opciones</th>

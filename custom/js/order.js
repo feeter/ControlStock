@@ -142,11 +142,16 @@ $(document).ready(function() {
                 }
             },
             'ajax': 'php_action/fetchOrder.php',
-            'order': [0, "desc"],
-            "aoColumnDefs": [{
-                "aTargets": [1],
-                "sType": 'html'
-            }]
+            'order': [0, "desc"]
+                // "aoColumnDefs": [{
+                //         "aTargets": [1],
+                //         "sType": 'html'
+                //     },
+                //     {
+                //         aTargets: [2],
+                //         sType: 'num-fmt'
+                //     }
+                // ]
         });
 
     } else if (divRequest == 'editOrd') {
