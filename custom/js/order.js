@@ -142,7 +142,11 @@ $(document).ready(function() {
                 }
             },
             'ajax': 'php_action/fetchOrder.php',
-            'order': [1, "desc"]
+            'order': [0, "desc"],
+            "aoColumnDefs": [{
+                "aTargets": [1],
+                "sType": 'html'
+            }]
         });
 
     } else if (divRequest == 'editOrd') {
