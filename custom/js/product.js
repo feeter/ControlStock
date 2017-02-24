@@ -235,10 +235,10 @@ function editProduct(productId = null) {
         $.ajax({
             url: 'php_action/fetchSelectedProduct.php',
             type: 'post',
-            data: { productId: productId, barCode: "" },
+            data: { productId: productId, productName: "", barCode: "" },
             dataType: 'json',
             success: function(response) {
-                // alert(response.product_image);
+
                 // modal spinner
                 $('.div-loading').addClass('div-hide');
                 // modal div
@@ -492,17 +492,17 @@ function editProduct(productId = null) {
 
             }, // /success function
             error: function(xhr, ajaxOptions, thrownError) {
-                alert('No existe el producto');
+                console.log('Error al obtener producto...');
 
-                // alert(xhr.status);
-                // alert(thrownError);
+                console.log(xhr.status);
+                console.log(thrownError);
             }
 
         }); // /ajax to fetch product image
 
 
     } else {
-        alert('error please refresh the page');
+        alert('Favor refresque la pagina!!');
     }
 } // /edit product function
 

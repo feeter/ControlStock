@@ -391,7 +391,7 @@ function addProduct() {
     $.ajax({
         url: 'php_action/fetchSelectedProduct.php',
         type: 'post',
-        data: { barCode: barCode, productName: productName },
+        data: { barCode: barCode, productName: productName, productId: "" },
         dataType: 'json',
         success: function(response) {
 
