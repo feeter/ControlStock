@@ -1,13 +1,6 @@
 $(document).ready(function() {
 
-    $("#startDate").datetimepicker({
-        format: 'dd/mm/yyyy',
-        language: 'es',
-        minView: 2,
-        autoclose: true,
-        weekStart: 1
-    });
-    $("#endDate").datetimepicker({
+    $("#startDate, #endDate").datetimepicker({
         format: 'dd/mm/yyyy',
         language: 'es',
         minView: 2,
@@ -42,14 +35,16 @@ $(document).ready(function() {
 
             var form = $(this);
 
+            //console.log(form.serialize());
+
             $.ajax({
                 url: form.attr('action'),
                 type: form.attr('method'),
                 data: form.serialize(),
                 dataType: 'text',
                 success: function(response) {
-                        var mywindow = window.open('', 'Stock Management System', 'height=400,width=600');
-                        mywindow.document.write('<html><head><title>Order Report Slip</title>');
+                        var mywindow = window.open('', 'Sistema de Administracion de Stock', 'height=400,width=600');
+                        mywindow.document.write('<html><head><title>Informe de Ventas</title>');
                         mywindow.document.write('</head><body>');
                         mywindow.document.write(response);
                         mywindow.document.write('</body></html>');
@@ -59,7 +54,9 @@ $(document).ready(function() {
 
                         mywindow.print();
                         mywindow.close();
-                    } // /success
+                    } //success
+                    //error: ajaxFailed // FAILED
+
             }); // /ajax
 
         } // /else
