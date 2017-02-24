@@ -51,7 +51,7 @@ $orderItemResult = $connect->query($orderItemSql);
 		<tr>
 			<th>Nro</th>
 			<th>Producto</th>
-			<th>Precio</th>
+			<th>Precio Unitario</th>
 			<th>Cantidad</th>
 			<th>Total</th>
 		</tr>';
