@@ -17,20 +17,20 @@ if($result->num_rows > 0) {
  	// active 
  	if($row[2] == 1) {
  		// activate member
- 		$activeCategories = "<label class='label label-success'>Available</label>";
+ 		$activeCategories = "<label class='label label-success'>Disponible</label>";
  	} else {
  		// deactivate member
- 		$activeCategories = "<label class='label label-danger'>Not Available</label>";
+ 		$activeCategories = "<label class='label label-danger'>No Disponible</label>";
  	}
 
  	$button = '<!-- Single button -->
 	<div class="btn-group">
 	  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	    Action <span class="caret"></span>
+	    Acciones <span class="caret"></span>
 	  </button>
 	  <ul class="dropdown-menu">
-	    <li><a type="button" data-toggle="modal" id="editCategoriesModalBtn" data-target="#editCategoriesModal" onclick="editCategories('.$categoriesId.')"> <i class="glyphicon glyphicon-edit"></i> Edit</a></li>
-	    <li><a type="button" data-toggle="modal" data-target="#removeCategoriesModal" id="removeCategoriesModalBtn" onclick="removeCategories('.$categoriesId.')"> <i class="glyphicon glyphicon-trash"></i> Remove</a></li>       
+	    <li><a type="button" data-toggle="modal" id="editCategoriesModalBtn" data-target="#editCategoriesModal" onclick="editCategories('.$categoriesId.')"> <i class="glyphicon glyphicon-edit"></i> Editar</a></li>
+	    <li><a type="button" data-toggle="modal" data-target="#removeCategoriesModal" id="removeCategoriesModalBtn" onclick="removeCategories('.$categoriesId.')"> <i class="glyphicon glyphicon-trash"></i> Eliminar</a></li>       
 	  </ul>
 	</div>';
 

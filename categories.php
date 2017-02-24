@@ -6,27 +6,27 @@
 
 		<ol class="breadcrumb">
 		  <li><a href="dashboard.php">Home</a></li>		  
-		  <li class="active">Category</li>
+		  <li class="active">Categorias</li>
 		</ol>
 
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<div class="page-heading"> <i class="glyphicon glyphicon-edit"></i> Manage Categories</div>
+				<div class="page-heading"> <i class="glyphicon glyphicon-edit"></i> Administracion de Categorias</div>
 			</div> <!-- /panel-heading -->
 			<div class="panel-body">
 
 				<div class="remove-messages"></div>
 
 				<div class="div-action pull pull-right" style="padding-bottom:20px;">
-					<button class="btn btn-default button1" data-toggle="modal" id="addCategoriesModalBtn" data-target="#addCategoriesModal"> <i class="glyphicon glyphicon-plus-sign"></i> Add Categories </button>
+					<button class="btn btn-default button1" data-toggle="modal" id="addCategoriesModalBtn" data-target="#addCategoriesModal"> <i class="glyphicon glyphicon-plus-sign"></i> Agregar Categoria </button>
 				</div> <!-- /div-action -->				
 				
 				<table class="table" id="manageCategoriesTable">
 					<thead>
 						<tr>							
-							<th>Categories Name</th>
-							<th>Status</th>
-							<th style="width:15%;">Options</th>
+							<th>Nombre Categoria</th>
+							<th>Estado</th>
+							<th style="width:15%;">Opciones</th>
 						</tr>
 					</thead>
 				</table>
@@ -46,36 +46,36 @@
     	<form class="form-horizontal" id="submitCategoriesForm" action="php_action/createCategories.php" method="POST">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title"><i class="fa fa-plus"></i> Add Categories</h4>
+	        <h4 class="modal-title"><i class="fa fa-plus"></i> Agregar Categoria</h4>
 	      </div>
 	      <div class="modal-body">
 
 	      	<div id="add-categories-messages"></div>
 
 	        <div class="form-group">
-	        	<label for="categoriesName" class="col-sm-4 control-label">Categories Name: </label>
+	        	<label for="categoriesName" class="col-sm-4 control-label">Nombre Categoria: </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-7">
-				      <input type="text" class="form-control" id="categoriesName" placeholder="Categories Name" name="categoriesName" autocomplete="off">
+				      <input type="text" class="form-control" id="categoriesName" placeholder="Nombre Categoria" name="categoriesName" autocomplete="off">
 				    </div>
 	        </div> <!-- /form-group-->	         	        
 	        <div class="form-group">
-	        	<label for="categoriesStatus" class="col-sm-4 control-label">Status: </label>
+	        	<label for="categoriesStatus" class="col-sm-4 control-label">Estado: </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-7">
 				      <select class="form-control" id="categoriesStatus" name="categoriesStatus">
 				      	<option value="">~~SELECT~~</option>
-				      	<option value="1">Available</option>
-				      	<option value="2">Not Available</option>
+				      	<option value="1">Disponible</option>
+				      	<option value="2">No Disponible</option>
 				      </select>
 				    </div>
 	        </div> <!-- /form-group-->	         	        
 	      </div> <!-- /modal-body -->
 	      
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Cerrar</button>
 	        
-	        <button type="submit" class="btn btn-primary" id="createCategoriesBtn" data-loading-text="Loading..." autocomplete="off"> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
+	        <button type="submit" class="btn btn-primary" id="createCategoriesBtn" data-loading-text="Loading..." autocomplete="off"> <i class="glyphicon glyphicon-ok-sign"></i> Agregar</button>
 	      </div> <!-- /modal-footer -->	      
      	</form> <!-- /.form -->	     
     </div> <!-- /modal-content -->    

@@ -17,20 +17,20 @@ if($result->num_rows > 0) {
  	// active 
  	if($row[2] == 1) {
  		// activate member
- 		$activeBrands = "<label class='label label-success'>Available</label>";
+ 		$activeBrands = "<label class='label label-success'>Disponible</label>";
  	} else {
  		// deactivate member
- 		$activeBrands = "<label class='label label-danger'>Not Available</label>";
+ 		$activeBrands = "<label class='label label-danger'>No Disponible</label>";
  	}
 
  	$button = '<!-- Single button -->
 	<div class="btn-group">
 	  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	    Action <span class="caret"></span>
+	    Acciones <span class="caret"></span>
 	  </button>
 	  <ul class="dropdown-menu">
-	    <li><a type="button" data-toggle="modal" data-target="#editBrandModel" onclick="editBrands('.$brandId.')"> <i class="glyphicon glyphicon-edit"></i> Edit</a></li>
-	    <li><a type="button" data-toggle="modal" data-target="#removeMemberModal" onclick="removeBrands('.$brandId.')"> <i class="glyphicon glyphicon-trash"></i> Remove</a></li>       
+	    <li><a href="" type="button" data-toggle="modal" data-target="#editBrandModel" onclick="editBrands('.$brandId.')"> <i class="glyphicon glyphicon-edit"></i> Editar</a></li>
+	    <li><a href="" type="button" data-toggle="modal" data-target="#removeMemberModal" onclick="removeBrands('.$brandId.')"> <i class="glyphicon glyphicon-trash"></i> Eliminar</a></li>       
 	  </ul>
 	</div>';
 
