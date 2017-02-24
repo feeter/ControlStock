@@ -23,7 +23,7 @@ if($result->num_rows > 0) {
  while($row = $result->fetch_array()) {
  	$productId = $row[0];
  	// active 
- 	if($row[7] == 1) {
+ 	if($row[5] > 0) {
  		// activate member
  		$active = "<label class='label label-success'>Disponible</label>";
  	} else {
