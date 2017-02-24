@@ -22,20 +22,20 @@ if($_POST) {
 			$updateSql = "UPDATE users SET password = '$newPassword' WHERE user_id = {$userId}";
 			if($connect->query($updateSql) === TRUE) {
 				$valid['success'] = true;
-				$valid['messages'] = "Successfully Updated";		
+				$valid['messages'] = "Actualizacion realizada Correctamente";		
 			} else {
 				$valid['success'] = false;
-				$valid['messages'] = "Error while updating the password";	
+				$valid['messages'] = "Error mientras se actualiza la Clave";	
 			}
 
 		} else {
 			$valid['success'] = false;
-			$valid['messages'] = "New password does not match with Conform password";
+			$valid['messages'] = "El campo Nueva Clave no coincide con Confirmar Clave";
 		}
 
 	} else {
 		$valid['success'] = false;
-		$valid['messages'] = "Current password is incorrect";
+		$valid['messages'] = "La Contraseña Actual es Incorrecta";
 	}
 
 	$connect->close();

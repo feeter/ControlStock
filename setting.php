@@ -18,7 +18,7 @@ $connect->close();
 
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<div class="page-heading"> <i class="glyphicon glyphicon-wrench"></i> Setting</div>
+				<div class="page-heading"> <i class="glyphicon glyphicon-wrench"></i> Ajustes</div>
 			</div> <!-- /panel-heading -->
 
 			<div class="panel-body">
@@ -56,21 +56,21 @@ $connect->close();
 						<div class="form-group">
 					    <label for="password" class="col-sm-2 control-label">Clave Actual</label>
 					    <div class="col-sm-10">
-					      <input type="password" class="form-control" id="password" name="password" placeholder="Current Password">
+					      <input type="password" class="form-control" id="password" name="password" placeholder="Clave Actual">
 					    </div>
 					  </div>
 
 					  <div class="form-group">
 					    <label for="npassword" class="col-sm-2 control-label">Nueva Clave</label>
 					    <div class="col-sm-10">
-					      <input type="password" class="form-control" id="npassword" name="npassword" placeholder="New Password">
+					      <input type="password" class="form-control" id="npassword" name="npassword" placeholder="Nueva Clave">
 					    </div>
 					  </div>
 
 					  <div class="form-group">
 					    <label for="cpassword" class="col-sm-2 control-label">Confirmar Clave</label>
 					    <div class="col-sm-10">
-					      <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Confirm Password">
+					      <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Confirmar Clave">
 					    </div>
 					  </div>
 
