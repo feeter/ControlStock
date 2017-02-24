@@ -78,7 +78,7 @@ if($_POST) {
 			 //echo "<script>console.log( 'Debug Objects: total: " . $totalValue . "' );</script>";	
 
 			$orderItemSql = "INSERT INTO order_item (order_id, product_id, quantity, rate, total, order_item_status) 
-			VALUES ('$order_id', '". $updateProductQuantityResult[1] ."', '".$_POST['quantity'][$x]."', '".$updateProductQuantityResult[1]."', '".$totalValue."', 1)"; 
+			VALUES ('$order_id', '". $updateProductQuantityResult[1] ."', '".$_POST['quantity'][$x]."', '".$updateProductQuantityResult[2]."', '".$totalValue."', 1)"; 
 
 
 
