@@ -1,6 +1,11 @@
 $(document).ready(function() {
+
+    //inicializar tooltip jquery
+    $('[data-toggle="tooltip"]').tooltip();
+
     // top bar active
     $('#navDashboard').addClass('active');
+
 
     //Date for the calendar events (dummy data)
     var date = new Date();
