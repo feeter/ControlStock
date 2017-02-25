@@ -21,12 +21,16 @@ $totalRevenue = $orderResult['SumaTotal'];
 $countOrder = $orderResult['CantidadTotal'];
 
 
-$lowStockSql = "SELECT COUNT(product_id) CantidadProducto FROM product WHERE quantity < 3 AND status = 1";
+$CantidadStock = 3;
+
+$lowStockSql = "SELECT COUNT(product_id) CantidadProducto FROM product WHERE quantity < $CantidadStock AND status = 1";
 $lowStockQuery = $connect->query($lowStockSql);
 $lowStockResult = $lowStockQuery->fetch_assoc();
 $countLowStock = $lowStockResult['CantidadProducto'];
 
-$soonStockExpireSql = "SELECT COUNT(product_id) CantProdToExpire FROM product WHERE expiration_date >= CURDATE() and expiration_date <= date_add(curdate(), interval 31 day) AND status = 1";
+$Dias = 31;
+
+$soonStockExpireSql = "SELECT COUNT(product_id) CantProdToExpire FROM product WHERE expiration_date >= CURDATE() and expiration_date <= date_add(curdate(), interval $Dias day) AND status = 1";
 $soonStockExpireQuery = $connect->query($soonStockExpireSql);
 $soonStockExpireResult = $soonStockExpireQuery->fetch_assoc();
 $countStockExpire = $soonStockExpireResult['CantProdToExpire'];
@@ -77,7 +81,7 @@ $connect->close();
 	<div class="col-md-4">
 		<div class="panel panel-danger">
 			<div class="panel-heading">
-				<a href="product.php" style="text-decoration:none;color:black;">
+				<a href="product.php" style="text-decoration:none;color:black;" data-toggle="tooltip" title="Cantidad menor a <?php echo $CantidadStock; ?>.">
 					Bajo Stock
 					<span class="badge pull pull-right"><?php echo $countLowStock; ?></span>	
 				</a>
@@ -95,7 +99,7 @@ $connect->close();
 		<div class="panel panel-warning">
 			<div class="panel-heading">
 				
-				<a href="product.php" style="text-decoration:none;color:black;">
+				<a href="product.php" style="text-decoration:none;color:black;" data-toggle="tooltip" title="Productos a expirar en <?php echo $Dias ?> dias.">
 					Productos pronto a expirar
 					<span class="badge pull pull-right"><?php echo $countStockExpire; ?></span>	
 				</a>
