@@ -328,11 +328,13 @@ if($_GET['o'] == 'add') {
 				    </div>
 				  </div> <!--/form-group-->			  
 		  		<div class="form-group">
-				    <label for="discount" class="col-sm-3 control-label">Descuento %</label>
-				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="discount" name="discount" onkeyup="discountFunc()" autocomplete="off" value="<?php echo $data[5] ?>" />
+				    <label for="discount" class="col-sm-3 control-label">Descuento</label>
+				    <div class="col-sm-2">
+				      <input type="text" maxlength="3" class="form-control" id="discount" name="discount" onkeyup="discountFunc()" onchange="discountFunc()" autocomplete="off" value="<?php echo $data[5] ?>" />
 				    </div>
+						<label class="col-sm-0 control-label">%</label>
 				  </div> <!--/form-group-->	
+
 				  <div class="form-group">
 				    <label for="totalAmount" class="col-sm-3 control-label">Monto Total</label>
 				    <div class="col-sm-9">
@@ -358,27 +360,11 @@ if($_GET['o'] == 'add') {
 				      <input type="hidden" class="form-control" id="dueValue" name="dueValue" value="<?php echo $data[8] ?>"  />
 				    </div>
 				  </div> <!--/form-group-->		
-				  <div class="form-group">
-				    <label for="clientContact" class="col-sm-3 control-label">Forma de Pago</label>
-				    <div class="col-sm-9">
-				      <select class="form-control" name="paymentType" id="paymentType" >
-				      	<option value="">~~SELECT~~</option>
-				      	<option value="1" <?php if($data[9] == 1) {
-				      		echo "selected";
-				      	} ?> >Cheque</option>
-				      	<option value="2" <?php if($data[9] == 2) {
-				      		echo "selected";
-				      	} ?>  >Efectivo</option>
-				      	<option value="3" <?php if($data[9] == 3) {
-				      		echo "selected";
-				      	} ?> >Tarjeta de Credito</option>
-				      </select>
-				    </div>
-				  </div> <!--/form-group-->							  
+						  
 				  <div class="form-group">
 				    <label for="clientContact" class="col-sm-3 control-label">Estado del Pago</label>
 				    <div class="col-sm-9">
-				      <select class="form-control" name="paymentStatus" id="paymentStatus">
+				      <select class="form-control" disabled name="paymentStatus" id="paymentStatus">
 				      	<option value="">~~SELECT~~</option>
 				      	<option value="1" <?php if($data[10] == 1) {
 				      		echo "selected";

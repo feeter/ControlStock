@@ -616,7 +616,8 @@ function getProductDataByBarCode(e, row) {
 
 }
 
-// select on product data
+// utilizado solo para editar venta 25/02/2017 
+// jose campos
 function getProductData(row = null) {
 
     if (row) {
@@ -632,7 +633,7 @@ function getProductData(row = null) {
             $.ajax({
                 url: 'php_action/fetchSelectedProduct.php',
                 type: 'post',
-                data: { productId: productId },
+                data: { barCode: "", productName: "", productId: productId },
                 dataType: 'json',
                 success: function(response) {
                         // setting the rate value into the rate input field
@@ -640,10 +641,10 @@ function getProductData(row = null) {
                         $("#rate" + row).val(response.rate);
                         $("#rateValue" + row).val(response.rate);
 
-                        $("#quantity" + row).val(1);
+                        $("#quantity" + row).val(0);
 
                         var total = Number(response.rate) * 1;
-                        total = total.toFixed(2);
+                        total = total.toFixed(0);
                         $("#total" + row).val(total);
                         $("#totalValue" + row).val(total);
 
