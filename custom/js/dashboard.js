@@ -6,6 +6,10 @@ $(document).ready(function() {
     // top bar active
     $('#navDashboard').addClass('active');
 
+    //Inicializa el chart de los productos mas vendidos
+    google.charts.load('current', { 'packages': ['corechart'] });
+    //google.charts.setOnLoadCallback(drawChart);   
+
 
     //Date for the calendar events (dummy data)
     var date = new Date();
@@ -26,6 +30,9 @@ $(document).ready(function() {
             //console.log(view.intervalStart.format());
             var res = view.intervalStart.format().split("-");
             nombreCalendario(res[1], res[0]);
+
+            //Dibujar el grafico de los productos mas vendidos
+            drawChart(res[1], res[0]);
         },
         dayRender: function(date, cell) {
             //console.log("date: " + date.format() + " cell: " + cell);
@@ -33,10 +40,6 @@ $(document).ready(function() {
             var fecha = cell[0].getAttribute("data-date");
 
             obtenerMontoDelDia(cell, fecha);
-
-            // if (moment().diff(date, 'days') > 0) {
-            //     cell.css("background-color", "silver");
-            // }
 
         }
     });
@@ -46,7 +49,7 @@ $(document).ready(function() {
 
 });
 
-//Ingresa el monto vendido en el plugin FullCalendar segun la fecha indicada en el parametro 
+//Ingresa el monto vendido en el plugin FullCalendar segun la fecha indicada en el parametro  por dia
 function obtenerMontoDelDia(cell, fecha) {
 
     var fechaArray = fecha.split("-");
@@ -82,6 +85,7 @@ function obtenerMontoDelDia(cell, fecha) {
 }
 
 
+//Obtiene el total mensual y lo agrega en el titulo del calendario
 function nombreCalendario(mes, y) {
     var mesActual = $(".fc-center h2").html();
 
@@ -101,6 +105,55 @@ function nombreCalendario(mes, y) {
         }
 
     });
+
+
+}
+
+//funcion para obtener los datos de los productos mas vendidos y pintarlos en pantalla
+function drawChart(mes, y) {
+
+    var data = null;
+
+    $.ajax({
+        url: 'php_action/GetProductMostSold.php',
+        type: 'post',
+        data: { month: mes, year: y },
+        dataType: 'json',
+        success: function(response) {
+
+            //for que convierte el valor de la "cantidad vendida" en numerico y crea un "newArray" con los mismos datos
+            var newArray = [];
+            for (x = 0; x < response.length; x++) {
+                newArray[x] = [response[x][0], Number(response[x][1])];
+            }
+
+            //Agrega el primer array el indicador de que es cada valor
+            newArray.splice(0, 0, ['Producto', 'Cantidad Vendida']);
+
+            data = google.visualization.arrayToDataTable(newArray);
+
+
+            var options = {
+                title: 'Productos mas Vendidos del mes'
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
+
+        }
+
+    });
+
+
+    // var data = google.visualization.arrayToDataTable([
+    //     ['Task', 'Hours per Day'],
+    //     ['Work', 11],
+    //     ['Eat', 2],
+    //     ['Commute', 2],
+    //     ['Watch TV', 2],
+    //     ['Sleep', 7]
+    // ]);
 
 
 }

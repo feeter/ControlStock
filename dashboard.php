@@ -81,7 +81,7 @@ $connect->close();
 	<div class="col-md-4">
 		<div class="panel panel-danger">
 			<div class="panel-heading">
-				<a href="product.php" style="text-decoration:none;color:black;" data-toggle="tooltip" title="Cantidad menor a <?php echo $CantidadStock; ?>.">
+				<a href="product.php" style="text-decoration:none;color:black;" data-toggle="tooltip" title="Stock menor a <?php echo $CantidadStock; ?> por producto.">
 					Bajo Stock
 					<span class="badge pull pull-right"><?php echo $countLowStock; ?></span>	
 				</a>
@@ -109,14 +109,15 @@ $connect->close();
 	
 
 		<div class="card">
-		  <div class="cardHeader">
-		    <h1><?php echo date('d'); ?></h1>
-		  </div>
+		  <div class="cardHeader" style="background-color:#777799;" title="Productos vendidos mas de 3 veces." data-toggle="tooltip" >
+		    
+			<div id="piechart" style="width: 340px; height: 200px;"></div>
 
-		  <div class="cardContainer">
-		    <p><?php echo $fecha; ?></p>
 		  </div>
 		</div> 
+
+
+
 		<br/>
 
 		<div class="card">
@@ -132,6 +133,20 @@ $connect->close();
 		    <p> <i class="glyphicon glyphicon-usd"></i> Cantidad de Ingresos</p>
 		  </div>
 		</div> 
+		
+		<br/>
+
+		<div class="card">
+		  <div class="cardHeader">
+		    <h1><?php echo date('d'); ?></h1>
+		  </div>
+
+		  <div class="cardContainer">
+		    <p><?php echo $fecha; ?></p>
+		  </div>
+		</div> 
+
+		
 
 	</div>
 
@@ -152,6 +167,8 @@ $connect->close();
 <script src="assests/plugins/fullcalendar/lib/moment.min.js"></script>
 <script src="assests/plugins/fullcalendar/fullcalendar.min.js"></script>
 <script src='assests/plugins/fullcalendar/locale/es.js'></script>
+
+<script type="text/javascript" src="assests/plugins/googleChart/pieChart/loader.js"></script>
 
 <script src="custom/js/dashboard.js"></script>
 <?php require_once 'includes/footer.php'; ?>
