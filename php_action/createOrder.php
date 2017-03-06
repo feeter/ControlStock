@@ -19,11 +19,12 @@ if($_POST) {
   $dueValue 						= $_POST['dueValue'];
   //$paymentType 					= $_POST['paymentType']; se quita el 18/02/2017 y se inserta por defecto con valor 0
   $paymentStatusValue 				= $_POST['paymentStatusValue'];
+  $userSeller 				= $_POST['userSeller'];
 
   
 
-	$sql = "INSERT INTO orders (order_date, client_name, client_contact, sub_total, discount, grand_total, paid, due, payment_type, payment_status, order_status) 
-					VALUES ('$orderDate', '$clientName', '$clientContact', '$subTotalValue', '$discount', '$grandTotalValue', '$paid', '$dueValue', '0', '$paymentStatusValue', '1')";
+	$sql = "INSERT INTO orders (order_date, client_name, client_contact, sub_total, discount, grand_total, paid, due, payment_type, payment_status, order_status, user_id) 
+					VALUES ('$orderDate', '$clientName', '$clientContact', '$subTotalValue', '$discount', '$grandTotalValue', '$paid', '$dueValue', '0', '$paymentStatusValue', '1', $userSeller)";
 	
 	
 	$order_id;

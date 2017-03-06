@@ -63,6 +63,8 @@ if($_GET['o'] == 'add') {
 
   		<form class="form-horizontal" method="POST" action="php_action/createOrder.php" id="createOrderForm" >
 
+				<input type="hidden" class="form-control" id="userSeller" name="userSeller" value="<?php echo $_SESSION['userId'] ?>" />
+
 			  <div class="form-group">
 			    <label for="orderDate" class="col-sm-2 control-label">Fecha</label>
 			    <div class="col-sm-2">
