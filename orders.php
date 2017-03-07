@@ -203,7 +203,7 @@ if($_GET['o'] == 'add') {
 						<th>Fecha de Venta</th>
 						<th>Monto</th>
 						<th>Cantidad Vendida</th>
-						<th>Estado del Pago</th>
+						<th>Nombre Vendedor</th>
 						<th>Opciones</th>
 					</tr>
 				</thead>
