@@ -34,21 +34,33 @@ $(document).ready(function() {
         // remove the form error
         $('.form-group').removeClass('has-error').removeClass('has-success');
 
-        var userName = $("#tbUserName").val();
+        var userName = $("#tbUserName");
         var clave = $("#tbUserPass").val();
         var clave2 = $("#tbUserPass2").val();
-        var brandStatus = $("#tbUserEmail").val();
+        var userEmail = $("#tbUserEmail").val();
+        var perfil = $("#ddlUserPerfil");
 
 
-
-        if (userName == "" && /\s/.test(userName)) {
-            $("#tbUserName").after('<p class="text-danger">Nombre de usuario es obligatorio y no debe contener espacios</p>');
-            $('#tbUserName').closest('.form-group').addClass('has-error');
+        if (perfil.val() == "") {
+            perfil.after('<p class="text-danger">Debe ingresar un perfil</p>');
+            perfil.closest('.form-group').addClass('has-error');
         } else {
             // remov error text field
-            $("#tbUserName").find('.text-danger').remove();
+            perfil.find('.text-danger').remove();
             // success out for form 
-            $("#tbUserName").closest('.form-group').addClass('has-success');
+            perfil.closest('.form-group').addClass('has-success');
+        }
+
+
+
+        if (userName.val() == "" || /\s/.test(userName.val())) {
+            userName.after('<p class="text-danger">Nombre de usuario es obligatorio y no debe contener espacios</p>');
+            userName.closest('.form-group').addClass('has-error');
+        } else {
+            // remov error text field
+            userName.find('.text-danger').remove();
+            // success out for form 
+            userName.closest('.form-group').addClass('has-success');
         }
 
         if (clave == "" || clave2 == "") {
@@ -73,10 +85,12 @@ $(document).ready(function() {
             $("#tbUserPass, #tbUserPass2").closest('.form-group').addClass('has-success');
         }
 
-        if (true) {
+        if (userName.val() || perfil.val() || clave || clave2) {
             var form = $(this);
             // button loading
             $("#btnCreateUser").button('loading');
+
+            console.log(form.serialize());
 
             $.ajax({
                 url: form.attr('action'),
@@ -87,28 +101,30 @@ $(document).ready(function() {
                         // button loading
                         $("#btnCreateUser").button('reset');
 
-                        if (response.success == true) {
-                            // reload the manage member table 
-                            manageUserTable.ajax.reload(null, false);
+                        //if (response.success == true) {
+                        // reload the manage member table 
+                        manageUserTable.ajax.reload(null, false);
 
-                            // reset the form text
-                            $("#submitUserForm")[0].reset();
-                            // remove the error text
-                            $(".text-danger").remove();
-                            // remove the form error
-                            $('.form-group').removeClass('has-error').removeClass('has-success');
+                        //console.log(response.messages);
 
-                            $('#add-brand-messages').html('<div class="alert alert-success">' +
-                                '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
-                                '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> ' + response.messages +
-                                '</div>');
+                        // reset the form text
+                        $("#submitUserForm")[0].reset();
+                        // remove the error text
+                        $(".text-danger").remove();
+                        // remove the form error
+                        $('.form-group').removeClass('has-error').removeClass('has-success');
 
-                            $(".alert-success").delay(500).show(10, function() {
-                                $(this).delay(3000).hide(10, function() {
-                                    $(this).remove();
-                                });
-                            }); // /.alert
-                        } // if
+                        $('#add-user-messages').html('<div class="alert alert-success">' +
+                            '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
+                            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> ' + response.messages +
+                            '</div>');
+
+                        $(".alert-success").delay(500).show(10, function() {
+                            $(this).delay(3000).hide(10, function() {
+                                $(this).remove();
+                            });
+                        }); // /.alert
+                        //} // if
 
                     } // /success
             }); // /ajax	
@@ -119,9 +135,9 @@ $(document).ready(function() {
 
 });
 
-function editBrands(brandId = null) {
+function editUser(userId = null) {
 
-    if (brandId) {
+    if (userId) {
         // remove hidden brand id text
         $('#brandId').remove();
 
@@ -140,7 +156,7 @@ function editBrands(brandId = null) {
         $.ajax({
             url: 'php_action/fetchSelectedBrand.php',
             type: 'post',
-            data: { brandId: brandId },
+            data: { brandId: userId },
             dataType: 'json',
             success: function(response) {
                     // modal loading
@@ -241,61 +257,50 @@ function editBrands(brandId = null) {
     }
 } // /edit brands function
 
-function removeBrands(brandId = null) {
-    if (brandId) {
-        $('#removeBrandId').remove();
-        $.ajax({
-            url: 'php_action/fetchSelectedBrand.php',
-            type: 'post',
-            data: { brandId: brandId },
-            dataType: 'json',
-            success: function(response) {
-                    $('.removeBrandFooter').after('<input type="hidden" name="removeBrandId" id="removeBrandId" value="' + response.brand_id + '" /> ');
+function removeUser(userId = null) {
+    if (userId) {
+        $("#removeUserBtn").unbind('click').bind('click', function() {
 
-                    // click on remove button to remove the brand
-                    $("#removeBrandBtn").unbind('click').bind('click', function() {
+            $("#removeUserBtn").button('loading');
+
+
+            $.ajax({
+                url: 'php_action/removeUser.php',
+                type: 'post',
+                data: { userId: userId },
+                dataType: 'json',
+                success: function(response) {
+                        console.log(response);
                         // button loading
-                        $("#removeBrandBtn").button('loading');
+                        $("#removeUserBtn").button('reset');
+                        if (response.success == true) {
 
-                        $.ajax({
-                            url: 'php_action/removeBrand.php',
-                            type: 'post',
-                            data: { brandId: brandId },
-                            dataType: 'json',
-                            success: function(response) {
-                                    console.log(response);
-                                    // button loading
-                                    $("#removeBrandBtn").button('reset');
-                                    if (response.success == true) {
+                            // hide the remove modal 
+                            $('#removeMemberModal').modal('hide');
 
-                                        // hide the remove modal 
-                                        $('#removeMemberModal').modal('hide');
+                            // reload the brand table 
+                            manageUserTable.ajax.reload(null, false);
 
-                                        // reload the brand table 
-                                        manageUserTable.ajax.reload(null, false);
+                            $('.remove-messages').html('<div class="alert alert-success">' +
+                                '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
+                                '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> ' + response.messages +
+                                '</div>');
 
-                                        $('.remove-messages').html('<div class="alert alert-success">' +
-                                            '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
-                                            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> ' + response.messages +
-                                            '</div>');
+                            $(".alert-success").delay(500).show(10, function() {
+                                $(this).delay(3000).hide(10, function() {
+                                    $(this).remove();
+                                });
+                            }); // /.alert
+                        } else {
 
-                                        $(".alert-success").delay(500).show(10, function() {
-                                            $(this).delay(3000).hide(10, function() {
-                                                $(this).remove();
-                                            });
-                                        }); // /.alert
-                                    } else {
+                        } // /else
+                    } // /response messages
+            }); // /ajax function to remove the user
 
-                                    } // /else
-                                } // /response messages
-                        }); // /ajax function to remove the brand
 
-                    }); // /click on remove button to remove the brand
+        });
 
-                } // /success
-        }); // /ajax
-
-        $('.removeBrandFooter').after();
+        //$('.removeBrandFooter').after();
     } else {
         alert('error!! Refresh the page again');
     }

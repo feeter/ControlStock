@@ -52,32 +52,41 @@
 	      	<div id="add-user-messages"></div> <!-- Mensaje obtenido por jquery segun resulato al guardar  -->
 
 	        <div class="form-group">
-	        	<label for="brandName" class="col-sm-3 control-label">Nombre: </label>
-	        	<label class="col-sm-1 control-label">: </label>
+	        	<label class="col-sm-3 control-label">Nombre: </label>
 				    <div class="col-sm-8">
 				      <input type="text" class="form-control" id="tbUserName" placeholder="Nombre Usuarios" name="tbUserName">
+				    </div>
+	        </div> <!-- /form-group-->
+
+
+					<!-- MODIFICAR PARA OBTENERLOS DE LA BASE DE DATOS DIRECTAMENTE 07/03/2017 JCP -->
+					<div class="form-group">
+	        	<label class="col-sm-3 control-label">Perfil: </label>
+				    <div class="col-sm-8">
+				      <select class="form-control" id="ddlUserPerfil" name="ddlUserPerfil">
+				      	<option value="">--Seleccionar--</option>
+				      	<option value="1">Administrador</option>
+				      	<option value="2">Vendedor</option>
+				      </select>
 				    </div>
 	        </div> <!-- /form-group-->	
 
             <div class="form-group">
-	        	<label for="brandStatus" class="col-sm-3 control-label">Clave: </label>
-	        	<label class="col-sm-1 control-label">: </label>
+	        	<label class="col-sm-3 control-label">Clave: </label>
 				    <div class="col-sm-8">
 				      <input type="text" class="form-control" id="tbUserPass" placeholder="Clave" name="tbUserPass">
 				    </div>
 	        </div> <!-- /form-group-->
 
-            <div class="form-group">
-	        	<label for="brandStatus" class="col-sm-3 control-label">Repita Clave: </label>
-	        	<label class="col-sm-1 control-label">: </label>
+          <div class="form-group">
+	        	<label class="col-sm-3 control-label">Repita Clave: </label>
 				    <div class="col-sm-8">
 				      <input type="text" class="form-control" id="tbUserPass2" placeholder="Repita Clave" name="tbUserPass2">
 				    </div>
 	        </div> <!-- /form-group-->
 
 	        <div class="form-group">
-	        	<label for="brandStatus" class="col-sm-3 control-label">Email: </label>
-	        	<label class="col-sm-1 control-label">: </label>
+	        	<label class="col-sm-3 control-label">Email: </label>
 				    <div class="col-sm-8">
 				      <input type="text" class="form-control" id="tbUserEmail" placeholder="Ingrese Email" name="tbUserEmail">
 				    </div>
@@ -166,14 +175,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title"><i class="glyphicon glyphicon-trash"></i> Remove Brand</h4>
+        <h4 class="modal-title"><i class="glyphicon glyphicon-trash"></i> Eliminar Usuario</h4>
       </div>
       <div class="modal-body">
-        <p>Do you really want to remove ?</p>
+        <p>¿Desea eliminar el usuario seleccionado?</p>
       </div>
       <div class="modal-footer removeBrandFooter">
-        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
-        <button type="button" class="btn btn-primary" id="removeBrandBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save changes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Cerrar</button>
+        <button type="button" class="btn btn-primary" id="removeUserBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Eliminar</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

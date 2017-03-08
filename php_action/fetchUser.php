@@ -18,8 +18,8 @@ if($result->num_rows > 0) {
             Acciones <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
-            <li><a href="" type="button" data-toggle="modal" data-target="#editUserModel" onclick="editBrands('.$userId.')"> <i class="glyphicon glyphicon-edit"></i> Editar</a></li>
-            <li><a href="" type="button" data-toggle="modal" data-target="#removeMemberModal" onclick="removeBrands('.$userId.')"> <i class="glyphicon glyphicon-trash"></i> Eliminar</a></li>       
+            <li><a href="" type="button" data-toggle="modal" data-target="#editUserModel" onclick="editUser('.$userId.')"> <i class="glyphicon glyphicon-edit"></i> Editar</a></li>
+            <li><a href="" type="button" data-toggle="modal" data-target="#removeMemberModal" onclick="removeUser('.$userId.')"> <i class="glyphicon glyphicon-trash"></i> Eliminar</a></li>       
         </ul>
         </div>';
 
