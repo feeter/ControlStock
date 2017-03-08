@@ -134,9 +134,10 @@ while($row = $result->fetch_array()) {
           <li id="navReport"><a href="report.php"> <i class="glyphicon glyphicon-check"></i> Reportes </a></li>
 
           <li class="dropdown" id="navSetting">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-user"></i> <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-info-sign"></i> <span class="caret"></span></a>
             <ul class="dropdown-menu">            
-              <li id="topNavSetting"><a href="setting.php"> <i class="glyphicon glyphicon-wrench"></i> Configuraciones</a></li>            
+              <li id="topNavSetting"><a href="setting.php"> <i class="glyphicon glyphicon-wrench"></i> Configuraciones</a></li>
+              <li id="topNavUser"><a href="users.php"> <i class="glyphicon glyphicon-user"></i> Usuarios</a></li>
               <li id="topNavLogout"><a href="logout.php"> <i class="glyphicon glyphicon-log-out"></i> Salir</a></li>            
             </ul>
           </li>   
