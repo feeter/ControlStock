@@ -91,60 +91,48 @@ while($row = $result->fetch_array()) {
 
         <ul class="nav navbar-nav navbar-right">     
 
+				      	<?php 
+				      	$sql = "SELECT a.page_id, a.page_idName, a.page_name, a.page_url, a.page_class, a.isDropDown FROM page a 
+                        INNER JOIN functions b ON b.page_id = a.page_id 
+                        WHERE parent_node = 0 and profile_id = " . $_SESSION['profile'] . ";";
+                        
+								$result = $connect->query($sql);
 
-        <?php
-       if ($_SESSION['profile'] == 2){
-        ?>
-          <li class="dropdown" id="navOrder">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-shopping-cart"></i> Ventas <span class="caret"></span></a>
-            <ul class="dropdown-menu">            
-              <li id="topNavAddOrder"><a href="orders.php?o=add"> <i class="glyphicon glyphicon-plus"></i> Vender</a></li>            
-              
-            </ul>
-          </li> 
+								while($row = $result->fetch_array()) {
 
-          <li class="dropdown" id="navSetting">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-user"></i> <span class="caret"></span></a>
-            <ul class="dropdown-menu">            
-              <li id="topNavSetting"><a href="setting.php"> <i class="glyphicon glyphicon-wrench"></i> Configuraciones</a></li>            
-              <li id="topNavLogout"><a href="logout.php"> <i class="glyphicon glyphicon-log-out"></i> Salir</a></li>            
-            </ul>
-          </li>   
-      <?php
-       }else{
-      ?>
+                  if (!$row['isDropDown']){
+                    echo "<li id='" . $row['page_idName']  . "'>";
+                    echo "<a href='" . $row['page_url'] . "'><i class='" . $row['page_class'] . "'></i>  " . $row['page_name'] . "</a>";
+                    echo "</li>";
+                  } else {
+                    echo "<li class='dropdown' id='" . $row['page_idName'] . "'>";
+                    echo  "<a href='' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'> <i class='" . $row['page_class'] . "'></i> " . $row['page_name'] . " <span class='caret'></span></a>";
+                    echo  "<ul class='dropdown-menu'>";
 
-        
-          <li id="navDashboard"><a href="index.php"><i class="glyphicon glyphicon-list-alt"></i>  Informe</a></li>        
-          
-          <li id="navBrand"><a href="brand.php"><i class="glyphicon glyphicon-btc"></i>  Marcas</a></li>        
+                    $sqlChild = "SELECT a.page_idName, a.page_name, a.page_url, a.page_class FROM page a
+                                INNER JOIN functions b ON b.page_id = a.page_id 
+                                WHERE profile_id = " . $_SESSION['profile'] . " AND parent_node = " . $row['page_id'] . ";";
+                            
+                    
+                    $resultChild = $connect->query($sqlChild);
 
-          <li id="navCategories"><a href="categories.php"> <i class="glyphicon glyphicon-th-list"></i> Categorias</a></li>        
+                    while($rowChildNode = $resultChild->fetch_array()) {
 
-          <li id="navProduct"><a href="product.php"> <i class="glyphicon glyphicon-ruble"></i> Productos </a></li>     
+                      echo "<li id='" . $rowChildNode['page_idName'] . "'><a href='" . $rowChildNode['page_url'] . "'> <i class='" . $rowChildNode['page_class'] . "'></i> " . $rowChildNode['page_name'] . "</a></li>";
+                    }
 
-          <li class="dropdown" id="navOrder">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-shopping-cart"></i> Ventas <span class="caret"></span></a>
-            <ul class="dropdown-menu">            
-              <li id="topNavAddOrder"><a href="orders.php?o=add"> <i class="glyphicon glyphicon-plus"></i> Vender</a></li>            
-              <li id="topNavManageOrder"><a href="orders.php?o=manord"> <i class="glyphicon glyphicon-edit"></i> Administrar ventas</a></li>            
-            </ul>
-          </li> 
+                    
 
-          <li id="navReport"><a href="report.php"> <i class="glyphicon glyphicon-check"></i> Reportes </a></li>
 
-          <li class="dropdown" id="navSetting">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-info-sign"></i> <span class="caret"></span></a>
-            <ul class="dropdown-menu">            
-              <li id="topNavSetting"><a href="setting.php"> <i class="glyphicon glyphicon-wrench"></i> Configuraciones</a></li>
-              <li id="topNavUser"><a href="users.php"> <i class="glyphicon glyphicon-user"></i> Usuarios</a></li>
-              <li id="topNavLogout"><a href="logout.php"> <i class="glyphicon glyphicon-log-out"></i> Salir</a></li>            
-            </ul>
-          </li>   
-      <?php
+                    echo  "</ul>";
+                    echo "</li>";
+                  }
 
-       }
-        ?>   
+                  
+									
+								} // while
+								
+				      	?>
 
                 
         </ul>
