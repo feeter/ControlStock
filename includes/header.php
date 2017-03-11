@@ -92,7 +92,7 @@ while($row = $result->fetch_array()) {
         <ul class="nav navbar-nav navbar-right">     
 
 				      	<?php 
-				      	$sql = "SELECT a.page_id, a.page_idName, a.page_name, a.page_url, a.page_class, a.isDropDown FROM page a 
+				      	$sql = "SELECT a.page_id, a.page_TagId, a.page_name, a.page_url, a.page_class, a.isDropDown FROM page a 
                         INNER JOIN functions b ON b.page_id = a.page_id 
                         WHERE parent_node = 0 and profile_id = " . $_SESSION['profile'] . " ORDER BY a.page_order;";
                         
@@ -101,15 +101,15 @@ while($row = $result->fetch_array()) {
 								while($row = $result->fetch_array()) {
 
                   if (!$row['isDropDown']){
-                    echo "<li id='" . $row['page_idName']  . "'>";
+                    echo "<li id='" . $row['page_TagId']  . "'>";
                     echo "<a href='" . $row['page_url'] . "'><i class='" . $row['page_class'] . "'></i>  " . $row['page_name'] . "</a>";
                     echo "</li>";
                   } else {
-                    echo "<li class='dropdown' id='" . $row['page_idName'] . "'>";
+                    echo "<li class='dropdown' id='" . $row['page_TagId'] . "'>";
                     echo  "<a href='' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'> <i class='" . $row['page_class'] . "'></i> " . $row['page_name'] . " <span class='caret'></span></a>";
                     echo  "<ul class='dropdown-menu'>";
 
-                    $sqlChild = "SELECT a.page_idName, a.page_name, a.page_url, a.page_class FROM page a
+                    $sqlChild = "SELECT a.page_TagId, a.page_name, a.page_url, a.page_class FROM page a
                                 INNER JOIN functions b ON b.page_id = a.page_id 
                                 WHERE profile_id = " . $_SESSION['profile'] . " AND parent_node = " . $row['page_id'] . " ORDER BY a.page_order;";
                             
@@ -118,7 +118,7 @@ while($row = $result->fetch_array()) {
 
                     while($rowChildNode = $resultChild->fetch_array()) {
 
-                      echo "<li id='" . $rowChildNode['page_idName'] . "'><a href='" . $rowChildNode['page_url'] . "'> <i class='" . $rowChildNode['page_class'] . "'></i> " . $rowChildNode['page_name'] . "</a></li>";
+                      echo "<li id='" . $rowChildNode['page_TagId'] . "'><a href='" . $rowChildNode['page_url'] . "'> <i class='" . $rowChildNode['page_class'] . "'></i> " . $rowChildNode['page_name'] . "</a></li>";
                     }
 
                     
