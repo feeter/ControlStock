@@ -94,7 +94,7 @@ while($row = $result->fetch_array()) {
 				      	<?php 
 				      	$sql = "SELECT a.page_id, a.page_idName, a.page_name, a.page_url, a.page_class, a.isDropDown FROM page a 
                         INNER JOIN functions b ON b.page_id = a.page_id 
-                        WHERE parent_node = 0 and profile_id = " . $_SESSION['profile'] . ";";
+                        WHERE parent_node = 0 and profile_id = " . $_SESSION['profile'] . " ORDER BY a.page_order;";
                         
 								$result = $connect->query($sql);
 
@@ -111,7 +111,7 @@ while($row = $result->fetch_array()) {
 
                     $sqlChild = "SELECT a.page_idName, a.page_name, a.page_url, a.page_class FROM page a
                                 INNER JOIN functions b ON b.page_id = a.page_id 
-                                WHERE profile_id = " . $_SESSION['profile'] . " AND parent_node = " . $row['page_id'] . ";";
+                                WHERE profile_id = " . $_SESSION['profile'] . " AND parent_node = " . $row['page_id'] . " ORDER BY a.page_order;";
                             
                     
                     $resultChild = $connect->query($sqlChild);
