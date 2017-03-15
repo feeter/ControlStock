@@ -425,7 +425,7 @@ function addProductSuccess(response) {
     }).closest("tr");
 
     if (existeEnTabla.length > 0) {
-        cantidad = existeEnTabla[0].childNodes[3].innerText;
+        cantidad = existeEnTabla[0].childNodes[3].childNodes[0].value;
     }
 
     cantidad++;
@@ -433,12 +433,20 @@ function addProductSuccess(response) {
     //mejorable con metodo verifyStock() para mostrarlo de mejor forma al usuario 19/02/2017 Jose Campos
     if (response.quantity > 0 && cantidad <= response.quantity) {
 
+
         if (existeEnTabla.length > 0) {
+            var id = existeEnTabla[0].getAttribute("id");
+
+            var fila = id.substring(3, id.length);
 
             var total = cantidad * response.rate;
 
-            existeEnTabla[0].childNodes[3].innerHTML = cantidad + '<input type="hidden" name="quantity[]" value="' + cantidad + '" />';
-            existeEnTabla[0].childNodes[4].innerText = total;
+            //existeEnTabla[0].childNodes[3].innerHTML = cantidad + '<input type="hidden" name="quantity[]" value="' + cantidad + '" />';
+
+            $("#quantity" + fila).val(cantidad);
+            $("#total" + fila).text(total);
+
+            //existeEnTabla[0].childNodes[4].innerText = total;
 
 
 
@@ -452,13 +460,23 @@ function addProductSuccess(response) {
             }
 
             var trData = '<tr id="row' + numFila + '">' +
-                '<td>' + response.bar_code + '<input type="hidden" name="barCodeValue[]" value="' + response.bar_code + '" /></td>' +
+                '<td>' + response.bar_code + '<input type="hidden" name="barCodeValue[]" id="barCode' + numFila + '" value="' + response.bar_code + '" /></td>' +
                 '<td>' + response.product_name + '</td>' +
-                '<td>' + response.rate + '</td>' +
-                '<td>' + cantidad + '<input type="hidden" name="quantity[]" value="' + cantidad + '" /></td>' +
-                '<td id="total' + numFila + '">' + response.rate + '</td>' +
+                '<td><span id="precioUni' + numFila + '">' + response.rate + '</span></td>' +
+                //'<td id="cant' + numFila + '">' + cantidad + '<input type="hidden" name="quantity[]" value="' + cantidad + '" /></td>' +
+                '<td><input type="number" name="quantity[]" id="quantity' + numFila + '" onchange="getTotal(' + numFila + ')" autocomplete="off" class="form-control" min="1" value="1" /></td>' +
+                '<td><span id="total' + numFila + '">' + response.rate + '</td>' +
                 '<td><button class="btn btn-default removeProductRowBtn" type="button" id="removeProductRowBtn" onclick="removeProductRow(' + numFila + ')"><i class="glyphicon glyphicon-trash"></i></button></td>' +
                 '</tr>';
+
+            //var scriptData = '<script>document.addEventListener("dblclick", cambiarTag(' + numFila + '));</script>';
+            // Use any selector
+            //$("body").append(scriptData);
+
+
+
+
+
 
             $("#productTable tbody").append(trData);
 
@@ -475,6 +493,10 @@ function addProductSuccess(response) {
 
     CalculoFinal();
 } //addProductSuccess
+
+function cambiarTag(fila) {
+    console.log(fila);
+}
 
 //Metodo queda inabilitado ya que se cambiara la forma de agregar productos al metodo addProduct() - 20170218 jcp
 function addRow() {
@@ -677,10 +699,10 @@ function getProductData(row = null) {
 // table total
 function getTotal(row = null) {
     if (row) {
-        var total = Number($("#rate" + row).val()) * Number($("#quantity" + row).val());
+        var total = Number($("#precioUni" + row).text()) * Number($("#quantity" + row).val());
         total = total.toFixed();
-        $("#total" + row).val(total);
-        $("#totalValue" + row).val(total);
+        $("#total" + row).text(total);
+        //$("#totalValue" + row).val(total);
 
         verifyStock(row);
 
@@ -691,7 +713,7 @@ function getTotal(row = null) {
     }
 
 
-    validaFinalizarPago();
+    //validaFinalizarPago();
 
 }
 
@@ -728,22 +750,15 @@ function verifyStock(row) {
         data: { barCode: $barCode, toBuy: $toBuy },
         dataType: 'json',
         success: function(response) {
-            $('#row' + row + ' > td > div').removeClass('has-error');
-            $('#row' + row + ' > td > div > .text-danger').remove()
-            if (!response) {
-                //alert("No hay Stock Suficiente");
+            $('#quantity' + row).next().remove();
 
+            if (!response) {
 
                 $("#quantity" + row).after('<p class="text-danger"> No hay Stock Suficiente. </p>');
                 $('#quantity' + row).closest('.form-group').addClass('has-error');
 
 
-            } else {
-                // $('.form-group').removeClass('has-error').removeClass('has-success');
-                // $('.text-danger').remove();
-                $('.form-group > #quantity' + row).removeClass('has-error');
-
-            } // /else
+            }
         }, // /success
         error: function(xhr, ajaxOptions, thrownError) {
             alert('No existe el producto');
