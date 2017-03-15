@@ -14,6 +14,7 @@ if($_POST) {
   $productStatus 	= $_POST['editProductStatus'];
 
   $barCode       = $_POST['editBarCode'];
+  $descuento       = $_POST['editDescuento'];
   $var = $_POST['editExpirationDate'];
   
   //print_r($_POST);
@@ -22,7 +23,18 @@ if($_POST) {
   $expirationDate = date('Y-m-d', strtotime($date));
 
 				
-	$sql = "UPDATE product SET product_name = '$productName', brand_id = '$brandName', categories_id = '$categoryName', quantity = '$quantity', rate = '$rate', active = '$productStatus', status = 1, bar_code = '$barCode', expiration_date = '$expirationDate' WHERE product_id = $productId ";
+	$sql = "UPDATE product 
+  SET product_name = '$productName', 
+  brand_id = '$brandName', 
+  categories_id = '$categoryName', 
+  quantity = '$quantity', 
+  rate = '$rate', 
+  active = '$productStatus', 
+  status = 1, 
+  bar_code = '$barCode', 
+  expiration_date = '$expirationDate',
+  discount = $descuento
+  WHERE product_id = $productId ";
 
 	if($connect->query($sql) === TRUE) {
 		$valid['success'] = true;

@@ -267,6 +267,8 @@ function editProduct(productId = null) {
                 // Precio
                 $("#editRate").val(response.rate);
 
+                $("#editDescuento").val(response.discount);
+
                 // Fecha de Expiracion
                 $("#editExpirationDate").val($.datepicker.formatDate('dd/mm/yy', new Date(response.expiration_date + " ")));
 
@@ -365,6 +367,8 @@ function editProduct(productId = null) {
 
                         var form = $(this);
                         var formData = new FormData(this);
+
+
 
                         $.ajax({
                             url: form.attr('action'),

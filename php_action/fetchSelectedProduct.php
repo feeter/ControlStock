@@ -11,7 +11,20 @@ $barCode = $_POST['barCode'];
 
 $productId = $_POST['productId'];
   
-$sql = "SELECT product_id, bar_code, product_name, product_image, brand_id, categories_id, quantity, rate, active, status, bar_code, expiration_date 
+$sql = "SELECT 
+product_id, 
+bar_code, 
+product_name, 
+product_image, 
+brand_id, 
+categories_id, 
+quantity,
+rate,
+active,
+status,
+bar_code,
+expiration_date,
+discount
 FROM product 
 WHERE (bar_code = '$barCode' ) 
 OR (product_name = '$productName')
