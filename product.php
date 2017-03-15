@@ -101,7 +101,14 @@
 				    <div class="col-sm-8">
 				      <input type="text" class="form-control" id="rate" placeholder="Precio" name="rate" autocomplete="off">
 				    </div>
-	        </div> <!-- /form-group-->	
+	        </div> <!-- /form-group-->
+
+					<div class="form-group">
+						<label for="descuento" class="col-sm-3 control-label">Descuento: </label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="descuento" placeholder="Descuento" name="descuento" autocomplete="off">
+						</div>
+					</div> <!-- /form-group-->	
 
 					<div class="form-group">
 	        	<label for="expirationDate" class="col-sm-3 control-label">Fecha de Expiracion: </label>

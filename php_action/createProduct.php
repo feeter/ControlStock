@@ -18,6 +18,8 @@ if($_POST) {
   $categoryName 	= $_POST['categoryName'];
   $productStatus 	= $_POST['productStatus'];
 
+  $descuento 	= $_POST['descuento'];
+
 
 $var = $_POST['expirationDate'];
 $date = str_replace('/', '-', $var);
@@ -35,8 +37,8 @@ $expirationDate = date('Y-m-d', strtotime($date));
 		if(is_uploaded_file($_FILES['productImage']['tmp_name'])) {			
 			if(move_uploaded_file($_FILES['productImage']['tmp_name'], $url)) {
 				
-				$sql = "INSERT INTO product (bar_code, product_name, product_image, brand_id, categories_id, quantity, rate, active, status, expiration_date) 
-				VALUES ('$barCode', '$productName', '$url', '$brandName', '$categoryName', '$quantity', '$rate', '$productStatus', 1, '$expirationDate')";
+				$sql = "INSERT INTO product (bar_code, product_name, product_image, brand_id, categories_id, quantity, rate, active, status, expiration_date, discount) 
+				VALUES ('$barCode', '$productName', '$url', '$brandName', '$categoryName', '$quantity', '$rate', '$productStatus', 1, '$expirationDate', $descuento)";
 
 				if($connect->query($sql) === TRUE) {
 					$valid['success'] = true;

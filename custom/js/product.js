@@ -73,6 +73,7 @@ $(document).ready(function() {
             var brandName = $("#brandName").val();
             var categoryName = $("#categoryName").val();
             var productStatus = $("#productStatus").val();
+            var descuento = $("#descuento");
 
             if (productImage == "") {
                 $("#productImage").closest('.center-block').after('<p class="text-danger">Imagen Requerida</p>');
