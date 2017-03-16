@@ -71,7 +71,7 @@ $(document).ready(function() {
             } // /else
 
             console.log('primer log');
-            if (orderDate && paid && discount && paymentStatus) {
+            if (orderDate && paid && paymentStatus) {
                 console.log('segundo log dentro del if');
                 // create order button
                 // $("#createOrderBtn").button('loading');
@@ -116,7 +116,7 @@ $(document).ready(function() {
                             alert(response.messages);
                         }
                     }, //response
-                    error: console.log("Error") //AjaxFailed
+                    error: console.log("error") // AjaxFailed
                 }); // /ajax
             } // /if field validate is true
 
@@ -397,6 +397,8 @@ function addProduct() {
 
             if (response != null) {
                 addProductSuccess(response);
+                CalcularMontoFinal();
+                calcularVuelto();
                 validaFinalizarPago();
             } else {
                 alert('No existe el producto');
@@ -421,7 +423,7 @@ function addProductSuccess(response) {
     var cantidad = 0;
 
     var existeEnTabla = $("td").filter(function() {
-        return $(this).text() == response.product_name;
+        return (($(this).text().indexOf(response.product_name) > -1) ? $(this).text() : null);
     }).closest("tr");
 
     if (existeEnTabla.length > 0) {
@@ -436,15 +438,20 @@ function addProductSuccess(response) {
 
         if (existeEnTabla.length > 0) {
             var id = existeEnTabla[0].getAttribute("id");
-
             var fila = id.substring(3, id.length);
 
             var total = cantidad * response.rate;
 
+            if (response.discount > 0) {
+                total = (total - (total * (Number(response.discount / 100))));
+            }
+
+
+
             //existeEnTabla[0].childNodes[3].innerHTML = cantidad + '<input type="hidden" name="quantity[]" value="' + cantidad + '" />';
 
             $("#quantity" + fila).val(cantidad);
-            $("#total" + fila).text(total);
+            $("#total" + fila).text(total.toFixed(0));
 
             //existeEnTabla[0].childNodes[4].innerText = total;
 
@@ -459,13 +466,24 @@ function addProductSuccess(response) {
                 numFila = Number(numFila) + 1;
             }
 
+            var textoDescuento = '';
+            var montoConDescuento = 0;
+
+            var conDescuento = (response.discount > 0);
+
+            if (conDescuento) {
+                textoDescuento = response.discount + '% Dcto.';
+
+                montoConDescuento = (Number(response.rate) - (Number(response.rate) * (Number(response.discount / 100)))).toFixed(0);
+            }
+
             var trData = '<tr id="row' + numFila + '">' +
                 '<td>' + response.bar_code + '<input type="hidden" name="barCodeValue[]" id="barCode' + numFila + '" value="' + response.bar_code + '" /></td>' +
-                '<td>' + response.product_name + '</td>' +
+                '<td>' + response.product_name + '&nbsp;&nbsp;&nbsp;&nbsp;' + textoDescuento + '</td>' +
                 '<td><span id="precioUni' + numFila + '">' + response.rate + '</span></td>' +
                 //'<td id="cant' + numFila + '">' + cantidad + '<input type="hidden" name="quantity[]" value="' + cantidad + '" /></td>' +
-                '<td><input type="number" name="quantity[]" id="quantity' + numFila + '" onchange="getTotal(' + numFila + ')" autocomplete="off" class="form-control" min="1" value="1" /></td>' +
-                '<td><span id="total' + numFila + '">' + response.rate + '</td>' +
+                '<td><input type="number" name="quantity[]" id="quantity' + numFila + '" onchange="getTotal(' + numFila + ', ' + ((conDescuento) ? response.discount : 0) + ')" autocomplete="off" class="form-control" min="1" value="1" /></td>' +
+                '<td><span id="total' + numFila + '">' + ((conDescuento) ? montoConDescuento : response.rate) + '</td>' +
                 '<td><button class="btn btn-default removeProductRowBtn" type="button" id="removeProductRowBtn" onclick="removeProductRow(' + numFila + ')"><i class="glyphicon glyphicon-trash"></i></button></td>' +
                 '</tr>';
 
@@ -491,7 +509,7 @@ function addProductSuccess(response) {
 
     $('#barCode, #productName').val('');
 
-    CalculoFinal();
+
 } //addProductSuccess
 
 function cambiarTag(fila) {
@@ -573,7 +591,7 @@ function addRow() {
 function removeProductRow(row = null) {
     if (row) {
         $("#row" + row).remove();
-        CalculoFinal();
+        CalcularMontoFinal();
     } else {
         alert('Error, favor refresque la pagina!');
     }
@@ -623,7 +641,7 @@ function getProductDataByBarCode(e, row) {
 
 
 
-                    CalculoFinal();
+                    CalcularMontoFinal();
                 }, // /success
                 error: function(xhr, ajaxOptions, thrownError) {
                     alert('No existe el producto');
@@ -686,7 +704,7 @@ function getProductData(row = null) {
                         // 	}											
                         // } // /for
 
-                        CalculoFinal();
+                        CalcularMontoFinal();
                     } // /success
             }); // /ajax function to fetch the product data	
         }
@@ -696,46 +714,38 @@ function getProductData(row = null) {
     }
 } // /select on product data
 
-// table total
-function getTotal(row = null) {
-    if (row) {
-        var total = Number($("#precioUni" + row).text()) * Number($("#quantity" + row).val());
-        total = total.toFixed();
-        $("#total" + row).text(total);
-        //$("#totalValue" + row).val(total);
-
-        verifyStock(row);
-
-        CalculoFinal();
-
-    } else {
-        alert('no row !! please refresh the page');
-    }
+//Calcula el precio al subir manualmente la cantidad de un producto
+function getTotal(row, descuento) {
 
 
-    //validaFinalizarPago();
+    var total = Number($("#precioUni" + row).text()) * Number($("#quantity" + row).val());
+    total = (total - (total * (Number(descuento / 100)))).toFixed(0);
+    $("#total" + row).text(total);
+    //$("#totalValue" + row).val(total);
+
+    verifyStock(row);
+
+    CalcularMontoFinal();
+    calcularVuelto();
 
 }
 
 //Valida si permite finalizar la venta habilitando o desabilitando el textbox createOrderBtn
 function validaFinalizarPago() {
-    if ($("#dueValue").val() <= 0 && $(".text-danger").length === 0) {
 
+    var tbMontoPagar = $("#paid");
+    var tbMontoFinal = $("#grandTotal");
+
+    if (Number(tbMontoPagar.val()) >= Number(tbMontoFinal.val())) {
+        $("label[for='due']").text("Vuelto");
         $("#paymentStatus").val("1");
         $("#createOrderBtn").removeAttr("disabled");
     } else {
+        $("label[for='due']").text("Faltan");
         $("#paymentStatus").val("3");
         $("#createOrderBtn").attr("disabled", true);
     }
 
-    var isVuelto = Number($("#due").val());
-
-    if (isVuelto < 0) {
-        $("label[for='due']").text("Vuelto");
-
-    } else {
-        $("label[for='due']").text("Faltan");
-    }
 
 }
 
@@ -772,9 +782,11 @@ function verifyStock(row) {
 
 
 //Obtiene el valor total de todos los productos agregados a la tabla calculando el "Monto" total y agregarlo al textbox 
-function CalculoFinal() {
+function CalcularMontoFinal() {
     var tableProductLength = $("#productTable tbody tr").length;
     var totalSubAmount = 0;
+
+
     for (x = 0; x < tableProductLength; x++) {
         var tr = $("#productTable tbody tr")[x];
         var count = $(tr).attr('id');
@@ -786,32 +798,10 @@ function CalculoFinal() {
     totalSubAmount = totalSubAmount.toFixed(0);
 
     // sub total
-    $("#subTotal").val(totalSubAmount);
-    $("#subTotalValue").val(totalSubAmount);
+    $("#grandTotal").val(totalSubAmount);
+    $("#grandTotalValue").val(totalSubAmount);
 
-    var discount = $("#discount").val();
-    if (discount) {
-        var grandTotal = Number($("#subTotal").val()) - Number(discount);
-        grandTotal = grandTotal.toFixed(0);
-        $("#grandTotal").val(grandTotal);
-        $("#grandTotalValue").val(grandTotal);
-    } else {
-        // $("#grandTotal").val(totalAmount);
-        // $("#grandTotalValue").val(totalAmount);
-    } // /else discount	
-
-    var paidAmount = $("#paid").val();
-    if (paidAmount) {
-        paidAmount = Number($("#grandTotal").val()) - Number(paidAmount);
-        paidAmount = paidAmount.toFixed(0);
-        $("#due").val(paidAmount);
-        $("#dueValue").val(paidAmount);
-    } else {
-        $("#due").val($("#grandTotal").val());
-        $("#dueValue").val($("#grandTotal").val());
-    } // else
-
-} // /sub total amount
+} // CalculoFinal
 
 function discountFunc() {
     var discount = $("#discount").val();
@@ -844,7 +834,9 @@ function discountFunc() {
 } // /discount function
 
 //Calcula el campo "Vuelto"
-function paidAmount() {
+function calcularVuelto() {
+
+
     var grandTotal = $("#grandTotal").val();
 
     if (grandTotal) {

@@ -12,19 +12,19 @@ if($_POST) {
   $orderDate 						= date('Y-m-d H:i:s');
   $clientName 					= $_POST['clientName'];
   $clientContact 				= $_POST['clientContact'];
-  $subTotalValue 				= $_POST['subTotalValue'];
-  $discount 						= $_POST['discount'];
+  //$subTotalValue 				= $_POST['subTotalValue'];
+  //$discount 						= $_POST['discount'];
   $grandTotalValue 			= $_POST['grandTotalValue'];
   $paid 								= $_POST['paid'];
   $dueValue 						= $_POST['dueValue'];
   //$paymentType 					= $_POST['paymentType']; se quita el 18/02/2017 y se inserta por defecto con valor 0
   $paymentStatusValue 				= $_POST['paymentStatusValue'];
-  $userSeller 				= $_POST['userSeller'];
+  $userSeller 				= $_SESSION['userId'];
 
   
 
-	$sql = "INSERT INTO orders (order_date, client_name, client_contact, sub_total, discount, grand_total, paid, due, payment_type, payment_status, order_status, user_id) 
-					VALUES ('$orderDate', '$clientName', '$clientContact', '$subTotalValue', '$discount', '$grandTotalValue', '$paid', '$dueValue', '0', '$paymentStatusValue', '1', $userSeller)";
+	$sql = "INSERT INTO orders (order_date, client_name, client_contact, grand_total, paid, due, payment_type, payment_status, order_status, user_id) 
+					VALUES ('$orderDate', '$clientName', '$clientContact', '$grandTotalValue', '$paid', '$dueValue', '0', '$paymentStatusValue', '1', $userSeller)";
 	
 	
 	$order_id;
@@ -46,17 +46,16 @@ if($_POST) {
 
 		 //echo "<script>console.log( 'Debug Objects: " . "INICIO" . "' );</script>";
 		
-		$updateProductQuantitySql = "SELECT product.quantity, product.product_id, product.rate FROM product WHERE product.bar_code = ".$_POST['barCodeValue'][$x]."";
-		 //echo "<script>console.log( 'Debug Objects: sql:" . "$updateProductQuantitySql" . "' );</script>";
-		$updateProductQuantityData = $connect->query($updateProductQuantitySql);
+		$productSQL = "SELECT a.quantity, a.product_id, a.rate, a.discount FROM product a WHERE a.bar_code = ".$_POST['barCodeValue'][$x]."";
+		 //echo "<script>console.log( 'Debug Objects: sql:" . "$productSQL" . "' );</script>";
+		$peoductData = $connect->query($productSQL);
 		
-		$updateProductQuantityResult = $updateProductQuantityData->fetch_row();	
-		//while ($updateProductQuantityResult = $updateProductQuantityData->fetch_row()) {
-			$updateQuantity = $updateProductQuantityResult[0] - $_POST['quantity'][$x];							
+		$productResult = $peoductData->fetch_array();	
+			$updateQuantity = $productResult['quantity'] - $_POST['quantity'][$x];							
 				
 			 //echo "<script>console.log( 'Debug Objects: barCode:" . $_POST['barCodeValue'][$x] . "' );</script>";
 
-			 //echo "<script>console.log( 'Debug Objects: PRODUCTO: Cantidad Original: " . $updateProductQuantityResult[0] . " Cantidad a descontar: " . $_POST['quantity'][$x] . " Cantidad Final: " . $updateQuantity . "' );</script>";	
+			 //echo "<script>console.log( 'Debug Objects: PRODUCTO: Cantidad Original: " . $productResult[0] . " Cantidad a descontar: " . $_POST['quantity'][$x] . " Cantidad Final: " . $updateQuantity . "' );</script>";	
 			// update product table
 			 //echo "<script>console.log( 'Debug Objects: barCodeValue: " . $_POST['barCodeValue'][$x] . "' );</script>";	
 			$updateProductTable = "UPDATE product SET quantity = ".$updateQuantity." WHERE bar_code = '".$_POST['barCodeValue'][$x]."'";
@@ -69,17 +68,22 @@ if($_POST) {
 			
 
 			// add into order_item
+			//total = (total - (total * (Number(response.discount / 100))));
+			
 
-			$totalValue = $_POST['quantity'][$x] * $updateProductQuantityResult[2];
+			$precioSinDescuento = $_POST['quantity'][$x] * $productResult['rate'];
+
+			$totalValue = round($precioSinDescuento - ($precioSinDescuento * ($productResult['discount'] / 100)));
 
 			 //echo "<script>console.log( 'Debug Objects: orderId: " . $order_id . "' );</script>";	
-			 //echo "<script>console.log( 'Debug Objects: productId: " . $updateProductQuantityResult[1] . "' );</script>";	
+			 //echo "<script>console.log( 'Debug Objects: productId: " . $productResult['product_id'] . "' );</script>";	
+			 //echo "<script>console.log( 'Debug Objects: descuento: " . $productResult['discount'] . "' );</script>";	
 			 //echo "<script>console.log( 'Debug Objects: cantidad: " . $_POST['quantity'][$x] . "' );</script>";	
-			 //echo "<script>console.log( 'Debug Objects: precio: " . $updateProductQuantityResult[2] . "' );</script>";	
+			 //echo "<script>console.log( 'Debug Objects: precio: " . $productResult[2] . "' );</script>";	
 			 //echo "<script>console.log( 'Debug Objects: total: " . $totalValue . "' );</script>";	
 
-			$orderItemSql = "INSERT INTO order_item (order_id, product_id, quantity, rate, total, order_item_status) 
-			VALUES ('$order_id', '". $updateProductQuantityResult[1] ."', '".$_POST['quantity'][$x]."', '".$updateProductQuantityResult[2]."', '".$totalValue."', 1)"; 
+			$orderItemSql = "INSERT INTO order_item (order_id, product_id, quantity, rate, discount, total, order_item_status) 
+			VALUES ('$order_id', '". $productResult['product_id'] ."', '".$_POST['quantity'][$x]."', '".$productResult['rate']."', '".$productResult['discount']."' , '".$totalValue."', 1)"; 
 
 
 
