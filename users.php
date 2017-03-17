@@ -190,6 +190,6 @@
 <!-- /remove users -->
 
 <!--<script src="custom/js/brand.js"></script>-->
-<script src="custom/js/users.js"></script>
+<script src="custom/js/users.js?ver=20170317"></script>
 
 <?php require_once 'includes/footer.php'; ?>

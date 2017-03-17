@@ -163,6 +163,6 @@
 <!-- /categories brand -->
 
 
-<script src="custom/js/categories.js"></script>
+<script src="custom/js/categories.js?ver=20170317"></script>
 
 <?php require_once 'includes/footer.php'; ?>

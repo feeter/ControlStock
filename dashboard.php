@@ -170,5 +170,5 @@ $connect->close();
 
 <script type="text/javascript" src="assests/plugins/googleChart/pieChart/loader.js"></script>
 
-<script src="custom/js/dashboard.js"></script>
+<script src="custom/js/dashboard.js?ver=20170317"></script>
 <?php require_once 'includes/footer.php'; ?>

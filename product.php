@@ -402,7 +402,7 @@
 <!-- /categories brand -->
 
 
-<script src="custom/js/product.js"></script>
+<script src="custom/js/product.js?ver=20170317"></script>
 
 
 <?php require_once 'includes/footer.php'; ?>

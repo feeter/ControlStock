@@ -165,6 +165,6 @@
 </div><!-- /.modal -->
 <!-- /remove brand -->
 
-<script src="custom/js/brand.js"></script>
+<script src="custom/js/brand.js?ver=20170317"></script>
 
 <?php require_once 'includes/footer.php'; ?>
