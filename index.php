@@ -41,13 +41,17 @@ if($_POST) {
 				$_SESSION['userId'] = $user_id;
 				$_SESSION['profile'] = $profile;
 
-				if ($_SESSION['profile'] == 2){
-					header('location:orders.php?o=add');
-				}else{
-					header('location:dashboard.php');	
-				}
-				
+				$primeraPag = "SELECT b.page_url FROM functions a 
+				inner join page b on a.page_id = b.page_id 
+				where a.profile_id = $profile
+				and b.page_url != '#'
+				order by b.parent_node, b.page_order 
+				limit 1";
 
+				$primeraPagResult = $connect->query($primeraPag);
+				$primeraPagVal = $primeraPagResult->fetch_assoc();
+
+				header('location:'.$primeraPagVal['page_url']);
 				
 			} else {
 				
