@@ -105,6 +105,7 @@
 
 					<div class="form-group">
 						<label for="descuento" class="col-sm-3 control-label">Descuento: </label>
+						<label class="col-sm-1 control-label">: </label>
 						<div class="col-sm-8">
 							<input type="text" class="form-control" id="descuento" placeholder="Descuento" name="descuento" autocomplete="off">
 						</div>
@@ -291,6 +292,7 @@
 
 							<div class="form-group">
 			        	<label for="editDescuento" class="col-sm-3 control-label">Descuento: </label>
+								<label class="col-sm-1 control-label">: </label>
 						    <div class="col-sm-8">
 						      <input type="text" class="form-control" id="editDescuento" placeholder="Descuento" name="editDescuento" autocomplete="off">
 						    </div>
