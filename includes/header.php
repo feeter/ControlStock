@@ -2,21 +2,30 @@
 
 
 
-$urlActual = $_SERVER['REQUEST_URI'];
+$urlActual = basename($_SERVER['PHP_SELF']);
 $profileId = $_SESSION['profile'];
 
 $tieneAcceso = false;
 
-$sqlProfile = "SELECT b.page_url FROM functions a inner join page b on a.page_id = b.page_id WHERE profile_id = $profileId;";
+$sqlProfile = "SELECT b.page_url FROM functions a inner join page b on a.page_id = b.page_id WHERE profile_id = $profileId ORDER BY b.page_order;";
 $result = $connect->query($sqlProfile);
 
-while($row = $result->fetch_array()) {
-	$url = $row[0];
+//echo "<script>console.log( 'Debug Objects: PAGINA ACTUAL: " . $urlActual . "' );</script>";
 
-	//echo "<script>console.log( 'Debug Objects: " .  . "' );</script>";
-	if (strpos($urlActual,$url) !== false) {
-		//echo "<script>console.log( 'Debug Objects: " . "SI" . "' );</script>";
+while($row = $result->fetch_array()) {
+  //echo "<script>console.log( '' );</script>";
+	
+
+
+  //echo "<script>console.log( 'Debug Objects: PAGINA: " . $row['page_url'] . "' );</script>";
+  
+	//echo "<script>console.log( 'Debug Objects: COMPARACION: " . strpos($row['page_url'],$urlActual) . "' );</script>";
+  
+
+	if (strpos($row['page_url'], $urlActual) > -1) {
+  	//echo "<script>console.log( 'Debug Objects: " . "ACCESO" . "' );</script>";
 		$tieneAcceso = true;
+    //header('location: logout.php');
 		
 	}
 
