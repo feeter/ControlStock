@@ -66,7 +66,7 @@ $(document).ready(function() {
             var rowsTable = $("#productTable tr");
 
 
-            if (orderDate && Number(paid.val()) > 0 && paymentStatus && table.length > 1) {
+            if (orderDate && Number(paid.val()) > 0 && paymentStatus && rowsTable.length > 1) {
                 //console.log('segundo log dentro del if');
                 // create order button
                 // $("#createOrderBtn").button('loading');
@@ -78,40 +78,40 @@ $(document).ready(function() {
                     data: form.serialize(),
                     dataType: 'json',
                     success: function(response) {
-                        console.log(response);
+                            console.log(response);
 
-                        // reset button
-                        $("#createOrderBtn").button('reset');
+                            // reset button
+                            $("#createOrderBtn").button('reset');
 
-                        $(".text-danger").remove();
-                        $('.form-group').removeClass('has-error').removeClass('has-success');
+                            $(".text-danger").remove();
+                            $('.form-group').removeClass('has-error').removeClass('has-success');
 
-                        if (response.success == true) {
+                            if (response.success == true) {
 
-                            // create order button
-                            $(".success-messages").html('<div class="alert alert-success">' +
-                                '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
-                                '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> ' + response.messages +
-                                ' <br /> <br /> <a type="button" onclick="printOrder(' + response.order_id + ')" class="btn btn-primary"> <i class="glyphicon glyphicon-print"></i> Imprimir </a>' +
-                                '<a href="orders.php?o=add" class="btn btn-default" style="margin-left:10px;"> <i class="glyphicon glyphicon-plus-sign"></i> Realizar Nueva Venta </a>' +
+                                // create order button
+                                $(".success-messages").html('<div class="alert alert-success">' +
+                                    '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
+                                    '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> ' + response.messages +
+                                    ' <br /> <br /> <a type="button" onclick="printOrder(' + response.order_id + ')" class="btn btn-primary"> <i class="glyphicon glyphicon-print"></i> Imprimir </a>' +
+                                    '<a href="orders.php?o=add" class="btn btn-default" style="margin-left:10px;"> <i class="glyphicon glyphicon-plus-sign"></i> Realizar Nueva Venta </a>' +
 
-                                '</div>');
+                                    '</div>');
 
-                            $("html, body, div.panel, div.pane-body").animate({ scrollTop: '0px' }, 100);
+                                $("html, body, div.panel, div.pane-body").animate({ scrollTop: '0px' }, 100);
 
-                            // disabled te modal footer button
-                            $(".submitButtonFooter").addClass('div-hide');
-                            // remove the product row
-                            $(".removeProductRowBtn").addClass('div-hide');
+                                // disabled te modal footer button
+                                $(".submitButtonFooter").addClass('div-hide');
+                                // remove the product row
+                                $(".removeProductRowBtn").addClass('div-hide');
 
-                            //Desabilita los textbox de busqueda de productos
-                            $("#barCode, #productName").attr('disabled', 'disabled');
+                                //Desabilita los textbox de busqueda de productos
+                                $("#barCode, #productName").attr('disabled', 'disabled');
 
-                        } else {
-                            alert(response.messages);
-                        }
-                    }, //response
-                    error: console.log("error") // AjaxFailed
+                            } else {
+                                alert(response.messages);
+                            }
+                        } //, //response
+                        //error: console.log("error") // AjaxFailed
                 }); // /ajax
             } // /if field validate is true
 
