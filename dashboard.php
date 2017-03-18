@@ -111,7 +111,15 @@ $connect->close();
 		<div class="card">
 		  <div class="cardHeader" style="background-color:#777799;" title="Productos vendidos mas de 3 veces." data-toggle="tooltip" >
 		    
-			<div id="piechart" style="width: 340px; height: 200px;"></div>
+			<!--<div id="piechart" style="width: 340px; height: 200px;"></div>-->
+			<!--Div that will hold the dashboard-->
+		    <div id="dashboard_div" style="border: 1px solid #ccc">
+		      <!--Divs that will hold each control and chart-->
+		      <div id="filter_div" style="font: 16px/24px Roboto,sans-serif"></div>
+		      <div id="chart_div"></div>
+		    </div>
+			
+			
 
 		  </div>
 		</div> 
@@ -169,6 +177,11 @@ $connect->close();
 <script src='assests/plugins/fullcalendar/locale/es.js'></script>
 
 <script type="text/javascript" src="assests/plugins/googleChart/pieChart/loader.js"></script>
+<!--<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>-->
+<!--<script src="https://maps.google.com/maps/api/js"></script>-->
+<!--<script src="assests/plugins/googleChart/pieChart/google.js?key=AIzaSyAz3mg51Q7pnd2QV846M3E8W4ok-zeG9zk&callback"></script>-->
+<!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAz3mg51Q7pnd2QV846M3E8W4ok-zeG9zk&callback"
+  type="text/javascript"></script>-->
 
-<script src="custom/js/dashboard.js?ver=20170317"></script>
+<script src="custom/js/dashboard.js?ver=20170318"></script>
 <?php require_once 'includes/footer.php'; ?>

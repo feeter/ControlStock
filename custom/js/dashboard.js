@@ -7,7 +7,12 @@ $(document).ready(function() {
     $('#navDashboard').addClass('active');
 
     //Inicializa el chart de los productos mas vendidos
-    google.charts.load('current', { 'packages': ['corechart'] });
+    // google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.load('current', { 'packages': ['corechart', 'controls'] });
+
+
+    //google.charts.setOnLoadCallback(drawChart);
+
     //google.charts.setOnLoadCallback(drawChart);   
 
 
@@ -128,18 +133,50 @@ function drawChart(mes, y) {
             }
 
             //Agrega el primer array el indicador de que es cada valor
-            newArray.splice(0, 0, ['Producto', 'Cantidad Vendida']);
+            newArray.splice(0, 0, ['Producto', 'Cantidad']);
 
             data = google.visualization.arrayToDataTable(newArray);
 
 
-            var options = {
-                title: 'Productos mas Vendidos del mes'
-            };
+            // Create a dashboard.
+            var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard_div'));
+            // Create a range slider, passing some options
+            var donutRangeSlider = new google.visualization.ControlWrapper({     
+                'controlType': 'NumberRangeFilter',
+                'containerId': 'filter_div',
+                     'options': {      
+                    'filterColumnLabel': 'Cantidad',
+                    'ui': {
+                        'labelStacking': 'vertical'
+                    }
+                }
+            });
+            // Create a pie chart, passing some options
+            var pieChart = new google.visualization.ChartWrapper({     
+                'chartType': 'PieChart',
+                'containerId': 'chart_div',
+                'options': {      
+                    'width': '100%',
+                    'height': 300,
+                    'pieSliceText': 'value',
+                    'legend': 'right'     
+                }    
+            });
 
-            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            // Establish dependencies, declaring that 'filter' drives 'pieChart',
+            // so that the pie chart will only display entries that are let through
+            // given the chosen slider range.
+            dashboard.bind(donutRangeSlider, pieChart);    
+            // Draw the dashboard.
+            dashboard.draw(data);
 
-            chart.draw(data, options);
+            // var options = {
+            //     title: 'Productos mas Vendidos del mes'
+            // };
+
+            // var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            // chart.draw(data, options);
 
         }
 
