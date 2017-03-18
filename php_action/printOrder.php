@@ -4,29 +4,30 @@ require_once 'core.php';
 
 $orderId = $_POST['orderId'];
 
-$sql = "SELECT order_date, client_name, client_contact, sub_total, discount, grand_total, paid, due FROM orders WHERE order_id = $orderId";
+$sql = "SELECT order_date, client_name, client_contact, grand_total, paid, due FROM orders WHERE order_id = $orderId";
 //vat, total_amount,
 
 
 $orderResult = $connect->query($sql);
 $orderData = $orderResult->fetch_array();
 
-$orderDate = $orderData[0];
-$clientName = $orderData[1];
-$clientContact = $orderData[2]; 
-$subTotal = $orderData[3];
+$orderDate = $orderData['order_date'];
+$clientName = $orderData['client_name'];
+$clientContact = $orderData['client_contact']; 
+//$subTotal = $orderData[3];
 // $vat = $orderData[4];
 // $totalAmount = $orderData[5]; 
-$discount = $orderData[4];
-$grandTotal = $orderData[5];
-$paid = $orderData[6];
-$due = $orderData[7];
+//$discount = $orderData[4];
+$grandTotal = $orderData['grand_total'];
+$paid = $orderData['paid'];
+$due = $orderData['due'];
 
 
-$orderItemSql = "SELECT order_item.product_id, order_item.rate, order_item.quantity, order_item.total,
-product.product_name FROM order_item
-	INNER JOIN product ON order_item.product_id = product.product_id 
- WHERE order_item.order_id = $orderId";
+$orderItemSql = "SELECT a.product_id, a.rate, a.quantity, a.total,
+b.product_name FROM order_item a
+INNER JOIN product b ON a.product_id = b.product_id 
+WHERE a.order_id = $orderId";
+
 $orderItemResult = $connect->query($orderItemSql);
 
  $table = '
@@ -61,10 +62,10 @@ $orderItemResult = $connect->query($orderItemSql);
 						
 			$table .= '<tr>
 				<th>'.$x.'</th>
-				<th>'.$row[4].'</th>
-				<th>'.$row[1].'</th>
-				<th>'.$row[2].'</th>
-				<th>'.$row[3].'</th>
+				<th>'.$row['product_name'].'</th>
+				<th>'.$row['rate'].'</th>
+				<th>'.$row['quantity'].'</th>
+				<th>'.$row['total'].'</th>
 			</tr>
 			';
 		$x++;
@@ -76,16 +77,6 @@ $orderItemResult = $connect->query($orderItemSql);
 
 		<tr>
 			<th></th>
-		</tr>
-
-		<tr>
-			<th>Sub Total</th>
-			<th>'.$subTotal.'</th>			
-		</tr>
-
-		<tr>
-			<th>Descuento</th>
-			<th>'.$discount.'</th>			
 		</tr>
 
 		<tr>
