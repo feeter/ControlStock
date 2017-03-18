@@ -41,7 +41,7 @@ $(document).ready(function() {
             var orderDate = $("#orderDate").val();
             var clientName = $("#clientName").val();
             var clientContact = $("#clientContact").val();
-            var paid = $("#paid").val();
+            var paid = $("#paid");
             var discount = $("#discount").val();
             //var paymentType = $("#paymentType").val();
             var paymentStatus = $("#paymentStatus").val();
@@ -56,26 +56,21 @@ $(document).ready(function() {
             } // /else
 
 
-            if (paid == "") {
-                $("#paid").after('<p class="text-danger"> The Paid field is required </p>');
+            if (paid.val() == "" || Number(paid.val()) <= 0) {
+                $("#paid").after('<p class="text-danger"> El campo "Monto a Pagar" no puede ser "' + paid.val() + '" </p>');
                 $('#paid').closest('.form-group').addClass('has-error');
             } else {
                 $('#paid').closest('.form-group').addClass('has-success');
             } // /else
 
-            if (discount == "") {
-                $("#discount").after('<p class="text-danger"> The Discount field is required </p>');
-                $('#discount').closest('.form-group').addClass('has-error');
-            } else {
-                $('#discount').closest('.form-group').addClass('has-success');
-            } // /else
+            var rowsTable = $("#productTable tr");
 
-            console.log('primer log');
-            if (orderDate && paid && paymentStatus) {
-                console.log('segundo log dentro del if');
+
+            if (orderDate && Number(paid.val()) > 0 && paymentStatus && table.length > 1) {
+                //console.log('segundo log dentro del if');
                 // create order button
                 // $("#createOrderBtn").button('loading');
-                console.log(form.serialize());
+                //console.log(form.serialize());
 
                 $.ajax({
                     url: form.attr('action'),
