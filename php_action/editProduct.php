@@ -28,7 +28,7 @@ if($_POST) {
   }
   $expirationDate = !empty($expirationDate) ? "'$expirationDate'" : "NULL";
 
-	echo "<script>console.log( 'Debug Objects: $expirationDate' );</script>";
+	//echo "<script>console.log( 'Debug Objects: $expirationDate' );</script>";
 
 	$sql = "UPDATE product 
   SET product_name = '$productName', 
