@@ -15,14 +15,21 @@ if($_POST) {
 
   $barCode       = $_POST['editBarCode'];
   $descuento       = $_POST['editDescuento'];
-  $var = $_POST['editExpirationDate'];
+  $varDate = $_POST['editExpirationDate'];
   
   //print_r($_POST);
 
-  $date = str_replace('/', '-', $var);
-  $expirationDate = date('Y-m-d', strtotime($date));
+  
 
-				
+  
+  if (!empty($varDate)){
+    $date = str_replace('/', '-', $varDate);
+    $expirationDate = date('Y-m-d', strtotime($date));
+  }
+  $expirationDate = !empty($expirationDate) ? "'$expirationDate'" : "NULL";
+
+	echo "<script>console.log( 'Debug Objects: $expirationDate' );</script>";
+
 	$sql = "UPDATE product 
   SET product_name = '$productName', 
   brand_id = '$brandName', 
@@ -32,7 +39,7 @@ if($_POST) {
   active = '$productStatus', 
   status = 1, 
   bar_code = '$barCode', 
-  expiration_date = '$expirationDate',
+  expiration_date = $expirationDate,
   discount = $descuento
   WHERE product_id = $productId ";
 

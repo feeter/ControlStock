@@ -74,6 +74,7 @@ $(document).ready(function() {
             var categoryName = $("#categoryName").val();
             var productStatus = $("#productStatus").val();
             var descuento = $("#descuento");
+            var expirationDate = $("#expirationDate");
 
             if (productImage == "") {
                 $("#productImage").closest('.center-block').after('<p class="text-danger">Imagen Requerida</p>');
@@ -195,7 +196,7 @@ $(document).ready(function() {
 
                             } // /if response.success
 
-                        } // /success function
+                        } //success function
                         //error: AjaxFailed
                 }); // /ajax function
             } // /if validation is ok 					
@@ -271,7 +272,12 @@ function editProduct(productId = null) {
                 $("#editDescuento").val(response.discount);
 
                 // Fecha de Expiracion
-                $("#editExpirationDate").val($.datepicker.formatDate('dd/mm/yy', new Date(response.expiration_date + " ")));
+                if (response.expiration_date === null) {
+                    $("#editExpirationDate").val("");
+                } else {
+                    $("#editExpirationDate").val($.datepicker.formatDate('dd/mm/yy', new Date(response.expiration_date + " ")));
+                }
+
 
                 // Nombre Marca
                 $("#editBrandName").val(response.brand_id);
@@ -410,7 +416,8 @@ function editProduct(productId = null) {
 
                                     } // /if response.success
 
-                                } // /success function
+                                } //success function
+                                //error: AjaxFailed
                         }); // /ajax function
                     } // /if validation is ok 					
 

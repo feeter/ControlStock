@@ -107,7 +107,7 @@
 						<label for="descuento" class="col-sm-3 control-label">Descuento: </label>
 						<label class="col-sm-1 control-label">: </label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" id="descuento" placeholder="Descuento" name="descuento" autocomplete="off">
+							<input type="text" class="form-control" id="descuento" placeholder="Descuento" name="descuento" autocomplete="off" value="0">
 						</div>
 					</div> <!-- /form-group-->	
 
@@ -402,7 +402,7 @@
 <!-- /categories brand -->
 
 
-<script src="custom/js/product.js?ver=20170317"></script>
+<script src="custom/js/product.js?ver=201703191806"></script>
 
 
 <?php require_once 'includes/footer.php'; ?>
