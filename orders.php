@@ -512,7 +512,7 @@ if($_GET['o'] == 'add') {
 <!-- /remove order-->
 
 
-<script src="custom/js/order.js?ver=201703181429"></script>
+<script src="custom/js/order.js?ver=20170324"></script>
 
 <?php require_once 'includes/footer.php'; ?>
 
