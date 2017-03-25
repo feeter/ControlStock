@@ -23,7 +23,7 @@ $paid = $orderData['paid'];
 $due = $orderData['due'];
 
 
-$orderItemSql = "SELECT a.product_id, a.rate, a.quantity, a.total,
+$orderItemSql = "SELECT a.product_id, a.rate, a.discount, a.quantity, a.total,
 b.product_name FROM order_item a
 INNER JOIN product b ON a.product_id = b.product_id 
 WHERE a.order_id = $orderId";
@@ -59,10 +59,16 @@ $orderItemResult = $connect->query($orderItemSql);
 
 		$x = 1;
 		while($row = $orderItemResult->fetch_array()) {			
-						
+			
+			$descuentoText = "";
+
+			if ($row['discount'] > 0){
+				$descuentoText = $row['discount']."% Dcto.";
+			}
+
 			$table .= '<tr>
 				<th>'.$x.'</th>
-				<th>'.$row['product_name'].'</th>
+				<th>'.$row['product_name'] .  str_repeat('&nbsp;', 5) . $descuentoText  .'</th>
 				<th>'.$row['rate'].'</th>
 				<th>'.$row['quantity'].'</th>
 				<th>'.$row['total'].'</th>
