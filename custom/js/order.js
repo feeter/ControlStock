@@ -78,40 +78,44 @@ $(document).ready(function() {
                     data: form.serialize(),
                     dataType: 'json',
                     success: function(response) {
-                            console.log(response);
+                        //console.log(response);
 
-                            // reset button
-                            $("#createOrderBtn").button('reset');
+                        // reset button
+                        $("#createOrderBtn").button('reset');
 
-                            $(".text-danger").remove();
-                            $('.form-group').removeClass('has-error').removeClass('has-success');
+                        $(".text-danger").remove();
+                        $('.form-group').removeClass('has-error').removeClass('has-success');
 
-                            if (response.success == true) {
+                        if (response.success == true) {
 
-                                // create order button
-                                $(".success-messages").html('<div class="alert alert-success">' +
-                                    '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
-                                    '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> ' + response.messages +
-                                    ' <br /> <br /> <a type="button" onclick="printOrder(' + response.order_id + ')" class="btn btn-primary"> <i class="glyphicon glyphicon-print"></i> Imprimir </a>' +
-                                    '<a href="orders.php?o=add" class="btn btn-default" style="margin-left:10px;"> <i class="glyphicon glyphicon-plus-sign"></i> Realizar Nueva Venta </a>' +
+                            // create order button
+                            $(".success-messages").html('<div class="alert alert-success">' +
+                                '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
+                                '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> ' + response.messages +
+                                ' <br /> <br /> <a type="button" onclick="printOrder(' + response.order_id + ')" class="btn btn-primary"> <i class="glyphicon glyphicon-print"></i> Imprimir </a>' +
+                                '<a href="orders.php?o=add" class="btn btn-default" style="margin-left:10px;"> <i class="glyphicon glyphicon-plus-sign"></i> Realizar Nueva Venta </a>' +
 
-                                    '</div>');
+                                '</div>');
 
-                                $("html, body, div.panel, div.pane-body").animate({ scrollTop: '0px' }, 100);
+                            $("html, body, div.panel, div.pane-body").animate({ scrollTop: '0px' }, 100);
 
-                                // disabled te modal footer button
-                                $(".submitButtonFooter").addClass('div-hide');
-                                // remove the product row
-                                $(".removeProductRowBtn").addClass('div-hide');
+                            // disabled te modal footer button
+                            $(".submitButtonFooter").addClass('div-hide');
+                            // remove the product row
+                            $(".removeProductRowBtn").addClass('div-hide');
 
-                                //Desabilita los textbox de busqueda de productos
-                                $("#barCode, #productName").attr('disabled', 'disabled');
+                            //Desabilita los textbox de busqueda de productos
+                            $("#barCode, #productName").attr('disabled', 'disabled');
 
-                            } else {
-                                alert(response.messages);
-                            }
-                        } //, //response
-                        //error: console.log("error") // AjaxFailed
+                        } else {
+                            alert(response.messages);
+                        }
+                    }, //response
+                    error: function(xhr, status, error) {
+                            console.log("Error");
+                            var err = eval("(" + xhr.responseText + ")");
+                            alert(err.Message);
+                        } //AjaxFailed
                 }); // /ajax
             } // /if field validate is true
 
@@ -775,8 +779,7 @@ function verifyStock(row) {
 
 }
 
-
-//Obtiene el valor total de todos los productos agregados a la tabla calculando el "Monto" total y agregarlo al textbox 
+//Obtiene el valor total de todos los productos agregados a la tabla calculando el "Monto" y "Monto Total" y agregarlo al textbox 
 function CalcularMontoFinal() {
     var tableProductLength = $("#productTable tbody tr").length;
     var totalSubAmount = 0;
@@ -793,10 +796,20 @@ function CalcularMontoFinal() {
     totalSubAmount = totalSubAmount.toFixed(0);
 
     // sub total
-    $("#grandTotal").val(totalSubAmount);
-    $("#grandTotalValue").val(totalSubAmount);
+    var subTotal = $("#subTotal");
+    var subTotalValue = $("#subTotalValue");
+    var grandTotal = $("#grandTotal");
+    var grandTotalValue = $("#grandTotalValue");
 
-} // CalculoFinal
+    if (subTotal.length > 0) {
+        subTotal.val(totalSubAmount);
+        subTotalValue.val(totalSubAmount);
+    }
+
+    grandTotal.val(totalSubAmount);
+    grandTotalValue.val(totalSubAmount);
+
+}
 
 function discountFunc() {
     var discount = $("#discount").val();

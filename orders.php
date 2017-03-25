@@ -127,30 +127,54 @@ if($_GET['o'] == 'add') {
 
 			  <div class="col-md-6">
 
-				  <div class="form-group">
-				    <label for="grandTotal" class="col-sm-3 control-label">Monto Final</label>
+					
+
+					<?php
+
+						$profileId = $_SESSION['profile'];
+						$sql = "SELECT allow_discount_sale FROM profile WHERE profile_id = $profileId;";
+						$result = $connect->query($sql);
+						$allowDiscount = $result->fetch_array();
+
+						if ($allowDiscount['allow_discount_sale']){
+							//echo "<script>console.log( 'Debug Objects: " . "SI" . "' );</script>";
+					?>
+
+					<!-- Solo para los perfiles que tienen permitido realizar descsuentos -->
+					<div class="form-group">
+				    <label for="subTotal" class="col-sm-3 control-label">Monto</label>
 				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="grandTotal" name="grandTotal" disabled="true" value="0" />
-				      <input type="hidden" class="form-control" id="grandTotalValue" name="grandTotalValue" />
+				      <input type="text" class="form-control" id="subTotal" name="subTotal" disabled="true" value="0" />
+				      <input type="hidden" class="form-control" id="subTotalValue" name="subTotalValue"  value="0" />
 				    </div>
 				  </div> <!--/form-group-->
 
-					<!--<div class="form-group">
-				    <label for="subTotal" class="col-sm-3 control-label">Monto</label>
-				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="subTotal" name="subTotal" disabled="true" />
-				      <input type="hidden" class="form-control" id="subTotalValue" name="subTotalValue" />
-				    </div>
-				  </div> /form-group-->
-
-
-				  <!--<div class="form-group">
-				    <label for="discount" class="col-sm-3 control-label">Descuento</label>
-				    <div class="col-sm-2">
-				      <input type="text" maxlength="3" value="0" class="form-control" id="discount" name="discount" onkeyup="discountFunc()" onchange="discountFunc()" autocomplete="off" />
-				    </div>
+					<div class="form-group">
+						<label for="discount" class="col-sm-3 control-label">Descuento</label>
+						<div class="col-sm-2">
+							<input type="text" maxlength="3" value="0" class="form-control" id="discount" name="discount" onkeyup="discountFunc()" onchange="discountFunc()" autocomplete="off" />
+						</div>
 						<label class="col-sm-0 control-label">%</label>
-				  </div> /form-group	-->
+					</div> <!--/form-group	-->
+
+					
+					<?php
+
+
+						} else {
+							//echo "<script>console.log( 'Debug Objects: " . "NO" . "' );</script>";
+						}
+
+					?>
+					
+					<div class="form-group">
+						<label for="grandTotal" class="col-sm-3 control-label">Monto Final</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="grandTotal" name="grandTotal" disabled="true" value="0" />
+							<input type="hidden" class="form-control" id="grandTotalValue" name="grandTotalValue" />
+						</div>
+					</div> <!--/form-group-->
+
 			  </div> <!--/col-md-6-->
 
 			  <div class="col-md-6">
