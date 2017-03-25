@@ -4,7 +4,7 @@ require_once 'core.php';
 
 $orderId = $_POST['orderId'];
 
-$sql = "SELECT order_date, client_name, client_contact, grand_total, paid, due FROM orders WHERE order_id = $orderId";
+$sql = "SELECT order_date, client_name, client_contact, sub_total, discount, grand_total, paid, due FROM orders WHERE order_id = $orderId";
 //vat, total_amount,
 
 
@@ -14,10 +14,10 @@ $orderData = $orderResult->fetch_array();
 $orderDate = $orderData['order_date'];
 $clientName = $orderData['client_name'];
 $clientContact = $orderData['client_contact']; 
-//$subTotal = $orderData[3];
+$subTotal = $orderData['sub_total'];
 // $vat = $orderData[4];
 // $totalAmount = $orderData[5]; 
-//$discount = $orderData[4];
+$discount = $orderData['discount'];
 $grandTotal = $orderData['grand_total'];
 $paid = $orderData['paid'];
 $due = $orderData['due'];
@@ -80,9 +80,21 @@ $orderItemResult = $connect->query($orderItemSql);
 		</tr>
 
 		<tr>
+			<th>Sub. Total</th>
+			<th>'.$subTotal.'</th>
+		</tr>
+
+		<tr>
+			<th>Descuento</th>
+			<th>'.$discount.'</th>
+		</tr>
+
+		<tr>
 			<th>Monto Total</th>
 			<th>'.$grandTotal.'</th>			
 		</tr>
+
+		
 
 		<tr>
 			<th>Monto Pagado</th>
