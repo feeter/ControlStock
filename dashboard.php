@@ -129,12 +129,12 @@ $connect->close();
 		<br/>
 
 		<div class="card">
-		  <div class="cardHeader" style="background-color:#245580;">
-		    <h1><?php if($totalRevenue) {
-		    	echo $totalRevenue;
-		    	} else {
-		    		echo '0';
-		    		} ?></h1>
+			<div class="cardHeader" style="background-color:#245580;">
+		    <h1>
+				<?php 
+					echo $totalRevenue;
+				?>
+			</h1>
 		  </div>
 
 		  <div class="cardContainer">
