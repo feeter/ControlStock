@@ -77,7 +77,7 @@ $(document).ready(function() {
             var expirationDate = $("#expirationDate");
 
             if (productImage == "") {
-                //do nothingr
+                //do nothingrd
             }
 
             if (productName == "") {
