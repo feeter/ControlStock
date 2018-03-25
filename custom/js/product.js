@@ -77,14 +77,8 @@ $(document).ready(function() {
             var expirationDate = $("#expirationDate");
 
             if (productImage == "") {
-                $("#productImage").closest('.center-block').after('<p class="text-danger">Imagen Requerida</p>');
-                $('#productImage').closest('.form-group').addClass('has-error');
-            } else {
-                // remov error text field
-                $("#productImage").find('.text-danger').remove();
-                // success out for form 
-                $("#productImage").closest('.form-group').addClass('has-success');
-            } // /else
+
+            }
 
             if (productName == "") {
                 $("#productName").after('<p class="text-danger">Nombre Requerido</p>');

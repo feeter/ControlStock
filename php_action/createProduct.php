@@ -39,25 +39,29 @@ $expirationDate = !empty($expirationDate) ? "'$expirationDate'" : "NULL";
 
 //print_r($_POST);
 	
-
-
+	
 	$type = explode('.', $_FILES['productImage']['name']);
 	$type = $type[count($type)-1];		
 	$url = '../assests/images/stock/'.uniqid(rand()).'.'.$type;
+
+
+	if($_FILES['productImage']['size'] == 0) {
+		// No file was selected for upload, your (re)action goes here
+		$type = "png";
+		$url = "../assests/images/photo_default.png";
+	}
 
 	//echo "<script>console.log( 'Debug Objects: $type ' );</script>";
 
 	if(in_array($type, array('gif', 'jpg', 'jpeg', 'png', 'JPG', 'GIF', 'JPEG', 'PNG'))) {
 		//echo "<script>console.log( 'Debug Objects: tipo del archivo: $type' );</script>";
 
-		if(is_uploaded_file($_FILES['productImage']['tmp_name'])) {			
+		//if(is_uploaded_file($_FILES['productImage']['tmp_name'])) {			
 			//echo "<script>console.log( 'Debug Objects: is_uploaded_file' );</script>";
 
-			if(move_uploaded_file($_FILES['productImage']['tmp_name'], $url)) {
+			//if(move_uploaded_file($_FILES['productImage']['tmp_name'], $url)) {
 				
 				//echo "<script>console.log( 'Debug Objects: move_uploaded_file' );</script>";
-
-
 
 				$sql = "INSERT INTO product (bar_code, product_name, product_image, brand_id, categories_id, quantity, rate, active, status, expiration_date, discount) 
 				VALUES ('$barCode', '$productName', '$url', '$brandName', '$categoryName', '$quantity', '$rate', '$productStatus', 1, $expirationDate, $descuento)";
@@ -72,10 +76,10 @@ $expirationDate = !empty($expirationDate) ? "'$expirationDate'" : "NULL";
 					$valid['messages'] = "Ocurrio un Error";
 				}
 
-			}	else {
-				return false;
-			}	// /else	
-		} // if
+			//}	else {
+			//	return false;
+			//}	// /else	
+		//} // if
 	} // if in_array 		
 
 	$connect->close();
