@@ -10,8 +10,8 @@ if($_POST) {
 
 
   $orderDate 						= date('Y-m-d H:i:s');
-  $clientName 					= $_POST['clientName'];
-  $clientContact 				= $_POST['clientContact'];
+//   $clientName 					= $_POST['clientName'];
+//   $clientContact 				= $_POST['clientContact'];
 
   $subTotalValue 				= (empty($_POST['subTotalValue'])) ? "0" : $_POST['subTotalValue'];
   $discount 						=(empty($_POST['discount'])) ? "0" : $_POST['discount'];
@@ -27,7 +27,7 @@ if($_POST) {
   //echo "<script>console.log( 'Debug Objects: " . "DESCUENTO: " . $discount  . "' );</script>";
 
 	$sql = "INSERT INTO orders (order_date, client_name, client_contact, sub_total, discount, grand_total, paid, due, payment_type, payment_status, order_status, user_id) 
-					VALUES ('$orderDate', '$clientName', '$clientContact', '$subTotalValue', $discount, '$grandTotalValue', '$paid', '$dueValue', '0', '$paymentStatusValue', '1', $userSeller)";
+					VALUES ('$orderDate', '', '', '$subTotalValue', $discount, '$grandTotalValue', '$paid', '$dueValue', '0', '$paymentStatusValue', '1', $userSeller)";
 	
 	
 	$order_id;

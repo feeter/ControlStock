@@ -70,19 +70,19 @@ if($_GET['o'] == 'add') {
 			    <div class="col-sm-2">
 			      <input type="text" class="form-control" id="orderDate" value="<?php echo date('d/m/Y'); ?>" disabled="disabled" name="orderDate" autocomplete="off" />
 			    </div>
-			  </div> <!--/form-group-->
-			  <div class="form-group">
+			  </div> 
+			  <!-- <div class="form-group">
 			    <label for="clientName" class="col-sm-2 control-label">Nombre cliente</label>
 			    <div class="col-sm-10">
 			      <input type="text" class="form-control" id="clientName" name="clientName" placeholder="Nombre del Cliente" autocomplete="off" />
 			    </div>
-			  </div> <!--/form-group-->
+			  </div> 
 			  <div class="form-group">
 			    <label for="clientContact" class="col-sm-2 control-label">Numero de Contacto</label>
 			    <div class="col-sm-10">
 			      <input type="text" class="form-control" id="clientContact" name="clientContact" placeholder="Numero de Contacto" autocomplete="off" />
 			    </div>
-			  </div> <!--/form-group-->
+			  </div>  -->
 
 
 <hr style="color: #0056b2;" /> <!--Separador-->

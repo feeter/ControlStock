@@ -28,8 +28,8 @@
 							<th>Nombre del Producto</th>
 							<th>Precio</th>							
 							<th>Cantidad</th>
-							<th>Marca</th>
-							<th>Categoria</th>
+							<!-- <th>Marca</th>
+							<th>Categoria</th> -->
 							<th>Estado</th>
 							<th style="width:15%;">Opciones</th>
 						</tr>
