@@ -128,7 +128,7 @@ $connect->close();
 
 		<br/>
 
-		<div class="card">
+		<!-- <div class="card">
 			<div class="cardHeader" style="background-color:#245580;">
 		    <h1>
 				<?php 
@@ -140,7 +140,7 @@ $connect->close();
 		  <div class="cardContainer">
 		    <p> <i class="glyphicon glyphicon-usd"></i> Cantidad de Ingresos</p>
 		  </div>
-		</div> 
+		</div>  -->
 		
 		<!-- <br/>
 
