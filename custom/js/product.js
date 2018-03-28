@@ -1,5 +1,6 @@
 var manageProductTable;
 
+
 $(document).ready(function() {
 
     $("#expirationDate").datetimepicker({
@@ -54,7 +55,7 @@ $(document).ready(function() {
             removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
             elErrorContainer: '#kv-avatar-errors-1',
             msgErrorClass: 'alert alert-block alert-danger',
-            defaultPreviewContent: '<img src="assests/images/photo_default.png" alt="Profile Image" style="width:100%;">',
+            //defaultPreviewContent: '<img src="assests/images/photo_default.png" alt="Profile Image" style="width:100%;">',
             layoutTemplates: { main2: '{preview} {remove} {browse}' },
             allowedFileExtensions: ["jpg", "png", "gif", "JPG", "PNG", "GIF"]
         });
@@ -110,37 +111,37 @@ $(document).ready(function() {
                 $("#rate").closest('.form-group').addClass('has-success');
             } // /else
 
-            if (brandName == "") {
-                $("#brandName").after('<p class="text-danger">Marca es Obligatoria</p>');
-                $('#brandName').closest('.form-group').addClass('has-error');
-            } else {
-                // remov error text field
-                $("#brandName").find('.text-danger').remove();
-                // success out for form 
-                $("#brandName").closest('.form-group').addClass('has-success');
-            } // /else
+            // if (brandName == "") {
+            //     $("#brandName").after('<p class="text-danger">Marca es Obligatoria</p>');
+            //     $('#brandName').closest('.form-group').addClass('has-error');
+            // } else {
+            //     // remov error text field
+            //     $("#brandName").find('.text-danger').remove();
+            //     // success out for form 
+            //     $("#brandName").closest('.form-group').addClass('has-success');
+            // }
 
-            if (categoryName == "") {
-                $("#categoryName").after('<p class="text-danger">Categoria es Obligatoria</p>');
-                $('#categoryName').closest('.form-group').addClass('has-error');
-            } else {
-                // remov error text field
-                $("#categoryName").find('.text-danger').remove();
-                // success out for form 
-                $("#categoryName").closest('.form-group').addClass('has-success');
-            } // /else
+            // if (categoryName == "") {
+            //     $("#categoryName").after('<p class="text-danger">Categoria es Obligatoria</p>');
+            //     $('#categoryName').closest('.form-group').addClass('has-error');
+            // } else {
+            //     // remov error text field
+            //     $("#categoryName").find('.text-danger').remove();
+            //     // success out for form 
+            //     $("#categoryName").closest('.form-group').addClass('has-success');
+            // }
 
-            if (productStatus == "") {
-                $("#productStatus").after('<p class="text-danger">Estado es Obligatorio</p>');
-                $('#productStatus').closest('.form-group').addClass('has-error');
-            } else {
-                // remov error text field
-                $("#productStatus").find('.text-danger').remove();
-                // success out for form 
-                $("#productStatus").closest('.form-group').addClass('has-success');
-            } // /else
+            // if (productStatus == "") {
+            //     $("#productStatus").after('<p class="text-danger">Estado es Obligatorio</p>');
+            //     $('#productStatus').closest('.form-group').addClass('has-error');
+            // } else {
+            //     // remov error text field
+            //     $("#productStatus").find('.text-danger').remove();
+            //     // success out for form 
+            //     $("#productStatus").closest('.form-group').addClass('has-success');
+            // }
 
-            if (productName && quantity && rate && brandName && categoryName && productStatus) {
+            if (productName && quantity && rate) {
                 // submit loading button
                 $("#createProductBtn").button('loading');
 

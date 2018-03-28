@@ -59,67 +59,68 @@
 	      	<div id="add-product-messages"></div>
 
 	      	<div class="form-group">
-	        	<label for="productImage" class="col-sm-3 control-label">Imagen: </label>
+	        	<label for="productImage" class="col-sm-3 control-label">Imagen</label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
 					    <!-- the avatar markup -->
-							<div id="kv-avatar-errors-1" class="center-block" style="display:none;"></div>							
+							<div id="kv-avatar-errors-1" class="center-block" style="display:none;"></div>
 					    <div class="kv-avatar center-block">					        
 					        <input type="file" class="form-control" id="productImage" placeholder="Nombre del Producto" name="productImage" class="file-loading" style="width:auto;"/>
 					    </div>
 				      
 				    </div>
-	        </div> <!-- /form-group-->	   
+	        </div>
 
 					<div class="form-group">
-	        	<label for="barCode" class="col-sm-3 control-label">Codigo de Barra: </label>
+	        	<label for="barCode" class="col-sm-3 control-label">Codigo de Barra</label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
 				      <input type="text" class="form-control" id="barCode" placeholder="Codigo de Barra" name="barCode" autocomplete="off">
 				    </div>
-	        </div> <!-- /form-group-->	    	           	       
+	        </div>  	           	       
 
 	        <div class="form-group">
-	        	<label for="productName" class="col-sm-3 control-label">Nombre: </label>
+	        	<label for="productName" class="col-sm-3 control-label">Nombre</label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
 				      <input type="text" class="form-control" id="productName" placeholder="Nombre del Producto" name="productName" autocomplete="off">
 				    </div>
-	        </div> <!-- /form-group-->	    
+	        </div>	    
 
 	        <div class="form-group">
-	        	<label for="quantity" class="col-sm-3 control-label">Cantidad: </label>
+	        	<label for="quantity" class="col-sm-3 control-label">Cantidad</label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
-				      <input type="text" class="form-control" id="quantity" placeholder="Cantidad" name="quantity" autocomplete="off">
+						
+				      <input type="number" class="form-control" id="quantity" placeholder="Cantidad" name="quantity" autocomplete="off">
 				    </div>
 	        </div> <!-- /form-group-->	        	 
 
 	        <div class="form-group">
-	        	<label for="rate" class="col-sm-3 control-label">Precio: </label>
+	        	<label for="rate" class="col-sm-3 control-label">Precio</label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
-				      <input type="text" class="form-control" id="rate" placeholder="Precio" name="rate" autocomplete="off">
+				      <input type="number" class="form-control" id="rate" placeholder="Precio" name="rate" autocomplete="off">
 				    </div>
-	        </div> <!-- /form-group-->
-
-					<div class="form-group">
+	        </div>
+					
+					<!-- <div class="form-group">
 						<label for="descuento" class="col-sm-3 control-label">Descuento: </label>
 						<label class="col-sm-1 control-label">: </label>
 						<div class="col-sm-8">
 							<input type="text" class="form-control" id="descuento" placeholder="Descuento" name="descuento" autocomplete="off" value="0">
 						</div>
-					</div> <!-- /form-group-->	
+					</div> -->
 
 					<div class="form-group">
-	        	<label for="expirationDate" class="col-sm-3 control-label">Fecha de Expiracion: </label>
+	        	<label for="expirationDate" class="col-sm-3 control-label">Fecha de Caducidad</label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
 				      <input type="text" class="form-control" id="expirationDate" placeholder="dd/mm/aaaa" name="expirationDate" autocomplete="off">
 				    </div>
 	        </div> <!-- /form-group-->     	        
 
-	        <div class="form-group">
+	        <!-- <div class="form-group">
 	        	<label for="brandName" class="col-sm-3 control-label">Marca: </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
@@ -136,9 +137,9 @@
 				      	?>
 				      </select>
 				    </div>
-	        </div> <!-- /form-group-->	
+	        </div> -->
 
-	        <div class="form-group">
+	        <!-- <div class="form-group">
 	        	<label for="categoryName" class="col-sm-3 control-label">Categoria: </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
@@ -155,9 +156,9 @@
 				      	?>
 				      </select>
 				    </div>
-	        </div> <!-- /form-group-->					        	         	       
+	        </div>				        	         	        -->
 
-	        <div class="form-group">
+	        <!-- <div class="form-group">
 	        	<label for="productStatus" class="col-sm-3 control-label">Estado: </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
@@ -167,7 +168,7 @@
 				      	<option value="2">No Disponible</option>
 				      </select>
 				    </div>
-	        </div> <!-- /form-group-->	  
+	        </div> -->
 
 					
 

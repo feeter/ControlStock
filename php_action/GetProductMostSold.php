@@ -11,8 +11,8 @@ INNER JOIN order_item b ON a.product_id = b.product_id
 INNER JOIN orders c ON b.order_id = c.order_id 
 WHERE MONTH( c.order_date ) = $mes 
 AND YEAR( c.order_date ) = $year 
-GROUP BY a.product_name 
-HAVING cantidad > 3";
+GROUP BY a.product_name
+HAVING cantidad >= 1";
 
 
 $result = $connect->query($sql);

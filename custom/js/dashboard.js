@@ -132,6 +132,11 @@ function drawChart(mes, y) {
                 newArray[x] = [response[x][0], Number(response[x][1])];
             }
 
+            if (newArray.length <= 1) {
+                //Viene vacio
+                return;
+            }
+
             //Agrega el primer array el indicador de que es cada valor
             newArray.splice(0, 0, ['Producto', 'Cantidad']);
 

@@ -14,11 +14,11 @@ if($_POST) {
   // $productImage 	= $_POST['productImage'];
   $quantity 			= $_POST['quantity'];
   $rate 					= $_POST['rate'];
-  $brandName 			= $_POST['brandName'];
-  $categoryName 	= $_POST['categoryName'];
-  $productStatus 	= $_POST['productStatus'];
+  $brandName 			= "0"; //$_POST['brandName'];
+  $categoryName 	= "0"; //$_POST['categoryName'];
+  $productStatus 	= "1"; //$_POST['productStatus'];
 
-  $descuento 	= $_POST['descuento'];
+  $descuento 	= "0"; //$_POST['descuento'];
 
 $varDate = $_POST['expirationDate'];
 
@@ -64,7 +64,7 @@ $expirationDate = !empty($expirationDate) ? "'$expirationDate'" : "NULL";
 				//echo "<script>console.log( 'Debug Objects: move_uploaded_file' );</script>";
 
 				$sql = "INSERT INTO product (bar_code, product_name, product_image, brand_id, categories_id, quantity, rate, active, status, expiration_date, discount) 
-				VALUES ('$barCode', '$productName', '$url', '$brandName', '$categoryName', '$quantity', '$rate', '$productStatus', 1, $expirationDate, $descuento)";
+				VALUES ('$barCode', '$productName', '$url', '0', '0', '$quantity', '$rate', '1', 1, $expirationDate, 0)";
 
 				//echo "<script>console.log( 'Debug Objects: $expirationDate' );</script>";
 

@@ -109,7 +109,7 @@ $connect->close();
 	
 
 		<div class="card">
-		  <div class="cardHeader" style="background-color:#777799;" title="Productos vendidos mas de 3 veces." data-toggle="tooltip" >
+		  <div class="cardHeader" style="background-color:#777799;" data-toggle="tooltip" >
 		    
 			<!--<div id="piechart" style="width: 340px; height: 200px;"></div>-->
 			<!--Div that will hold the dashboard-->
@@ -142,7 +142,7 @@ $connect->close();
 		  </div>
 		</div> 
 		
-		<br/>
+		<!-- <br/>
 
 		<div class="card">
 		  <div class="cardHeader">
@@ -152,7 +152,7 @@ $connect->close();
 		  <div class="cardContainer">
 		    <p><?php echo $fecha; ?></p>
 		  </div>
-		</div> 
+		</div>  -->
 
 		
 
